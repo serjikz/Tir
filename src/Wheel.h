@@ -5,14 +5,10 @@ class Wheel
 private:	
 	Render::Texture* _wheel;
 	short int _x, _y;
-	/*float _speed;
-	float _scale;
 	float _angle;
-	float _t;*/
 public:
-	Wheel();
+	Wheel(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Wheel> HardPrt;
 	void draw();
-	void init();
 	void update(float dt);
 };

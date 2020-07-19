@@ -6,8 +6,7 @@ Tank::Tank()
 	_speed(0),
 	_angle(0),
 	_t(0)	
-{
-	_tank= Core::resourceManager.Get<Render::Texture>("Tank");
+{	
 	Xml::RapidXmlDocument tankSettingsXml("TankSettings.xml");
 	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
 	rapidxml::xml_node<>* tankSpeed = root->first_node("TankSpeed");
@@ -16,6 +15,14 @@ Tank::Tank()
 	MAX_ANGLE = Xml::GetFloatAttributeOrDef(tankSpeed, "maxAngle", 0.f);
 	ANGLE_COEF = Xml::GetFloatAttributeOrDef(tankSpeed, "angleCoef", 0.f);
 	FRICTION_FORCE = Xml::GetFloatAttributeOrDef(tankSpeed, "frictionForce", 0.f);
+	_tank = Core::resourceManager.Get<Render::Texture>("Tank");
+	rapidxml::xml_node<>* wheels = root->first_node("Wheels");
+	rapidxml::xml_node<>* wheel = wheels->first_node("Wheel");
+	while (wheel) {
+		_wheels.push_back(Wheel::HardPrt(new Wheel(wheel)));
+		wheel = wheel->next_sibling();
+	}
+	
 };
 
 void Tank::update(float dt) {
@@ -25,6 +32,9 @@ void Tank::update(float dt) {
 	_x = math::clamp(0, Render::device.Width() - _tank->getBitmapRect().Width(), pos);
 	_angle *= FRICTION_FORCE;
 	_t = dt;
+	for (int i = 0; i < (int)_wheels.size(); i++) {
+		_wheels[i]->update(-_speed);
+	}
 }
 
 void Tank::draw() {
@@ -36,7 +46,13 @@ void Tank::draw() {
 	Render::device.MatrixScale(1.f, _scaleY, 1.f);
 	Render::device.MatrixTranslate(-textureCenter.x, -textureCenter.y, 0);
 	_tank->Draw();
+	for (int i = 0; i < (int)_wheels.size(); i++) {
+		_wheels[i]->draw();
+	}
 	Render::device.PopMatrix();	
+
+	
+	
 }
 
 void Tank::moveLeft() {

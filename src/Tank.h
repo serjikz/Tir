@@ -8,14 +8,14 @@ private:
 	float MOVE_DX;
 	float MAX_ANGLE;
 	float FRICTION_FORCE;
-	float ANGLE_COEF;
-	Render::Texture* _tank;
+	float ANGLE_COEF;	
 	short int _x;
 	float _speed;
 	float _scaleY;
 	float _angle;
 	float _t;
-	//Wheel::HardPrt _
+	Render::Texture* _tank;
+	std::vector<Wheel::HardPrt> _wheels;
 public:
 	Tank();
 	void init();
