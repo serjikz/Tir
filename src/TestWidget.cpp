@@ -60,6 +60,7 @@ void TestWidget::Draw()
 		// При вызове метода Texture::Draw() вызывать Texture::Bind() необязательно.
 		//
 		_tex1->Draw();
+		// test commit
 	}
 	else
 	{
