@@ -15,6 +15,7 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 void GameFieldWidget::Init()
 {
 	_tank = Tank::HardPrt(new Tank());
+	_bkg = Core::resourceManager.Get<Render::Texture>("Background");
 	_curTex = 0;
 	_angle = 0;
 
@@ -24,131 +25,24 @@ void GameFieldWidget::Init()
 	spline.addKey(0.75f, FPoint(630.0f, 450.0f));
 	spline.addKey(1.0f, FPoint(600.0f, 550.0f));
 	spline.CalculateGradient();
+
+	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
+	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
+	rapidxml::xml_node<>* cloud = root->first_node("Clouds")->first_node("Cloud");
+	while (cloud) {
+		_clouds.push_back(Cloud::HardPrt(new Cloud(cloud)));
+		cloud = cloud->next_sibling();
+	}
 }
 
 void GameFieldWidget::Draw()
 {
-	//
-	// Получаем текущее положение курсора мыши.
-	//
-	IPoint mouse_pos = Core::mainInput.GetMousePos();
-
-	//
-	// Проталкиваем в стек текущее преобразование координат, чтобы в дальнейшем
-	// можно было восстановить это преобразование вызовом PopMatrix.
-	//
-	Render::device.PushMatrix();
-	
-	//
-	// Изменяем текущее преобразование координат, перемещая центр координат в позицию мыши
-	// и поворачивая координаты относительно этого центра вокруг оси z на угол _angle.
-	//
-	Render::device.MatrixTranslate((float)mouse_pos.x, (float)mouse_pos.y, 0);
-	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
-
-	if (!_curTex)
-	{
-		//
-		// Метод Texture::Draw() выводит квадратный спрайт с размерами текстуры
-		// в центре координат (0, 0). Центр координат и преобразование координат вершин
-		// спрайта устанавливаются с применением текущего преобразования.
-		//
-		// При вызове метода Texture::Draw() вызывать Texture::Bind() необязательно.
-		//
-		//_tex1->Draw();
-		// test commit
+	_bkg->Draw();
+	for (int i = 0; i < (int)_clouds.size(); i++) {
+		_clouds[i]->draw();
 	}
-	else
-	{
-		//IRect texRect = _tex2->getBitmapRect();
-
-		//
-		// При отрисовке текстуры можно вручную задавать UV координаты той части текстуры,
-		// которая будет натянута на вершины спрайта. UV координаты должны быть нормализованы,
-		// т.е., вне зависимости от размера текстуры в текселях, размер любой текстуры
-		// равен 1 (UV координаты задаются в диапазоне 0..1, хотя ничто не мешает задать их
-		// больше единицы, при этом в случае установленной адресации текстуры REPEAT, текстура
-		// будет размножена по этой стороне соответствующее количество раз).
-		//
-
-		//FRect rect(texRect);
-		//FRect uv(0, 1, 0, 1);
-
-		//_tex2->TranslateUV(rect, uv);
-
-		///Render::device.MatrixScale(_scale);
-		//Render::device.MatrixTranslate(-texRect.width * 0.5f, -texRect.height * 0.5f, 0.0f);
-
-		//
-		// Привязываем текстуру.
-		//
-		//_tex2->Bind();
-		
-		//
-		// Метод DrawQuad() выводит в графическое устройство квадратный спрайт, состоящий их двух
-		// примитивов - треугольников, используя при этом текущий цвет для вершин и привязанную (binded) текстуру,
-		// если разрешено текстурирование.
-		//
-		// Перед вызовом DrawQuad() должен быть вызов Texture::Bind() либо SetTexturing(false),
-		// иначе визуальный результат будет непредсказуемым.
-		//
-		//Render::DrawQuad(rect, uv);
-	}
-
-	//
-	// Воостанавливаем прежнее преобразование координат, снимая со стека изменённый фрейм.
-	//
-	Render::device.PopMatrix();
-	
-	//
-	// Получаем текущие координаты объекта, двигающегося по сплайну
-	//
-	FPoint currentPosition = spline.getGlobalFrame(math::clamp(0.0f, 1.0f, _timer / 6.0f));
-
-	//
-	// И рисуем объект в этих координатах
-	//
-	
-	_tank->draw();
-	
-	//
-	// Этот вызов отключает текстурирование при отрисовке.
-	//
-	Render::device.SetTexturing(false);
-	
-	//
-	// Метод BeginColor() проталкивает в стек текущий цвет вершин и устанавливает новый.
-	//
-	Render::BeginColor(Color(255, 128, 0, 255));
-	
-	//
-	// Метод DrawRect() выводит в графическое устройство квадратный спрайт, состоящий их двух
-	// примитивов - треугольников, используя при этом текущий цвет для вершин и привязанную (binded) текстуру,
-	// если разрешено текстурирование.
-	//
-	// Перед вызовом DrawRect() должен быть вызов Texture::Bind(), либо SetTexturing(false),
-	// иначе визуальный результат будет непредсказуемым.
-	//
-	Render::DrawRect(924, 0, 100, 100);
-	
-	//
-	// Метод EndColor() снимает со стека текущий цвет вершин, восстанавливая прежний.
-	//
-	Render::EndColor();
-	
-	//
-	// Опять включаем текстурирование.
-	//
-	Render::device.SetTexturing(true);
-
-	//
-	// Рисуем все эффекты, которые добавили в контейнер (Update() для контейнера вызывать не нужно).
-	//
+	_tank->draw();		
 	_effCont.Draw();
-
-	Render::BindFont("arial");
-	Render::PrintString(924 + 100 / 2, 35, utils::lexical_cast(mouse_pos.x) + ", " + utils::lexical_cast(mouse_pos.y), 1.f, CenterAlign);
-
 }
 
 void GameFieldWidget::Update(float dt)
@@ -158,6 +52,9 @@ void GameFieldWidget::Update(float dt)
 	//
 	_effCont.Update(dt);
 	_tank->update(_timer);
+	for (int i = 0; i < (int)_clouds.size(); i++) {
+		_clouds[i]->update(_timer);
+	}
 
 	//
 	// dt - значение времени в секундах, прошедшее от предыдущего кадра.
@@ -276,11 +173,5 @@ void GameFieldWidget::KeyPressed(int keyCode)
 
 void GameFieldWidget::CharPressed(int unicodeChar)
 {
-	//
-	// unicodeChar - Unicode код введённого символа
-	//
 
-	if (unicodeChar == L'а') {
-		// Реакция на ввод символа 'а'
-	}
 }

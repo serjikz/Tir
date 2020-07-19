@@ -18,7 +18,6 @@ void Wheel::draw() {
 	Render::device.PushMatrix();
 	Render::device.MatrixTranslate(_x, _y, 0);
 	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
-	Render::device.MatrixScale(1.f, 1.f, 1.f);
 	Render::device.MatrixTranslate(-textureCenter.x, -textureCenter.y, 0);
 	_wheel->Draw();
 	Render::device.PopMatrix();

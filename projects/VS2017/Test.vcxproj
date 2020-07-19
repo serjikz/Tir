@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\Cloud.cpp" />
     <ClCompile Include="..\..\src\Main.cpp" />
     <ClCompile Include="..\..\src\AppDelegate.cpp" />
     <ClCompile Include="..\..\src\GamefieldWidget.cpp" />
@@ -130,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\AppDelegate.h" />
+    <ClInclude Include="..\..\src\Cloud.h" />
     <ClInclude Include="..\..\src\GameFieldWidget.h" />
     <ClInclude Include="..\..\src\stdafx.h" />
     <ClInclude Include="..\..\src\Tank.h" />
@@ -140,7 +142,7 @@
       <SubType>Designer</SubType>
     </Xml>
     <Xml Include="..\..\bin\base_p\Resources.xml" />
-    <Xml Include="..\..\bin\base_p\TankSettings.xml" />
+    <Xml Include="..\..\bin\base_p\Settings.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\bin\base_p\start.lua" />

@@ -1,5 +1,6 @@
 #pragma once
 #include "Tank.h"
+#include "Cloud.h"
 ///
 /// Виджет - основной визуальный элемент на экране.
 /// Он отрисовывает себя, а также может содержать другие виджеты.
@@ -8,10 +9,12 @@ class GameFieldWidget : public GUI::Widget
 {
 private:
 	Tank::HardPrt _tank;
+	std::vector<Cloud::HardPrt> _clouds;
 	float _timer;
 	float _scale;
 	float _angle;
 	int _curTex;
+	Render::Texture* _bkg;
 	EffectsContainer _effCont;
 	ParticleEffectPtr _eff;
 	TimedSpline<FPoint> spline;

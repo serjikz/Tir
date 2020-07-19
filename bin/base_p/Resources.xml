@@ -15,5 +15,8 @@
     <texture id="Tank" path="textures/Tank" />
     <texture id="BigWheel" path="textures/BigWheel" />
     <texture id="LittleWheel" path="textures/LittleWheel" />
+    <texture id="Background" path="textures/Background" />
+    <texture id="Cloud1" path="textures/Cloud1" />
+    <texture id="Cloud2" path="textures/Cloud2" />    
   </Textures>
 </Resources>

@@ -7,7 +7,7 @@ Tank::Tank()
 	_angle(0),
 	_t(0)	
 {	
-	Xml::RapidXmlDocument tankSettingsXml("TankSettings.xml");
+	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
 	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
 	rapidxml::xml_node<>* tankSpeed = root->first_node("TankSpeed");
 	MAX_SPEED = Xml::GetFloatAttributeOrDef(tankSpeed, "maxSpeed", 0.f);
@@ -41,7 +41,7 @@ void Tank::draw() {
 	assert(_tank);
 	FPoint textureCenter = FPoint(_tank->getBitmapRect().Width() / 2, _tank->getBitmapRect().Height() / 2);
 	Render::device.PushMatrix();
-	Render::device.MatrixTranslate(_x, textureCenter.y, 0);
+	Render::device.MatrixTranslate(_x + textureCenter.x, textureCenter.y, 0);
 	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
 	Render::device.MatrixScale(1.f, _scaleY, 1.f);
 	Render::device.MatrixTranslate(-textureCenter.x, -textureCenter.y, 0);
