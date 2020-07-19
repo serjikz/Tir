@@ -157,6 +157,7 @@ void GameFieldWidget::Update(float dt)
 	// Обновим контейнер с эффектами
 	//
 	_effCont.Update(dt);
+	_tank->update();
 
 	//
 	// dt - значение времени в секундах, прошедшее от предыдущего кадра.
@@ -264,14 +265,12 @@ void GameFieldWidget::AcceptMessage(const Message& message)
 }
 
 void GameFieldWidget::KeyPressed(int keyCode)
-{
-	//
-	// keyCode - виртуальный код клавиши.
-	// В качестве значений для проверки нужно использовать константы VK_.
-	//
-
-	if (keyCode == VK_A) {
-		// Реакция на нажатие кнопки A
+{	
+	if (keyCode == VK_LEFT || keyCode == VK_A) {
+		_tank->moveLeft();
+	}
+	else if (keyCode == VK_RIGHT || keyCode == VK_D) {
+		_tank->moveRight();
 	}
 }
 
