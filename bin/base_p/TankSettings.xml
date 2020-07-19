@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Tank>
+	<TankSpeed maxSpeed="35" moveDX ="5" maxAngle="15" angleCoef="0.5" frictionForce="0.96">
+	</TankSpeed>
+  <Wheels>
+    <Wheel textureID="BigWheel" dx="41" dy="18"/> 
+    <Wheel textureID="BigWheel" dx="71" dy="18"/>
+    <Wheel textureID="BigWheel" dx="101" dy="18"/>
+    <Wheel textureID="LittleWheel" dx="19" dy="12"/>
+    <Wheel textureID="LittleWheel" dx="124" dy="12"/>
+  </Wheels>
+</Tank>
