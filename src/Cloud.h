@@ -16,7 +16,7 @@ private:
 	float MAX_Y;
 public:
 	Cloud (rapidxml::xml_node<>* settings);
-	typedef boost::shared_ptr<Cloud> HardPrt;
+	typedef boost::shared_ptr<Cloud> HardPtr;
 	void draw();
 	void update(float dt);
 };

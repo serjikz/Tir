@@ -22,7 +22,8 @@ Tank::Tank()
 		_wheels.push_back(Wheel::HardPrt(new Wheel(wheel)));
 		wheel = wheel->next_sibling();
 	}
-	
+	rapidxml::xml_node<>* cannon = root->first_node("Cannon");
+	_cannon = Cannon::HardPtr(new Cannon(cannon));
 };
 
 void Tank::update(float dt) {
@@ -35,6 +36,7 @@ void Tank::update(float dt) {
 	for (int i = 0; i < (int)_wheels.size(); i++) {
 		_wheels[i]->update(-_speed);
 	}
+	_cannon->update(dt);
 }
 
 void Tank::draw() {
@@ -45,6 +47,7 @@ void Tank::draw() {
 	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
 	Render::device.MatrixScale(1.f, _scaleY, 1.f);
 	Render::device.MatrixTranslate(-textureCenter.x, -textureCenter.y, 0);
+	_cannon->draw();
 	_tank->Draw();
 	for (int i = 0; i < (int)_wheels.size(); i++) {
 		_wheels[i]->draw();

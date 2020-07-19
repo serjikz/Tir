@@ -9,7 +9,7 @@ class GameFieldWidget : public GUI::Widget
 {
 private:
 	Tank::HardPrt _tank;
-	std::vector<Cloud::HardPrt> _clouds;
+	std::vector<Cloud::HardPtr> _clouds;
 	float _timer;
 	float _scale;
 	float _angle;

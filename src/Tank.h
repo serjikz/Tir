@@ -1,5 +1,6 @@
 #pragma once
 #include "Wheel.h"
+#include "Cannon.h"
 
 class Tank
 {
@@ -16,6 +17,7 @@ private:
 	float _t;
 	Render::Texture* _tank;
 	std::vector<Wheel::HardPrt> _wheels;
+	Cannon::HardPtr _cannon;
 public:
 	Tank();
 	void init();

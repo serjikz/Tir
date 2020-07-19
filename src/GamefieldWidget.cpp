@@ -30,7 +30,7 @@ void GameFieldWidget::Init()
 	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
 	rapidxml::xml_node<>* cloud = root->first_node("Clouds")->first_node("Cloud");
 	while (cloud) {
-		_clouds.push_back(Cloud::HardPrt(new Cloud(cloud)));
+		_clouds.push_back(Cloud::HardPtr(new Cloud(cloud)));
 		cloud = cloud->next_sibling();
 	}
 }
