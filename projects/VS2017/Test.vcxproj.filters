@@ -27,10 +27,10 @@
     <ClCompile Include="..\..\src\stdafx.cpp">
       <Filter>Header Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\TestAppDelegate.cpp">
+    <ClCompile Include="..\..\src\GamefieldWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\GamefieldWidget.cpp">
+    <ClCompile Include="..\..\src\AppDelegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,10 +38,10 @@
     <ClInclude Include="..\..\src\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\TestAppDelegate.h">
+    <ClInclude Include="..\..\src\GameFieldWidget.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\GameFieldWidget.h">
+    <ClInclude Include="..\..\src\AppDelegate.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

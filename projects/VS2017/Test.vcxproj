@@ -119,7 +119,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Main.cpp" />
-    <ClCompile Include="..\..\src\TestAppDelegate.cpp" />
+    <ClCompile Include="..\..\src\AppDelegate.cpp" />
     <ClCompile Include="..\..\src\GamefieldWidget.cpp" />
     <ClCompile Include="..\..\src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -127,7 +127,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\src\TestAppDelegate.h" />
+    <ClInclude Include="..\..\src\AppDelegate.h" />
     <ClInclude Include="..\..\src\GameFieldWidget.h" />
     <ClInclude Include="..\..\src\stdafx.h" />
   </ItemGroup>

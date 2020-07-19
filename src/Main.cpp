@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "TestAppDelegate.h"
+#include "AppDelegate.h"
 
 #define MYAPPLICATION_NAME L"Test"
 
@@ -32,9 +32,9 @@ int main(int argc, const char* argv[])
 
 #if defined(ENGINE_TARGET_WIN32)
 	Core::Application::APPLICATION_NAME = MYAPPLICATION_NAME;
-	Core::RunApplicationWithDelegate(new TestAppDelegate());
+	Core::RunApplicationWithDelegate(new AppDelegate());
 #else
-	Core::RunApplicationWithDelegate(argc, argv, new TestAppDelegate());
+	Core::RunApplicationWithDelegate(argc, argv, new AppDelegate());
 #endif
 	
 	return 0;
