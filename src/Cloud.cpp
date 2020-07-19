@@ -11,12 +11,13 @@ Cloud::Cloud(rapidxml::xml_node<>* settings)
 	_cloud = Core::resourceManager.Get<Render::Texture>(textureID);
 	_x = Xml::GetIntAttributeOrDef(settings, "dx", 0);
 	_y = Xml::GetIntAttributeOrDef(settings, "dy", 0);
+	_alpha = Xml::GetFloatAttributeOrDef(settings, "alpha", 0.5f);
 }
 
 void Cloud::draw() {
 	assert(_cloud);
 	FPoint textureCenter = FPoint(_cloud->getBitmapRect().Width() / 2, _cloud->getBitmapRect().Height() / 2 );
-	Render::BeginAlphaMul(0.3f);
+	Render::BeginAlphaMul(_alpha);
 	Render::device.PushMatrix();
 	Render::device.MatrixTranslate(_x, _y, 0);
 	Render::device.MatrixScale(_scale);
