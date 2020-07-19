@@ -12,6 +12,6 @@
     <texture id="cancel_normal" path="textures/cancel_normal" />
     <texture id="cancel_active" path="textures/cancel_active" />
     <texture id="cancel_pressed" path="textures/cancel_pressed" />
-    <texture id="Cannon" path="textures/Cannon" />    
+    <texture id="Tank" path="textures/Tank" />    
 	</Textures>
 </Resources>

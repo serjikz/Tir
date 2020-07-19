@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "TestAppDelegate.h"
-#include "TestWidget.h"
+#include "GameFieldWidget.h"
 
 enum {
 	WINDOW_WIDTH = 1024,
@@ -34,7 +34,7 @@ void TestAppDelegate::RegisterTypes()
 	// Чтобы можно было декларативно использовать виджет в xml по имени,
 	// его необходимо зарегистрировать таким образом.
 	//
-	REGISTER_WIDGET_XML(TestWidget, "TestWidget");
+	REGISTER_WIDGET_XML(GameFieldWidget, "GameFieldWidget");
 }
 
 void TestAppDelegate::LoadResources()
