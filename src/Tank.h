@@ -11,11 +11,12 @@ private:
 	float _speed;
 	float _scaleY;
 	float _angle;
+	float _t;
 public:
 	Tank();
 	typedef boost::shared_ptr<Tank> HardPrt;
 	void draw();
-	void update();
+	void update(float dt);
 	void moveLeft();
 	void moveRight();
 };

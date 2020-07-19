@@ -32,11 +32,18 @@ void Tank::draw() {
 }
 
 void Tank::moveLeft() {
+	//_dt *= -1;
+	//_angle = -10;
+	//_t = 0;
 	_angle = math::clamp(-15.f, 0.f, _angle - 0.5f *_t);
+	//_speed = -MOVE_DX;	
 	_speed = math::clamp(-MOVE_DX + 0.f, 0.f, _speed - MOVE_DX * _t);
 }
 
 void Tank::moveRight() {
+	//_dt *= -1;
 	_angle = math::clamp(0.f, 15.f, _angle + 0.5f * _t);
+	//_t = 0;
+	//_speed = MOVE_DX;
 	_speed = math::clamp(0.f, MOVE_DX + 0.f, _speed + MOVE_DX * _t);
 }

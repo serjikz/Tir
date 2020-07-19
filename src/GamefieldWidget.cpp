@@ -157,7 +157,7 @@ void GameFieldWidget::Update(float dt)
 	// Обновим контейнер с эффектами
 	//
 	_effCont.Update(dt);
-	_tank->update();
+	_tank->update(_timer);
 
 	//
 	// dt - значение времени в секундах, прошедшее от предыдущего кадра.
