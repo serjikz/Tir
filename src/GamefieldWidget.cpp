@@ -14,7 +14,7 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 
 void GameFieldWidget::Init()
 {
-	_tank= Core::resourceManager.Get<Render::Texture>("Tank");
+	
 
 	_curTex = 0;
 	_angle = 0;
@@ -111,7 +111,7 @@ void GameFieldWidget::Draw()
 	//
 	Render::device.PushMatrix();
 	Render::device.MatrixTranslate(currentPosition.x, currentPosition.y, 0);
-	_tank->Draw();
+	//_tank->Draw();
 	//_cannon->Draw();
 	Render::device.PopMatrix();
 

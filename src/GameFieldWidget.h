@@ -1,11 +1,13 @@
 #pragma once
-
+#include "Tank.h"
 ///
 /// Виджет - основной визуальный элемент на экране.
 /// Он отрисовывает себя, а также может содержать другие виджеты.
 ///
 class GameFieldWidget : public GUI::Widget
 {
+private:
+	Tank _tank;
 public:
 	GameFieldWidget(const std::string& name, rapidxml::xml_node<>* elem);
 
@@ -30,7 +32,7 @@ private:
 	float _scale;
 	float _angle;
 	
-	Render::Texture* _tank;
+	
 	int _curTex;
 
 	EffectsContainer _effCont;
