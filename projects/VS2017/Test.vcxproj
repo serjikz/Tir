@@ -126,18 +126,21 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\src\Tank.cpp" />
+    <ClCompile Include="..\..\src\Wheel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\AppDelegate.h" />
     <ClInclude Include="..\..\src\GameFieldWidget.h" />
     <ClInclude Include="..\..\src\stdafx.h" />
     <ClInclude Include="..\..\src\Tank.h" />
+    <ClInclude Include="..\..\src\Wheel.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\..\bin\base_p\Layers.xml">
       <SubType>Designer</SubType>
     </Xml>
     <Xml Include="..\..\bin\base_p\Resources.xml" />
+    <Xml Include="..\..\bin\base_p\TankSettings.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\bin\base_p\start.lua" />

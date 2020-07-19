@@ -36,6 +36,9 @@
     <ClCompile Include="..\..\src\Tank.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Wheel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\stdafx.h">
@@ -50,12 +53,18 @@
     <ClInclude Include="..\..\src\Tank.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\Wheel.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\..\bin\base_p\Layers.xml">
       <Filter>XML</Filter>
     </Xml>
     <Xml Include="..\..\bin\base_p\Resources.xml">
+      <Filter>XML</Filter>
+    </Xml>
+    <Xml Include="..\..\bin\base_p\TankSettings.xml">
       <Filter>XML</Filter>
     </Xml>
   </ItemGroup>

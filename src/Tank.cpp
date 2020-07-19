@@ -8,6 +8,14 @@ Tank::Tank()
 	_t(0)	
 {
 	_tank= Core::resourceManager.Get<Render::Texture>("Tank");
+	Xml::RapidXmlDocument tankSettingsXml("TankSettings.xml");
+	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
+	rapidxml::xml_node<>* tankSpeed = root->first_node("TankSpeed");
+	MAX_SPEED = Xml::GetFloatAttributeOrDef(tankSpeed, "maxSpeed", 0.f);
+	MOVE_DX = Xml::GetFloatAttributeOrDef(tankSpeed, "moveDX", 0.f);
+	MAX_ANGLE = Xml::GetFloatAttributeOrDef(tankSpeed, "maxAngle", 0.f);
+	ANGLE_COEF = Xml::GetFloatAttributeOrDef(tankSpeed, "angleCoef", 0.f);
+	FRICTION_FORCE = Xml::GetFloatAttributeOrDef(tankSpeed, "frictionForce", 0.f);
 };
 
 void Tank::update(float dt) {
@@ -32,11 +40,11 @@ void Tank::draw() {
 }
 
 void Tank::moveLeft() {
-	_angle = math::clamp(-15.f, 0.f, _angle - 0.5f *_t);
+	_angle = math::clamp(-MAX_ANGLE, 0.f, _angle - ANGLE_COEF *_t);
 	_speed = math::clamp(-MOVE_DX + 0.f, 0.f, _speed - MOVE_DX * _t);
 }
 
 void Tank::moveRight() {
-	_angle = math::clamp(0.f, 15.f, _angle + 0.5f * _t);
+	_angle = math::clamp(0.f, MAX_ANGLE, _angle + ANGLE_COEF * _t);
 	_speed = math::clamp(0.f, MOVE_DX + 0.f, _speed + MOVE_DX * _t);
 }
