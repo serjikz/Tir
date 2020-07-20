@@ -36,7 +36,7 @@ void Tank::update(float dt) {
 	for (int i = 0; i < (int)_wheels.size(); i++) {
 		_wheels[i]->update(-_speed);
 	}
-	_cannon->update(_x + _tank->getBitmapRect().Width() / 2.f);
+	_cannon->update(dt, _x + _tank->getBitmapRect().Width() / 2.f);
 }
 
 void Tank::draw() {
@@ -53,9 +53,6 @@ void Tank::draw() {
 		_wheels[i]->draw();
 	}
 	Render::device.PopMatrix();	
-
-	
-	
 }
 
 void Tank::moveLeft() {
@@ -66,4 +63,8 @@ void Tank::moveLeft() {
 void Tank::moveRight() {
 	_angle = math::clamp(0.f, MAX_ANGLE, _angle + ANGLE_COEF * _t);
 	_speed = math::clamp(0.f, MOVE_DX + 0.f, _speed + MOVE_DX * _t);
+}
+
+void Tank::shot() {
+	_cannon->shot();
 }

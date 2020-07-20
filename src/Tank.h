@@ -26,5 +26,6 @@ public:
 	void update(float dt);
 	void moveLeft();
 	void moveRight();
+	void shot();
 };
 

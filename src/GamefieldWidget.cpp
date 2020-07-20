@@ -111,6 +111,7 @@ bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)
 	}
 	else
 	{
+		_tank->shot();
 		//
 		// При нажатии на левую кнопку мыши, создаём временный эффект, который завершится сам.
 		//
