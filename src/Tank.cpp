@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Tank.h"
 
-Tank::Tank()
+Tank::Tank() //singleton?
 	: _x(0),
 	_speed(0),
 	_angle(0),
@@ -36,12 +36,12 @@ void Tank::update(float dt) {
 	for (int i = 0; i < (int)_wheels.size(); i++) {
 		_wheels[i]->update(-_speed);
 	}
-	_cannon->update(dt);
+	_cannon->update(_x + _tank->getBitmapRect().Width() / 2.f);
 }
 
 void Tank::draw() {
 	assert(_tank);
-	FPoint textureCenter = FPoint(_tank->getBitmapRect().Width() / 2, _tank->getBitmapRect().Height() / 2);
+	FPoint textureCenter = FPoint(_tank->getBitmapRect().Width() / 2.f, _tank->getBitmapRect().Height() / 2.f);
 	Render::device.PushMatrix();
 	Render::device.MatrixTranslate(_x + textureCenter.x, textureCenter.y, 0);
 	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
