@@ -14,7 +14,8 @@ private:
 	float _speed;
 	float _scaleY;
 	float _angle;
-	float _t;
+	EffectsContainer _effCont;
+	ParticleEffectPtr _eff;
 	Render::Texture* _tank;
 	std::vector<Wheel::HardPrt> _wheels;
 	Cannon::HardPtr _cannon;

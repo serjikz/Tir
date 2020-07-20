@@ -34,7 +34,7 @@ void Cloud::draw() {
 }
 
 void Cloud::update(float dt) {
-	_x -= _speed * dt;
+	_x -= _speed;
 	float leftBottomX = _x + _cloud->getBitmapRect().Width();
 	if (leftBottomX < 0) {
 		_scale = math::random(MIN_SCALE, MAX_SCALE);

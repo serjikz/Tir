@@ -40,7 +40,7 @@ void Cannon::update(float dt, float tankPosx) {
 	if (v1.x > 0) {
 		_angle *= -1;
 	}
-	_t = math::clamp(0.f, 1.f, _t + 0.01f * dt);
+	_t = math::clamp(0.f, 1.f, _t + 5*dt);
 	_dx = math::lerp(int(v3.x * 10), 0, _t);
 	_dy = math::lerp(int(v3.y * 10), 0, _t);
 }

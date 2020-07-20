@@ -51,9 +51,9 @@ void GameFieldWidget::Update(float dt)
 	// Обновим контейнер с эффектами
 	//
 	_effCont.Update(dt);
-	_tank->update(_timer);
+	_tank->update(dt);
 	for (int i = 0; i < (int)_clouds.size(); i++) {
-		_clouds[i]->update(_timer);
+		_clouds[i]->update(dt);
 	}
 
 	//

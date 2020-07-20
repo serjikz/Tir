@@ -4,8 +4,7 @@
 Tank::Tank() //singleton?
 	: _x(0),
 	_speed(0),
-	_angle(0),
-	_t(0)	
+	_angle(0)
 {	
 	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
 	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
@@ -24,6 +23,10 @@ Tank::Tank() //singleton?
 	}
 	rapidxml::xml_node<>* cannon = root->first_node("Cannon");
 	_cannon = Cannon::HardPtr(new Cannon(cannon));
+	_eff = _effCont.AddEffect("ExhaustGas");
+	//_eff->posX = mouse_pos.x + 0.f;
+	_eff->posY = 56;
+	_eff->posX = -5;
 };
 
 void Tank::update(float dt) {
@@ -31,12 +34,12 @@ void Tank::update(float dt) {
 	_scaleY = 1.f + 0.01f * _speed * sinf(dt);	
 	int pos =  _x + (int) _speed;
 	_x = math::clamp(0, Render::device.Width() - _tank->getBitmapRect().Width(), pos);
-	_angle *= FRICTION_FORCE;
-	_t = dt;
+	_angle *= FRICTION_FORCE; //!!!! change const
 	for (int i = 0; i < (int)_wheels.size(); i++) {
 		_wheels[i]->update(-_speed);
 	}
 	_cannon->update(dt, _x + _tank->getBitmapRect().Width() / 2.f);
+	_effCont.Update(dt);
 }
 
 void Tank::draw() {
@@ -52,17 +55,18 @@ void Tank::draw() {
 	for (int i = 0; i < (int)_wheels.size(); i++) {
 		_wheels[i]->draw();
 	}
+	_effCont.Draw();
 	Render::device.PopMatrix();	
 }
 
 void Tank::moveLeft() {
-	_angle = math::clamp(-MAX_ANGLE, 0.f, _angle - ANGLE_COEF *_t);
-	_speed = math::clamp(-MOVE_DX + 0.f, 0.f, _speed - MOVE_DX * _t);
+	_angle = math::clamp(-MAX_ANGLE, 0.f, _angle - ANGLE_COEF );
+	_speed = math::clamp(-MOVE_DX + 0.f, 0.f, _speed - MOVE_DX );
 }
 
 void Tank::moveRight() {
-	_angle = math::clamp(0.f, MAX_ANGLE, _angle + ANGLE_COEF * _t);
-	_speed = math::clamp(0.f, MOVE_DX + 0.f, _speed + MOVE_DX * _t);
+	_angle = math::clamp(0.f, MAX_ANGLE, _angle + ANGLE_COEF);
+	_speed = math::clamp(0.f, MOVE_DX + 0.f, _speed + MOVE_DX);
 }
 
 void Tank::shot() {
