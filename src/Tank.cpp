@@ -27,6 +27,9 @@ Tank::Tank() //singleton?
 	//_eff->posX = mouse_pos.x + 0.f;
 	_eff->posY = 56;
 	_eff->posX = -5;
+	_eff = _effCont.AddEffect("Dirt");
+	_eff->posY = 0;
+	_eff->posX = -5;
 };
 
 void Tank::update(float dt) {

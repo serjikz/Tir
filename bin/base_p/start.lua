@@ -13,6 +13,7 @@ LoadResource("Resources.xml")
 LoadEffects("Example2_Flames.xml")
 LoadEffects("Example3_FindObject.xml")
 LoadEffects("ExhaustGas.xml")
+LoadEffects("Dirt.xml")
 
 --
 -- Загрузка слоёв.
