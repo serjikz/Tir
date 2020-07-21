@@ -6,16 +6,22 @@
 class Tank
 {
 private:	
+	enum {
+		MOVE_LEFT, MOVE_RIGHT, NONE
+	} _state;
+
 	float MAX_SPEED;
 	float MOVE_DX;
 	float MAX_ANGLE;
 	float FRICTION_FORCE;
 	float GRAVITY_FORCE;
+	float SWING_FORCE;
 	float ANGLE_COEF;	
-	short int _x;
+	float _x;
 	float _speed;
 	float _scaleY;
 	float _angle;
+	float _dt;
 	EffectsContainer _effCont;
 	ParticleEffectPtr _exhaustGasEff;
 	Render::Texture* _tank;

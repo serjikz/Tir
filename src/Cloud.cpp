@@ -18,6 +18,7 @@ Cloud::Cloud(rapidxml::xml_node<>* settings)
 	MAX_SPEED = Xml::GetFloatAttributeOrDef(settings, "maxSpeed", 1.f);
 	MIN_Y = Xml::GetFloatAttributeOrDef(settings, "minY", 300);
 	MAX_Y = Xml::GetFloatAttributeOrDef(settings, "maxY", 500);
+	_speed = math::random(MIN_SPEED, MAX_SPEED);
 }
 
 void Cloud::draw() {
@@ -34,7 +35,7 @@ void Cloud::draw() {
 }
 
 void Cloud::update(float dt) {
-	_x -= _speed;
+	_x -= math::clamp(1.f, MAX_SPEED, _speed * dt);
 	float leftBottomX = _x + _cloud->getBitmapRect().Width();
 	if (leftBottomX < 0) {
 		_scale = math::random(MIN_SCALE, MAX_SCALE);
