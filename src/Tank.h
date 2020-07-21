@@ -1,6 +1,7 @@
 #pragma once
 #include "Wheel.h"
 #include "Cannon.h"
+#include "Dirt.h"
 
 class Tank
 {
@@ -20,6 +21,7 @@ private:
 	Render::Texture* _tank;
 	std::vector<Wheel::HardPrt> _wheels;
 	Cannon::HardPtr _cannon;
+	Dirt::HardPrt _dirtEff;
 public:
 	Tank();
 	typedef boost::shared_ptr<Tank> HardPrt;

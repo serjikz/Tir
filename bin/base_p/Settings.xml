@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Tank exhaustGasPosX ="-5" exhaustGasPosY="56">
+<Tank exhaustGasPosX ="-5" exhaustGasPosY="56" dirtX1="0" dirtX2="140" dirtY="-5">
 	<TankSpeed maxSpeed="35" moveDX ="5" maxAngle="7" angleCoef="0.5" frictionForce="0.96" gravityForce="0.96"/>
   <Wheels>
     <Wheel textureID="BigWheel" dx="41" dy="18"/> 

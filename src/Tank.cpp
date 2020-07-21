@@ -8,9 +8,6 @@ Tank::Tank() //singleton?
 {	
 	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
 	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
-	_exhaustGasEff = _effCont.AddEffect("ExhaustGas");
-	_exhaustGasEff->posY = Xml::GetFloatAttributeOrDef(root, "exhaustGasPosY", 0);
-	_exhaustGasEff->posX = Xml::GetFloatAttributeOrDef(root, "exhaustGasPosX", 0);
 	rapidxml::xml_node<>* tankSpeed = root->first_node("TankSpeed");
 	MAX_SPEED = Xml::GetFloatAttributeOrDef(tankSpeed, "maxSpeed", 0.f);
 	MOVE_DX = Xml::GetFloatAttributeOrDef(tankSpeed, "moveDX", 0.f);
@@ -27,6 +24,10 @@ Tank::Tank() //singleton?
 	}
 	rapidxml::xml_node<>* cannon = root->first_node("Cannon");
 	_cannon = Cannon::HardPtr(new Cannon(cannon));
+	_exhaustGasEff = _effCont.AddEffect("ExhaustGas");
+	_exhaustGasEff->posY = Xml::GetFloatAttributeOrDef(root, "exhaustGasPosY", 0);
+	_exhaustGasEff->posX = Xml::GetFloatAttributeOrDef(root, "exhaustGasPosX", 0);
+	_dirtEff = Dirt::HardPrt(new Dirt(root));
 };
 
 void Tank::update(float dt) {
@@ -34,12 +35,13 @@ void Tank::update(float dt) {
 	_scaleY = 1.f + 0.01f * _speed * sinf(dt);	
 	int pos =  _x + (int) _speed;
 	_x = math::clamp(0, Render::device.Width() - _tank->getBitmapRect().Width(), pos);
-	_angle *= GRAVITY_FORCE; //!!!! change const
+	_angle *= GRAVITY_FORCE;
 	for (int i = 0; i < (int)_wheels.size(); i++) {
 		_wheels[i]->update(-_speed);
 	}
 	_cannon->update(dt, _x + _tank->getBitmapRect().Width() / 2.f);
 	_effCont.Update(dt);
+	_dirtEff->update(dt);
 }
 
 void Tank::draw() {
@@ -56,17 +58,20 @@ void Tank::draw() {
 		_wheels[i]->draw();
 	}
 	_effCont.Draw();
+	_dirtEff->draw();
 	Render::device.PopMatrix();	
 }
 
 void Tank::moveLeft() {
 	_angle = math::clamp(-MAX_ANGLE, 0.f, _angle - ANGLE_COEF );
 	_speed = math::clamp(-MOVE_DX + 0.f, 0.f, _speed - MOVE_DX );
+	_dirtEff->reset(_speed);
 }
 
 void Tank::moveRight() {
 	_angle = math::clamp(0.f, MAX_ANGLE, _angle + ANGLE_COEF);
 	_speed = math::clamp(0.f, MOVE_DX + 0.f, _speed + MOVE_DX);
+	_dirtEff->reset(_speed);
 }
 
 void Tank::shot() {
