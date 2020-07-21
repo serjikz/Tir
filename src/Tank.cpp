@@ -8,12 +8,16 @@ Tank::Tank() //singleton?
 {	
 	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
 	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
+	_exhaustGasEff = _effCont.AddEffect("ExhaustGas");
+	_exhaustGasEff->posY = Xml::GetFloatAttributeOrDef(root, "exhaustGasPosY", 0);
+	_exhaustGasEff->posX = Xml::GetFloatAttributeOrDef(root, "exhaustGasPosX", 0);
 	rapidxml::xml_node<>* tankSpeed = root->first_node("TankSpeed");
 	MAX_SPEED = Xml::GetFloatAttributeOrDef(tankSpeed, "maxSpeed", 0.f);
 	MOVE_DX = Xml::GetFloatAttributeOrDef(tankSpeed, "moveDX", 0.f);
 	MAX_ANGLE = Xml::GetFloatAttributeOrDef(tankSpeed, "maxAngle", 0.f);
 	ANGLE_COEF = Xml::GetFloatAttributeOrDef(tankSpeed, "angleCoef", 0.f);
 	FRICTION_FORCE = Xml::GetFloatAttributeOrDef(tankSpeed, "frictionForce", 0.f);
+	GRAVITY_FORCE = Xml::GetFloatAttributeOrDef(tankSpeed, "gravityForce", 0.f);
 	_tank = Core::resourceManager.Get<Render::Texture>("Tank");
 	rapidxml::xml_node<>* wheels = root->first_node("Wheels");
 	rapidxml::xml_node<>* wheel = wheels->first_node("Wheel");
@@ -23,13 +27,6 @@ Tank::Tank() //singleton?
 	}
 	rapidxml::xml_node<>* cannon = root->first_node("Cannon");
 	_cannon = Cannon::HardPtr(new Cannon(cannon));
-	_eff = _effCont.AddEffect("ExhaustGas");
-	//_eff->posX = mouse_pos.x + 0.f;
-	_eff->posY = 56;
-	_eff->posX = -5;
-	_eff = _effCont.AddEffect("Dirt");
-	_eff->posY = 0;
-	_eff->posX = -5;
 };
 
 void Tank::update(float dt) {
@@ -37,7 +34,7 @@ void Tank::update(float dt) {
 	_scaleY = 1.f + 0.01f * _speed * sinf(dt);	
 	int pos =  _x + (int) _speed;
 	_x = math::clamp(0, Render::device.Width() - _tank->getBitmapRect().Width(), pos);
-	_angle *= FRICTION_FORCE; //!!!! change const
+	_angle *= GRAVITY_FORCE; //!!!! change const
 	for (int i = 0; i < (int)_wheels.size(); i++) {
 		_wheels[i]->update(-_speed);
 	}
