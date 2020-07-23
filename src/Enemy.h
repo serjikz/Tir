@@ -3,19 +3,12 @@
 class Enemy
 {
 private:	
-	float MAX_SPEED;
-	float MOVE_DX;
-	float MAX_ANGLE;
-	float FRICTION_FORCE;
-	float GRAVITY_FORCE;
-	float SWING_FORCE;
-	float ANGLE_COEF;	
-	float _x;
-	float _speed;
-	float _scaleY;
-	float _angle;
+	float _x, _y;
 	EffectsContainer _effCont;
 	Render::Texture* _texture;
+	FPoint _textureCenter;
+	FPoint _vecMove;
+	void checkGameFieldCollision();
 public:
 	Enemy(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Enemy> HardPtr;

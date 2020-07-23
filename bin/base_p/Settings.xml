@@ -16,6 +16,6 @@
   </Clouds>
   <Cannon textureID="Cannon" x="75" y="96" minAngle ="-95" maxAngle="95"/>
   <Enemies>
-    <Enemy type="ship" textureID="enemy1" x="100" y="100"/>
+    <Enemy type="ship" textureID="Enemy1" x="100" y="100"/>
   </Enemies>
 </Tank>

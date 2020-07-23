@@ -19,5 +19,6 @@
     <texture id="Cloud1" path="textures/Cloud1" />
     <texture id="Cloud2" path="textures/Cloud2" />
     <texture id="Cannon" path="textures/Cannon" />
+    <texture id="Enemy1" path="textures/Enemy1" />
   </Textures>
 </Resources>

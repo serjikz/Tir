@@ -48,6 +48,9 @@ void GameFieldWidget::Draw()
 	}
 	_tank->draw();		
 	_effCont.Draw();
+	for (int i = 0; i < (int)_enemies.size(); i++) {
+		_enemies[i]->draw();
+	}
 }
 
 void GameFieldWidget::Update(float dt)
@@ -59,6 +62,9 @@ void GameFieldWidget::Update(float dt)
 	_tank->update(dt);
 	for (int i = 0; i < (int)_clouds.size(); i++) {
 		_clouds[i]->update(dt);
+	}
+	for (int i = 0; i < (int)_enemies.size(); i++) {
+		_enemies[i]->update(dt);
 	}
 
 	//
