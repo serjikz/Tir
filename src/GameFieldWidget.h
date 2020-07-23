@@ -1,6 +1,7 @@
 #pragma once
 #include "Tank.h"
 #include "Cloud.h"
+#include "Enemy.h"
 ///
 /// Виджет - основной визуальный элемент на экране.
 /// Он отрисовывает себя, а также может содержать другие виджеты.
@@ -18,6 +19,7 @@ private:
 	EffectsContainer _effCont;
 	ParticleEffectPtr _eff;
 	TimedSpline<FPoint> spline;
+	std::vector <Enemy::HardPtr> _enemies;
 	void Init();
 public:
 	GameFieldWidget(const std::string& name, rapidxml::xml_node<>* elem);

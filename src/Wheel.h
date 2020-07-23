@@ -8,7 +8,7 @@ private:
 	float _angle;
 public:
 	Wheel(rapidxml::xml_node<>* settings);
-	typedef boost::shared_ptr<Wheel> HardPrt;
+	typedef boost::shared_ptr<Wheel> HardPtr;
 	void draw();
 	void update(float dt);
 };

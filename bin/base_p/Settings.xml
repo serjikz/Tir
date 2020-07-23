@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Tank exhaustGasPosX ="-5" exhaustGasPosY="56" dirtX1="0" dirtX2="140" dirtY="-5">
-	<TankSpeed maxSpeed="65" moveDX ="20" maxAngle="7" angleCoef="35" frictionForce="0.97" gravityForce="0.96" swingForce="0.1"/>
+	<TankSpeed maxSpeed="85" moveDX ="40" maxAngle="7" angleCoef="35" frictionForce="0.97" gravityForce="0.96" swingForce="0.1"/>
   <Wheels>
     <Wheel textureID="BigWheel" dx="41" dy="18"/> 
     <Wheel textureID="BigWheel" dx="71" dy="18"/>

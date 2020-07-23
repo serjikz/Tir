@@ -20,7 +20,7 @@ Tank::Tank() //singleton?
 	rapidxml::xml_node<>* wheels = root->first_node("Wheels");
 	rapidxml::xml_node<>* wheel = wheels->first_node("Wheel");
 	while (wheel) {
-		_wheels.push_back(Wheel::HardPrt(new Wheel(wheel)));
+		_wheels.push_back(Wheel::HardPtr(new Wheel(wheel)));
 		wheel = wheel->next_sibling();
 	}
 	rapidxml::xml_node<>* cannon = root->first_node("Cannon");
@@ -29,29 +29,14 @@ Tank::Tank() //singleton?
 	_exhaustGasEff->posY = Xml::GetFloatAttributeOrDef(root, "exhaustGasPosY", 0);
 	_exhaustGasEff->posX = Xml::GetFloatAttributeOrDef(root, "exhaustGasPosX", 0);
 	_dirtEff = Dirt::HardPrt(new Dirt(root));
-	_state = NONE;
 };
 
 void Tank::update(float dt) {
-	switch (_state) {
-		case(MOVE_LEFT):
-			_angle = math::clamp(-MAX_ANGLE, 0.f, _angle - ANGLE_COEF * dt);
-			_speed = math::clamp(-MAX_SPEED, 0.f, _speed - MOVE_DX * dt);
-			_dirtEff->reset(_speed);
-			_state = NONE;
-			break;
-		case(MOVE_RIGHT):
-			_angle = math::clamp(0.f, MAX_ANGLE, _angle + ANGLE_COEF * dt);
-			_speed = math::clamp(0.f, MAX_SPEED, _speed + MOVE_DX * dt);
-			_dirtEff->reset(_speed);
-			_state = NONE;
-			break;
-	}
 	_speed *= FRICTION_FORCE;
-	_x = math::clamp(0.f, (float)Render::device.Width() - _tank->getBitmapRect().Width(), _x + _speed);
+	_x = math::clamp(0.f, (float)Render::device.Width() - _tank->getBitmapRect().Width(), _x + _speed * dt);
 	_angle *= GRAVITY_FORCE;
 	for (int i = 0; i < (int)_wheels.size(); i++) {
-		_wheels[i]->update(-_speed);
+		_wheels[i]->update(-_speed * dt);
 	}
 	_cannon->update(dt, _x + _tank->getBitmapRect().Width() / 2.f);
 	_effCont.Update(dt);
@@ -59,8 +44,6 @@ void Tank::update(float dt) {
 }
 
 void Tank::draw() {
-	
-	//assert(_tank);
 	FPoint textureCenter = FPoint(_tank->getBitmapRect().Width() / 2.f, _tank->getBitmapRect().Height() / 2.f);
 	Render::device.PushMatrix();
 	Render::device.MatrixTranslate(_x + textureCenter.x, textureCenter.y, 0);
@@ -78,11 +61,13 @@ void Tank::draw() {
 }
 
 void Tank::moveLeft() {
-	_state = MOVE_LEFT;
+	_speed = math::clamp(-MAX_SPEED, 0.f, _speed - MOVE_DX);
+	_dirtEff->reset(_speed);
 }
 
 void Tank::moveRight() {
-	_state = MOVE_RIGHT;	
+	_speed = math::clamp(0.f, MAX_SPEED, _speed + MOVE_DX);
+	_dirtEff->reset(_speed);
 }
 
 void Tank::shot() {

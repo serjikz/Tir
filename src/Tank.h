@@ -6,10 +6,6 @@
 class Tank
 {
 private:	
-	enum {
-		MOVE_LEFT, MOVE_RIGHT, NONE
-	} _state;
-
 	float MAX_SPEED;
 	float MOVE_DX;
 	float MAX_ANGLE;
@@ -21,11 +17,10 @@ private:
 	float _speed;
 	float _scaleY;
 	float _angle;
-	float _dt;
 	EffectsContainer _effCont;
 	ParticleEffectPtr _exhaustGasEff;
 	Render::Texture* _tank;
-	std::vector<Wheel::HardPrt> _wheels;
+	std::vector<Wheel::HardPtr> _wheels;
 	Cannon::HardPtr _cannon;
 	Dirt::HardPrt _dirtEff;
 public:

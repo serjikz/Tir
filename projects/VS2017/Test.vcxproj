@@ -121,6 +121,7 @@
     <ClCompile Include="..\..\src\Cannon.cpp" />
     <ClCompile Include="..\..\src\Cloud.cpp" />
     <ClCompile Include="..\..\src\Dirt.cpp" />
+    <ClCompile Include="..\..\src\Enemy.cpp" />
     <ClCompile Include="..\..\src\Main.cpp" />
     <ClCompile Include="..\..\src\AppDelegate.cpp" />
     <ClCompile Include="..\..\src\GamefieldWidget.cpp" />
@@ -136,6 +137,7 @@
     <ClInclude Include="..\..\src\Cannon.h" />
     <ClInclude Include="..\..\src\Cloud.h" />
     <ClInclude Include="..\..\src\Dirt.h" />
+    <ClInclude Include="..\..\src\Enemy.h" />
     <ClInclude Include="..\..\src\GameFieldWidget.h" />
     <ClInclude Include="..\..\src\stdafx.h" />
     <ClInclude Include="..\..\src\Tank.h" />
