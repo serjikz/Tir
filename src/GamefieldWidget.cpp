@@ -33,7 +33,12 @@ void GameFieldWidget::Init()
 		_clouds.push_back(Cloud::HardPtr(new Cloud(cloud)));
 		cloud = cloud->next_sibling();
 	}
-}
+	rapidxml::xml_node<>* enemy = root->first_node("Enemies")->first_node("Enemy");
+	while (enemy) {
+		_enemies.push_back(Enemy::HardPtr(new Enemy(enemy)));
+		enemy = enemy->next_sibling();
+	}
+} 
 
 void GameFieldWidget::Draw()
 {

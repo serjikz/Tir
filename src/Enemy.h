@@ -15,10 +15,9 @@ private:
 	float _scaleY;
 	float _angle;
 	EffectsContainer _effCont;
-	ParticleEffectPtr _exhaustGasEff;
 	Render::Texture* _texture;
 public:
-	Enemy();
+	Enemy(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Enemy> HardPtr;
 	void draw();
 	void update(float dt);

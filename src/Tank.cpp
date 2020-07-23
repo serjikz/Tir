@@ -32,9 +32,9 @@ Tank::Tank() //singleton?
 };
 
 void Tank::update(float dt) {
-	_speed *= FRICTION_FORCE;
 	_x = math::clamp(0.f, (float)Render::device.Width() - _tank->getBitmapRect().Width(), _x + _speed * dt);
 	_angle *= GRAVITY_FORCE;
+	_speed *= FRICTION_FORCE;
 	for (int i = 0; i < (int)_wheels.size(); i++) {
 		_wheels[i]->update(-_speed * dt);
 	}
@@ -62,11 +62,13 @@ void Tank::draw() {
 
 void Tank::moveLeft() {
 	_speed = math::clamp(-MAX_SPEED, 0.f, _speed - MOVE_DX);
+	_angle = math::clamp(-MAX_ANGLE, 0.f, _angle - ANGLE_COEF);
 	_dirtEff->reset(_speed);
 }
 
 void Tank::moveRight() {
 	_speed = math::clamp(0.f, MAX_SPEED, _speed + MOVE_DX);
+	_angle = math::clamp(0.f, MAX_ANGLE, _angle + ANGLE_COEF);
 	_dirtEff->reset(_speed);
 }
 

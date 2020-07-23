@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <Tank exhaustGasPosX ="-5" exhaustGasPosY="56" dirtX1="0" dirtX2="140" dirtY="-5">
-	<TankSpeed maxSpeed="85" moveDX ="40" maxAngle="7" angleCoef="35" frictionForce="0.97" gravityForce="0.96" swingForce="0.1"/>
+	<TankSpeed maxSpeed="185" moveDX ="40" maxAngle="5" angleCoef="0.5" frictionForce="0.97" gravityForce="0.96" swingForce="0.1"/>
   <Wheels>
     <Wheel textureID="BigWheel" dx="41" dy="18"/> 
     <Wheel textureID="BigWheel" dx="71" dy="18"/>
@@ -15,4 +15,7 @@
            minSpeed ="45" maxSpeed="50" minY ="300" maxY="600"/>
   </Clouds>
   <Cannon textureID="Cannon" x="75" y="96" minAngle ="-95" maxAngle="95"/>
+  <Enemies>
+    <Enemy type="ship" textureID="enemy1" x="100" y="100"/>
+  </Enemies>
 </Tank>
