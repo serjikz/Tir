@@ -32,7 +32,6 @@ void Enemy::update(float dt) {
 }
 
 void Enemy::draw() {
-	
 	Render::device.PushMatrix();
 	Render::device.MatrixTranslate(_x, _y, 0);
 	//Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
@@ -81,16 +80,14 @@ void Enemy::setMoveVec(float x, float y) {
 }
 
 bool Enemy::isIntersect(Enemy::HardPtr anotherEnemy) {
-	//IRect r1 = this->getTextureRect();
-//	IRect r2 = anotherEnemy->getTextureRect();
-	//return r1.Intersects(r2);
-	//return this->getTextureRect().Intersects(anotherEnemy->getTextureRect());
+	// расстояние между центрами текстур
 	FPoint interactionVec = anotherEnemy->getCenterPos() - this->getCenterPos();
 	float sqrLen = pow(interactionVec.x, 2) + pow(interactionVec.y, 2);
-	return sqrLen < 120 * 120;
+	return sqrLen < _texture->getBitmapRect().Width() * anotherEnemy->getTextureRect().Width();
 }
 
 void Enemy::bounceWith(Enemy::HardPtr anotherEnemy) {
+	// даем время разлететься, чтобы тексутры не "слиплись"
 	if (_isBounced) {
 		return;
 	}
@@ -98,7 +95,6 @@ void Enemy::bounceWith(Enemy::HardPtr anotherEnemy) {
 	_isBounced = true;
 	// вектор взаимодействия
 	FPoint interactionVec = anotherEnemy->getCenterPos() - this->getCenterPos();
-	//float sqrLen = pow(interactionVec.x, 2) + pow(interactionVec.y, 2);
 	float alpha = math::atan(interactionVec.y, interactionVec.x);
 	float cosA = cos(alpha);
 	float sinA = sin(alpha);
