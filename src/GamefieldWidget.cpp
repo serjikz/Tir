@@ -55,9 +55,6 @@ void GameFieldWidget::Draw()
 
 void GameFieldWidget::Update(float dt)
 {
-	//
-	// Обновим контейнер с эффектами
-	//
 	_effCont.Update(dt);
 	_tank->update(dt);
 	for (int i = 0; i < (int)_clouds.size(); i++) {
@@ -65,6 +62,14 @@ void GameFieldWidget::Update(float dt)
 	}
 	for (int i = 0; i < (int)_enemies.size(); i++) {
 		_enemies[i]->update(dt);
+	}
+
+	for (int i = 0; i < (int)_enemies.size(); i++) {
+		for (int j = i + 1; j < (int)_enemies.size(); j++) {
+			if (_enemies[i]->isIntersect(_enemies[j])) {
+				_enemies[i]->bounceWith(_enemies[j]);
+			}
+		}
 	}
 
 	//

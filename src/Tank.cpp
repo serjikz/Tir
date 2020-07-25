@@ -35,6 +35,9 @@ void Tank::update(float dt) {
 	_x = math::clamp(0.f, (float)Render::device.Width() - _tank->getBitmapRect().Width(), _x + _speed * dt);
 	_angle *= GRAVITY_FORCE;
 	_speed *= FRICTION_FORCE;
+	if (fabs(_speed) < 0.1f) {
+		_speed = 0.f;
+	}
 	for (int i = 0; i < (int)_wheels.size(); i++) {
 		_wheels[i]->update(-_speed * dt);
 	}
