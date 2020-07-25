@@ -4,13 +4,14 @@ class Enemy
 {
 private:	
 	float _x, _y, _m;
+	float _t;
+	float _scale;
 	FPoint _speed;
 	EffectsContainer _effCont;
 	Render::Texture* _texture;
 	FPoint _textureCenter;
 	FPoint _vecMove;
-	void checkScreenBounce();
-	float _t;
+	void checkScreenBounce();	
 	bool _isBounced;
 public:
 	Enemy(rapidxml::xml_node<>* settings);
@@ -22,6 +23,7 @@ public:
 	void bounceWith(Enemy::HardPtr anotherEnemy);
 	FPoint getCenterPos() const;
 	FPoint getMoveVec() const;
+	float getScale() const;
 	void setMoveVec(float x, float y);
 	float getMass();
 };

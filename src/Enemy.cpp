@@ -11,6 +11,7 @@ Enemy::Enemy(rapidxml::xml_node<>* settings)
 	_vecMove.x = Xml::GetFloatAttributeOrDef(settings, "speedX", 0);
 	_vecMove.y = Xml::GetFloatAttributeOrDef(settings, "speedY", 0);
 	_m = Xml::GetFloatAttributeOrDef(settings, "m", 0);
+	_scale = Xml::GetFloatAttributeOrDef(settings, "scale", 1.f);
 	_speed = _vecMove;
 	_t = 0;
 	_isBounced = false;
@@ -27,7 +28,6 @@ void Enemy::update(float dt) {
 	else {
 		_isBounced = false;
 	}
-	
 	checkScreenBounce();
 }
 
@@ -35,35 +35,37 @@ void Enemy::draw() {
 	Render::device.PushMatrix();
 	Render::device.MatrixTranslate(_x, _y, 0);
 	//Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
-	//Render::device.MatrixScale(1.f, _scaleY, 1.f);
-	//Render::device.MatrixTranslate(-_textureCenter.x, -_textureCenter.y, 0);
+	Render::device.MatrixScale(_scale, _scale, 1.f);
+	Render::device.MatrixTranslate(-_textureCenter.x, -_textureCenter.y, 0);
 	_texture->Draw();
 	Render::device.PopMatrix();	
 }
 
 void Enemy::checkScreenBounce() {
-	if (_x + 2 * _textureCenter.x > Render::device.Width()) {
+	float halfWidth = getTextureRect().Width() / 2.f;
+	float halfHeight = getTextureRect().Height() / 2.f;
+	if (_x + halfWidth > Render::device.Width()) {
 		_vecMove.x *= -1;
-		_x = Render::device.Width() - 2 * _textureCenter.x;
+		_x = Render::device.Width() - halfWidth;
 	}
-	else if (_x  < 0) {
+	else if (_x - halfWidth < 0) {
 		_vecMove.x *= -1;
-		_x = 0.f;
-	} else if (_y + 2 * _textureCenter.y > Render::device.Height()) {
-		_y = Render::device.Height() - 2 * _textureCenter.y;
+		_x = halfWidth;
+	} else if (_y + halfHeight > Render::device.Height()) {
+		_y = Render::device.Height() - halfHeight;
 		_vecMove.y *= -1;
-	} else if (_y  < 0) {
-		_y = 0.f;
+	} else if (_y - halfHeight < 0) {
+		_y = halfHeight;
 		_vecMove.y *= -1;
 	}
 }
 
 IRect Enemy::getTextureRect() const{
-	return IRect(_x, _y, _texture->getBitmapRect().Width(), _texture->getBitmapRect().Height());
+	return IRect(_x, _y, _scale * _texture->getBitmapRect().Width(), _scale * _texture->getBitmapRect().Height());
 }
 
 FPoint Enemy::getCenterPos() const {
-	return FPoint(_x + _textureCenter.x, _y + _textureCenter.y);
+	return FPoint(_x, _y);
 }
 
 FPoint Enemy::getMoveVec() const {
@@ -72,6 +74,10 @@ FPoint Enemy::getMoveVec() const {
 
 float Enemy::getMass() {
 	return _m;
+}
+
+float Enemy::getScale() const {
+	return _scale;
 }
 
 void Enemy::setMoveVec(float x, float y) {
@@ -83,7 +89,8 @@ bool Enemy::isIntersect(Enemy::HardPtr anotherEnemy) {
 	// расстояние между центрами текстур
 	FPoint interactionVec = anotherEnemy->getCenterPos() - this->getCenterPos();
 	float sqrLen = pow(interactionVec.x, 2) + pow(interactionVec.y, 2);
-	return sqrLen < _texture->getBitmapRect().Width() * anotherEnemy->getTextureRect().Width();
+	float r = getTextureRect().Width() / 2.f + anotherEnemy->getTextureRect().Width() / 2.f;
+	return sqrLen < r* r;
 }
 
 void Enemy::bounceWith(Enemy::HardPtr anotherEnemy) {

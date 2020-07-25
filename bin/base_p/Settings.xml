@@ -16,12 +16,12 @@
   </Clouds>
   <Cannon textureID="Cannon" x="75" y="96" minAngle ="-95" maxAngle="95"/>
   <Enemies>
-    <Enemy type="ship" textureID="Enemy1" x="100" y="100" speedX="160" speedY="160" m="10"/>
-    <Enemy type="ship" textureID="Enemy2" x="200" y="400" speedX="100" speedY="160" m="20"/>
-    <Enemy type="ship" textureID="Enemy1" x="700" y="400" speedX="100" speedY="160"  m="90"/>
-    <Enemy type="ship" textureID="Enemy1" x="700" y="700" speedX="100" speedY="160" m="40"/>
-    <Enemy type="ship" textureID="Enemy1" x="500" y="400" speedX="100" speedY="160"  m="4"/>
-    <Enemy type="ship" textureID="Enemy2" x="250" y="700" speedX="100" speedY="160" m="40"/>
+    <Enemy type="ship" textureID="Enemy1" x="100" y="100" speedX="160" speedY="160" m="3" scale ="1"/>
+    <Enemy type="ship" textureID="Enemy2" x="200" y="400" speedX="100" speedY="160" m="1"/>
+    <Enemy type="ship" textureID="Enemy1" x="700" y="400" speedX="100" speedY="160"  m="2" scale ="1"/>
+    <Enemy type="ship" textureID="Enemy1" x="700" y="700" speedX="100" speedY="160" m="2" scale ="1"/>
+    <Enemy type="ship" textureID="Enemy1" x="500" y="400" speedX="100" speedY="160"  m="2" scale ="1"/>
+    <Enemy type="ship" textureID="Enemy2" x="250" y="700" speedX="100" speedY="160" m="1"/>
   
   </Enemies>
 </Tank>
