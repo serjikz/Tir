@@ -12,16 +12,19 @@ Enemy::Enemy(rapidxml::xml_node<>* settings)
 	_vecMove.y = Xml::GetFloatAttributeOrDef(settings, "speedY", 0);
 	_m = Xml::GetFloatAttributeOrDef(settings, "m", 0);
 	_scale = Xml::GetFloatAttributeOrDef(settings, "scale", 1.f);
+	_rotationSpeed = Xml::GetFloatAttributeOrDef(settings, "rotationSpeed", 10.f);
+	_rotateDirection = Xml::GetIntAttributeOrDef(settings, "rotateDirection", 1);
 	_speed = _vecMove;
 	_t = 0;
+	_angle = 0;
 	_isBounced = false;
 };
 
 void Enemy::update(float dt) {
 	_x += _vecMove.x * dt;
 	_y += _vecMove.y * dt;
-	_vecMove.x = math::clamp(-2*_speed.x, 2*_speed.x, _vecMove.x );
-	_vecMove.y = math::clamp(-2*_speed.y, 2*_speed.y, _vecMove.y );
+	_vecMove.x = math::clamp(-2*_speed.x, 2*_speed.x, _vecMove.x);
+	_vecMove.y = math::clamp(-2*_speed.y, 2*_speed.y, _vecMove.y);
 	if (_t < 2 *dt) {
 		_t += dt;
 	}
@@ -29,12 +32,16 @@ void Enemy::update(float dt) {
 		_isBounced = false;
 	}
 	checkScreenBounce();
+	_angle += _rotateDirection * _rotationSpeed *dt;
+	if (_angle > 360) {
+		_angle = _angle - 360;
+	}
 }
 
 void Enemy::draw() {
 	Render::device.PushMatrix();
 	Render::device.MatrixTranslate(_x, _y, 0);
-	//Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
+	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
 	Render::device.MatrixScale(_scale, _scale, 1.f);
 	Render::device.MatrixTranslate(-_textureCenter.x, -_textureCenter.y, 0);
 	_texture->Draw();
@@ -109,7 +116,7 @@ void Enemy::bounceWith(Enemy::HardPtr anotherEnemy) {
 	// проекци€ скорости на вектор взаимодействи€
 	float p1X = _vecMove.x * cosA + _vecMove.y * sinA;
 	float p2X = anotherEnemyV.x * cosA + anotherEnemyV.y * sinA;
-	// проекци€ на линию перпенидукул€рную вектору взамиодействи€
+	// проекци€ на линию перпендикул€рную вектору взамиодействи€
 	float p1Y = _vecMove.y * cosA - _vecMove.x * sinA;
 	float p2Y = anotherEnemyV.y * cosA - anotherEnemyV.x * sinA;
 	// новые скорости тел

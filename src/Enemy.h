@@ -6,7 +6,10 @@ private:
 	float _x, _y, _m;
 	float _t;
 	float _scale;
+	float _angle;
 	FPoint _speed;
+	float _rotationSpeed;
+	int _rotateDirection;
 	EffectsContainer _effCont;
 	Render::Texture* _texture;
 	FPoint _textureCenter;
