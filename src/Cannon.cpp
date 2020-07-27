@@ -49,8 +49,14 @@ void Cannon::update(float dt, float tankPosx) {
 	_t = math::clamp(0.f, 1.f, _t + INTERTIA_SPEED * dt);
 	_dx = math::lerp(int(INTERTIA_MOVE * _directionVec.x), 0, _t);
 	_dy = math::lerp(int(INTERTIA_MOVE * _directionVec.y ), 0, _t);
-	for (auto it =_missiles.begin(); it != _missiles.end(); it++) {
+	for (auto it =_missiles.begin(); it != _missiles.end();) {
 		(*it)->update(dt);
+		if ((*it)->isNotVisible()) {
+			it = _missiles.erase(it);
+		}
+		else {
+			it++;
+		}
 	}
 }
 

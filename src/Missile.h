@@ -13,7 +13,9 @@ private:
 
 public:
 	Missile(FPoint directionVec, float angle, float x0, float y0);
+	~Missile();
 	typedef boost::shared_ptr<Missile> HardPtr;
 	void draw();
 	void update(float dt);
+	bool isNotVisible();
 };

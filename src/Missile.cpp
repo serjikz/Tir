@@ -14,6 +14,10 @@ Missile::Missile(FPoint directionVec, float angle, float x0, float y0)
 	_t = 0.f;
 }
 
+Missile::~Missile() {
+
+}
+
 void Missile::draw() {
 	FPoint textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
 	Render::device.PushMatrix();
@@ -29,4 +33,10 @@ void Missile::update(float dt) {
 	_t = math::clamp(0.f, 5.f, _t + 10 * dt);
 	_dx += 100.f * _directionVec.x * dt;
 	_dy += 100.f * _directionVec.y * dt;
+}
+
+bool Missile::isNotVisible() {
+	IRect screen = IRect(0, 0, Render::device.Width(), Render::device.Height());
+	IRect texture = IRect(_x0 + _dx, _y0 + _dy, _tex->getBitmapRect().Width(), _tex->getBitmapRect().Height());
+	return !texture.Intersects(screen);
 }
