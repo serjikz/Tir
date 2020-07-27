@@ -16,6 +16,8 @@ Cannon::Cannon(rapidxml::xml_node<>* settings)
 	_y = Xml::GetIntAttributeOrDef(settings, "y", 0);
 	MIN_ANGLE = Xml::GetFloatAttributeOrDef(settings, "minAngle", -90);
 	MAX_ANGLE = Xml::GetFloatAttributeOrDef(settings, "maxAngle", 90);
+	INTERTIA_MOVE = Xml::GetFloatAttributeOrDef(settings, "inertiaMove", 0);
+	INTERTIA_SPEED = Xml::GetFloatAttributeOrDef(settings, "inertiaSpeed", 0);
 }
 
 void Cannon::draw() {
@@ -33,18 +35,18 @@ void Cannon::update(float dt, float tankPosx) {
 	IPoint mousePos = Core::mainInput.GetMousePos();
 	IPoint v1 = IPoint(mousePos.x - tankPosx, mousePos.y - _tex->getBitmapRect().Height());
 	IPoint v2 = IPoint(0, 1);
-	float len1 = sqrt(pow(v1.x, 2) + pow(v1.y, 2));
-	FPoint v3 = FPoint(v1.x / len1, v1.y / len1);
-	float len2 = 1;
+	float len = sqrt(pow(v1.x, 2) + pow(v1.y, 2));
+	FPoint v3 = FPoint(v1.x / len, v1.y / len);
 	_angle = math::clamp(MIN_ANGLE, MAX_ANGLE, 180.f / math::PI * (float) acos(v3.y));
 	if (v1.x > 0) {
 		_angle *= -1;
 	}
-	_t = math::clamp(0.f, 1.f, _t + 5*dt);   /// const
-	_dx = math::lerp(int(v3.x * 10), 0, _t);
-	_dy = math::lerp(int(v3.y * 10), 0, _t);
+	_t = math::clamp(0.f, 1.f, _t + INTERTIA_SPEED * dt);
+	_dx = math::lerp(int(INTERTIA_MOVE * v3.x), 0, _t);
+	_dy = math::lerp(int(INTERTIA_MOVE * v3.y ), 0, _t);
 }
 
 void Cannon::shot() {
 	_t = 0;
+	_missiles.push_back(Missile::HardPtr(new Missile(_x, _y)));
 }

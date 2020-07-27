@@ -21,5 +21,6 @@
     <texture id="Cannon" path="textures/Cannon" />
     <texture id="Enemy1" path="textures/Enemy1" />
     <texture id="Enemy2" path="textures/Enemy2" />
+    <texture id="Missile" path="textures/Missile" />
   </Textures>
 </Resources>

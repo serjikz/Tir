@@ -3,6 +3,7 @@
 #include "Cannon.h"
 #include "Dirt.h"
 
+
 class Tank
 {
 private:	
@@ -20,7 +21,7 @@ private:
 	EffectsContainer _effCont;
 	ParticleEffectPtr _exhaustGasEff;
 	Render::Texture* _tank;
-	std::vector<Wheel::HardPtr> _wheels;
+	std::vector<Wheel::HardPtr> _wheels;	
 	Cannon::HardPtr _cannon;
 	Dirt::HardPrt _dirtEff;
 public:

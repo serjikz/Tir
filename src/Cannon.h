@@ -1,4 +1,5 @@
 #pragma once
+#include "Missile.h"
 
 class Cannon
 {
@@ -11,6 +12,9 @@ private:
 	float _t;
 	float MIN_ANGLE;
 	float MAX_ANGLE;
+	float INTERTIA_MOVE;
+	float INTERTIA_SPEED;
+	std::vector<Missile::HardPtr> _missiles;
 public:
 	Cannon(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Cannon> HardPtr;
