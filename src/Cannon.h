@@ -14,11 +14,14 @@ private:
 	float MAX_ANGLE;
 	float INTERTIA_MOVE;
 	float INTERTIA_SPEED;
-	std::vector<Missile::HardPtr> _missiles;
+	float CANNON_X0;
+	float CANNON_Y0;
+	FPoint _directionVec;
+	std::deque<Missile::HardPtr> _missiles;
 public:
 	Cannon(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Cannon> HardPtr;
 	void draw();
 	void update(float dt, float tankPosx);
-	void shot();
+	void shot(IPoint atTankPos);
 };

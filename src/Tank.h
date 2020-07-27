@@ -20,7 +20,7 @@ private:
 	float _angle;
 	EffectsContainer _effCont;
 	ParticleEffectPtr _exhaustGasEff;
-	Render::Texture* _tank;
+	Render::Texture* _tex;
 	std::vector<Wheel::HardPtr> _wheels;	
 	Cannon::HardPtr _cannon;
 	Dirt::HardPrt _dirtEff;

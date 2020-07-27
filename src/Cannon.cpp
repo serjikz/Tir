@@ -18,6 +18,8 @@ Cannon::Cannon(rapidxml::xml_node<>* settings)
 	MAX_ANGLE = Xml::GetFloatAttributeOrDef(settings, "maxAngle", 90);
 	INTERTIA_MOVE = Xml::GetFloatAttributeOrDef(settings, "inertiaMove", 0);
 	INTERTIA_SPEED = Xml::GetFloatAttributeOrDef(settings, "inertiaSpeed", 0);
+	CANNON_X0 = Xml::GetIntAttributeOrDef(settings, "cannonX0", 0);
+	CANNON_Y0 = Xml::GetIntAttributeOrDef(settings, "cannonY0", 0);
 }
 
 void Cannon::draw() {
@@ -28,6 +30,9 @@ void Cannon::draw() {
 	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
 	Render::device.MatrixTranslate(-textureCenter.x, 0, 0);
 	_tex->Draw();
+	for (int i = 0; i < (int)_missiles.size(); i++) {
+		_missiles[i]->draw();
+	}
 	Render::device.PopMatrix();
 }
 
@@ -36,17 +41,24 @@ void Cannon::update(float dt, float tankPosx) {
 	IPoint v1 = IPoint(mousePos.x - tankPosx, mousePos.y - _tex->getBitmapRect().Height());
 	IPoint v2 = IPoint(0, 1);
 	float len = sqrt(pow(v1.x, 2) + pow(v1.y, 2));
-	FPoint v3 = FPoint(v1.x / len, v1.y / len);
-	_angle = math::clamp(MIN_ANGLE, MAX_ANGLE, 180.f / math::PI * (float) acos(v3.y));
+	_directionVec = FPoint(v1.x / len, v1.y / len);
+	_angle = math::clamp(MIN_ANGLE, MAX_ANGLE, 180.f / math::PI * (float) acos(_directionVec.y));
 	if (v1.x > 0) {
 		_angle *= -1;
 	}
 	_t = math::clamp(0.f, 1.f, _t + INTERTIA_SPEED * dt);
-	_dx = math::lerp(int(INTERTIA_MOVE * v3.x), 0, _t);
-	_dy = math::lerp(int(INTERTIA_MOVE * v3.y ), 0, _t);
+	_dx = math::lerp(int(INTERTIA_MOVE * _directionVec.x), 0, _t);
+	_dy = math::lerp(int(INTERTIA_MOVE * _directionVec.y ), 0, _t);
+	for (auto it =_missiles.begin(); it != _missiles.end(); it++) {
+		(*it)->update(dt);
+	}
 }
 
-void Cannon::shot() {
+void Cannon::shot(IPoint atTankPos) {
 	_t = 0;
-	_missiles.push_back(Missile::HardPtr(new Missile(_x, _y)));
+	float alpha = _angle * math::PI / 180.f + math::PI / 2.f;
+	float r = _tex->getBitmapRect().Height();
+	float x0 = CANNON_X0 + atTankPos.x + r * cos(alpha);
+	float y0 = CANNON_Y0 +  atTankPos.y + r * sin(alpha);
+	_missiles.push_back(Missile::HardPtr(new Missile(_directionVec, _angle,  x0, y0)));
 }

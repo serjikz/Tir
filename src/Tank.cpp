@@ -16,7 +16,7 @@ Tank::Tank() //singleton?
 	FRICTION_FORCE = Xml::GetFloatAttributeOrDef(tankSpeed, "frictionForce", 0.f);
 	GRAVITY_FORCE = Xml::GetFloatAttributeOrDef(tankSpeed, "gravityForce", 0.f);
 	SWING_FORCE = Xml::GetFloatAttributeOrDef(tankSpeed, "swingForce", 0.f);
-	_tank = Core::resourceManager.Get<Render::Texture>("Tank");
+	_tex = Core::resourceManager.Get<Render::Texture>("Tank");
 	rapidxml::xml_node<>* wheels = root->first_node("Wheels");
 	rapidxml::xml_node<>* wheel = wheels->first_node("Wheel");
 	while (wheel) {
@@ -32,7 +32,7 @@ Tank::Tank() //singleton?
 };
 
 void Tank::update(float dt) {
-	_x = math::clamp(0.f, (float)Render::device.Width() - _tank->getBitmapRect().Width(), _x + _speed * dt);
+	_x = math::clamp(0.f, (float)Render::device.Width() - _tex->getBitmapRect().Width(), _x + _speed * dt);
 	_angle *= GRAVITY_FORCE;
 	_speed *= FRICTION_FORCE;
 	if (fabs(_speed) < 0.1f) {
@@ -41,20 +41,21 @@ void Tank::update(float dt) {
 	for (int i = 0; i < (int)_wheels.size(); i++) {
 		_wheels[i]->update(-_speed * dt);
 	}
-	_cannon->update(dt, _x + _tank->getBitmapRect().Width() / 2.f);
+	_cannon->update(dt, _x + _tex->getBitmapRect().Width() / 2.f);
 	_effCont.Update(dt);
 	_dirtEff->update(dt);
 }
 
 void Tank::draw() {
-	FPoint textureCenter = FPoint(_tank->getBitmapRect().Width() / 2.f, _tank->getBitmapRect().Height() / 2.f);
+	FPoint textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
 	Render::device.PushMatrix();
 	Render::device.MatrixTranslate(_x + textureCenter.x, textureCenter.y, 0);
 	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
 	//Render::device.MatrixScale(1.f, _scaleY, 1.f);
 	Render::device.MatrixTranslate(-textureCenter.x, -textureCenter.y, 0);
+	_tex->Draw();
 	_cannon->draw();
-	_tank->Draw();
+	
 	for (int i = 0; i < (int)_wheels.size(); i++) {
 		_wheels[i]->draw();
 	}
@@ -76,5 +77,6 @@ void Tank::moveRight() {
 }
 
 void Tank::shot() {
-	_cannon->shot();
+	FPoint textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
+	_cannon->shot(IPoint(_x + textureCenter.x, textureCenter.y));
 }
