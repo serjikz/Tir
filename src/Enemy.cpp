@@ -97,7 +97,7 @@ bool Enemy::isIntersect(Enemy::HardPtr anotherEnemy) {
 	FPoint interactionVec = anotherEnemy->getCenterPos() - this->getCenterPos();
 	float sqrLen = pow(interactionVec.x, 2) + pow(interactionVec.y, 2);
 	float r = getTextureRect().Width() / 2.f + anotherEnemy->getTextureRect().Width() / 2.f;
-	return sqrLen < r* r;
+	return sqrLen < r * r;
 }
 
 void Enemy::bounceWith(Enemy::HardPtr anotherEnemy) {

@@ -36,7 +36,7 @@ void Cannon::draw() {
 	Render::device.PopMatrix();
 }
 
-void Cannon::update(float dt, float tankPosx) {
+void Cannon::update(float dt, float tankPosx, std::vector<Enemy::HardPtr> &enemies) {
 	IPoint mousePos = Core::mainInput.GetMousePos();
 	IPoint v1 = IPoint(mousePos.x - tankPosx, mousePos.y - _tex->getBitmapRect().Height());
 	IPoint v2 = IPoint(0, 1);
@@ -55,6 +55,7 @@ void Cannon::update(float dt, float tankPosx) {
 			it = _missiles.erase(it);
 		}
 		else {
+			(*it)->tryHit(enemies);
 			it++;
 		}
 	}

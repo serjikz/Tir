@@ -2,6 +2,7 @@
 #include "Wheel.h"
 #include "Cannon.h"
 #include "Dirt.h"
+#include "Enemy.h"
 
 
 class Tank
@@ -28,7 +29,7 @@ public:
 	Tank();
 	typedef boost::shared_ptr<Tank> HardPrt;
 	void draw();
-	void update(float dt);
+	void update(float dt, std::vector<Enemy::HardPtr> &enemies);
 	void moveLeft();
 	void moveRight();
 	void shot();

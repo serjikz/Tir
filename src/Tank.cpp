@@ -31,7 +31,7 @@ Tank::Tank() //singleton?
 	_dirtEff = Dirt::HardPrt(new Dirt(root));
 };
 
-void Tank::update(float dt) {
+void Tank::update(float dt, std::vector<Enemy::HardPtr>& enemies) {
 	_x = math::clamp(0.f, (float)Render::device.Width() - _tex->getBitmapRect().Width(), _x + _speed * dt);
 	_angle *= GRAVITY_FORCE;
 	_speed *= FRICTION_FORCE;
@@ -41,7 +41,7 @@ void Tank::update(float dt) {
 	for (int i = 0; i < (int)_wheels.size(); i++) {
 		_wheels[i]->update(-_speed * dt);
 	}
-	_cannon->update(dt, _x + _tex->getBitmapRect().Width() / 2.f);
+	_cannon->update(dt, _x + _tex->getBitmapRect().Width() / 2.f, enemies);
 	_effCont.Update(dt);
 	_dirtEff->update(dt);
 }
@@ -53,9 +53,8 @@ void Tank::draw() {
 	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
 	//Render::device.MatrixScale(1.f, _scaleY, 1.f);
 	Render::device.MatrixTranslate(-textureCenter.x, -textureCenter.y, 0);
-	_tex->Draw();
 	_cannon->draw();
-	
+	_tex->Draw();	
 	for (int i = 0; i < (int)_wheels.size(); i++) {
 		_wheels[i]->draw();
 	}

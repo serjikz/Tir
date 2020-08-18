@@ -1,5 +1,6 @@
 #pragma once
 #include "Missile.h"
+#include "Enemy.h"
 
 class Cannon
 {
@@ -22,6 +23,6 @@ public:
 	Cannon(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Cannon> HardPtr;
 	void draw();
-	void update(float dt, float tankPosx);
+	void update(float dt, float tankPosx, std::vector<Enemy::HardPtr>& enemies);
 	void shot(IPoint atTankPos);
 };

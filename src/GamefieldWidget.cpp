@@ -46,24 +46,24 @@ void GameFieldWidget::Draw()
 	for (int i = 0; i < (int)_clouds.size(); i++) {
 		_clouds[i]->draw();
 	}
-	_tank->draw();		
+		
 	_effCont.Draw();
 	for (int i = 0; i < (int)_enemies.size(); i++) {
 		_enemies[i]->draw();
 	}
+	_tank->draw();
 }
 
 void GameFieldWidget::Update(float dt)
 {
 	_effCont.Update(dt);
-	_tank->update(dt);
 	for (int i = 0; i < (int)_clouds.size(); i++) {
 		_clouds[i]->update(dt);
 	}
 	for (int i = 0; i < (int)_enemies.size(); i++) {
 		_enemies[i]->update(dt);
 	}
-
+	_tank->update(dt, _enemies);
 	for (int i = 0; i < (int)_enemies.size(); i++) {
 		for (int j = i + 1; j < (int)_enemies.size(); j++) {
 			if (_enemies[i]->isIntersect(_enemies[j])) {
