@@ -4,7 +4,7 @@
 class Missile
 {
 private:	
-	const float SPEED = 700.f;
+	const float SPEED = 900.f;
 	const float G = 9.8;
 	const float LIFE_TIME = 150.f;
 	const float M = 5.f;
@@ -18,7 +18,6 @@ private:
 	void explode();
 public:
 	Missile(FPoint directionVec, float angle, float x0, float y0);
-	~Missile();
 	typedef boost::shared_ptr<Missile> HardPtr;
 	void draw();
 	void update(float dt);

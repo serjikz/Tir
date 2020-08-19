@@ -15,10 +15,6 @@ Missile::Missile(FPoint directionVec, float angle, float x0, float y0)
 	_t = 0.f;
 }
 
-Missile::~Missile() {
-
-}
-
 void Missile::draw() {
 	FPoint textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
 	Render::device.PushMatrix();
@@ -46,11 +42,13 @@ bool Missile::isNotVisible() {
 
 void Missile::tryHit(const std::vector<Enemy::HardPtr> &enemies) {
 	for (int i = 0; i < (int)enemies.size(); i++) {
-		IRect enemyRect = enemies[i]->getTextureRect();
-		IRect missileRect = IRect(_x0 + _dx, _y0 + _dy, _tex->getBitmapRect().Width(), _tex->getBitmapRect().Height());
-		if (missileRect.Intersects(enemyRect)) {
+		FPoint interactionVec = enemies[i]->getCenterPos() - this->getCenterPos();
+		float sqrLen = pow(interactionVec.x, 2) + pow(interactionVec.y, 2);
+		float r = _tex->getBitmapRect().Height() / 2.f + enemies[i]->getTextureRect().Width() / 2.f;
+		if (sqrLen < r * r) {
 			bounceWith(enemies[i]);
 		}
+
 	}
 }
 
