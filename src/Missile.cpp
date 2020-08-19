@@ -9,7 +9,6 @@ Missile::Missile(FPoint directionVec, float angle, float x0, float y0)
 	_dy(0.f),
 	_x0(x0),
 	_y0(y0),
-	_m(5.2f),
 	_exploaded(false)
 {
 	_tex = Core::resourceManager.Get<Render::Texture>("Missile");
@@ -32,20 +31,20 @@ void Missile::draw() {
 }
 
 void Missile::update(float dt) {
-	_t = math::clamp(0.f, 1500.f, _t + dt);
+	_t = math::clamp(0.f, LIFE_TIME, _t + dt);
 	_dx += _moveVec.x * dt;
-	_moveVec.y -= 25 * _t * _t / 2.f;
+	_moveVec.y -= M * G * _t * _t / 2.f;
 	_dy += _moveVec.y * dt;
-	_angle = -90.f + 180.f / math::PI * math::atan(_dy, _dx);
+	_angle = -90.f + 180.f / math::PI * atan2(_moveVec.y, _moveVec.x);
 }
 
 bool Missile::isNotVisible() {
-	IRect screen = IRect(0, 0, 2 * Render::device.Width(), 2 * Render::device.Height());
-	IRect texture = IRect(_x0 + _dx, _y0 + _dy, _tex->getBitmapRect().Width(), _tex->getBitmapRect().Height());
-	return _exploaded || !texture.Intersects(screen);
+	IRect screen = IRect(0, 0, Render::device.Width(), 2 * Render::device.Height());
+	IRect textureRect = IRect(_x0 + _dx, _y0 + _dy, _tex->getBitmapRect().Width(), _tex->getBitmapRect().Height());
+	return _exploaded || !textureRect.Intersects(screen);
 }
 
-void Missile::tryHit(std::vector<Enemy::HardPtr> &enemies) {
+void Missile::tryHit(const std::vector<Enemy::HardPtr> &enemies) {
 	for (int i = 0; i < (int)enemies.size(); i++) {
 		IRect enemyRect = enemies[i]->getTextureRect();
 		IRect missileRect = IRect(_x0 + _dx, _y0 + _dy, _tex->getBitmapRect().Width(), _tex->getBitmapRect().Height());
@@ -64,7 +63,7 @@ FPoint Missile::getMoveVec() const {
 }
 
 float Missile::getMass() const {
-	return _m;
+	return M;
 }
 
 void Missile::bounceWith(Enemy::HardPtr enemy) {
@@ -80,7 +79,7 @@ void Missile::bounceWith(Enemy::HardPtr enemy) {
 	float p1Y = _moveVec.y * cosA - _moveVec.x * sinA;
 	float p2Y = enemyV.y * cosA - enemyV.x * sinA;
 	// новые скорости тел
-	float m1 = _m;
+	float m1 = M;
 	float m2 = enemy->getMass();
 	float p = m1 * p1X + m2 * p2X;
 	float v = p1X - p2X;

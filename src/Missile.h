@@ -4,14 +4,16 @@
 class Missile
 {
 private:	
-	const float SPEED = 400.f;
+	const float SPEED = 700.f;
+	const float G = 9.8;
+	const float LIFE_TIME = 150.f;
+	const float M = 5.f;
 	Render::Texture* _tex;
 	FPoint _moveVec;
 	float _x0, _y0;
 	float _t;	
 	float _dx, _dy;
 	float _angle;
-	float _m;
 	bool _exploaded;
 	void explode();
 public:
@@ -21,7 +23,7 @@ public:
 	void draw();
 	void update(float dt);
 	bool isNotVisible();
-	void tryHit(std::vector<Enemy::HardPtr> &enemies);
+	void tryHit(const std::vector<Enemy::HardPtr> &enemies);
 	FPoint getCenterPos() const;
 	FPoint getMoveVec() const;
 	float getMass() const;	
