@@ -48,7 +48,6 @@ void Missile::tryHit(const std::vector<Enemy::HardPtr> &enemies) {
 		if (sqrLen < r * r) {
 			bounceWith(enemies[i]);
 		}
-
 	}
 }
 
