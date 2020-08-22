@@ -4,25 +4,41 @@
 Interface::Interface(rapidxml::xml_node<>* settings)
 {
 	rapidxml::xml_node<>* panel = settings->first_node("Panel");
-	_rockets = Panel::HardPtr(new Panel(panel));
+	_rocketsPanel = Panel::HardPtr(new Panel(panel));
 	panel = panel->next_sibling();
-	_time = Panel::HardPtr(new Panel(panel));
+	_timePanel = Panel::HardPtr(new Panel(panel));
 	panel = panel->next_sibling();
-	_score = Panel::HardPtr(new Panel(panel));
+	_scorePanel = Panel::HardPtr(new Panel(panel));
 	_tapToPlayText = TextAnimated::HardPtr(new TextAnimated("TAP TO PLAY", Render::device.Width() / 2, Render::device.Height() / 2));
+	_state = State::TAP_TO_PLAY;
 }
 
 void Interface::draw() {
-	/*assert(_wheel);
-	FPoint textureCenter = FPoint(_wheel->getBitmapRect().Width() / 2, _wheel->getBitmapRect().Height() / 2 );
-	Render::device.PushMatrix();
-	Render::device.MatrixTranslate(_x, _y, 0);
-	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
-	Render::device.MatrixTranslate(-textureCenter.x, -textureCenter.y, 0);
-	_wheel->Draw();
-	Render::device.PopMatrix();*/
+	switch (_state) {
+		case State::TAP_TO_PLAY: 
+			_tapToPlayText->draw();
+			break;
+		case State::PLAY:
+			_rocketsPanel->draw();
+			_timePanel->draw();
+			break;
+		case State::IS_OVER:
+			_scorePanel->draw();
+			break;
+	}
 }
 
 void Interface::update(float dt) {
-	
+	switch (_state) {
+	case State::TAP_TO_PLAY:
+		_tapToPlayText->update(dt);
+		break;
+	case State::PLAY:
+		_rocketsPanel->update(dt);
+		_timePanel->update(dt);
+		break;
+	case State::IS_OVER:
+		_scorePanel->update(dt);
+		break;
+	}
 }

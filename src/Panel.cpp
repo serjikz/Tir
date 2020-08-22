@@ -8,8 +8,8 @@ Panel::Panel(rapidxml::xml_node<>* settings)
 {
 	std::string textureID = Xml::GetStringAttributeOrDef(settings, "textureID", "");
 	_tex = Core::resourceManager.Get<Render::Texture>(textureID);
-	_x = Xml::GetIntAttributeOrDef(settings, "dx", 0);
-	_y = Xml::GetIntAttributeOrDef(settings, "dy", 0);
+	_x = Xml::GetIntAttributeOrDef(settings, "x", 0);
+	_y = Xml::GetIntAttributeOrDef(settings, "y", 0);
 }
 
 void Panel::draw() {

@@ -5,9 +5,14 @@
 class Interface
 {
 private:	
-	Panel::HardPtr _rockets;
-	Panel::HardPtr _time;
-	Panel::HardPtr _score;
+	enum State {
+		TAP_TO_PLAY,
+		PLAY,
+		IS_OVER
+	} _state;
+	Panel::HardPtr _rocketsPanel;
+	Panel::HardPtr _timePanel;
+	Panel::HardPtr _scorePanel;
 	TextAnimated::HardPtr _tapToPlayText;
 public:
 	Interface(rapidxml::xml_node<>* settings);

@@ -25,5 +25,8 @@
     <texture id="Enemy1" path="textures/Enemy1" />
     <texture id="Enemy2" path="textures/Enemy2" />
     <texture id="Missile" path="textures/Missile" />
+    <texture id="PanelRockets" path="textures/PanelRockets" />
+    <texture id="PanelTime" path="textures/PanelTime" />
+    <texture id="PanelScore" path="textures/PanelScore" />
   </Textures>
 </Resources>
