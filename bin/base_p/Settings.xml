@@ -24,8 +24,8 @@
     <Enemy type="ship" textureID="Enemy2" x="250" y="700" speedX="100" speedY="160" m="1" rotationSpeed="30"/-->
   </Enemies>
   <GUI>
-    <Panel name="rockets" textureID="PanelRockets" x="500" y="600"/>
-    <Panel name="time" textureID="PanelTime" x="700" y="600"/>
-    <Panel name="score" textureID="PanelScore" x="700" y="600"/>    
+    <Panel name="rockets" textureID="PanelRockets" x="500" y="670"/>
+    <Panel name="time" textureID="PanelTime" x="750" y="670"/>
+    <Panel name="score" textureID="PanelScore" x="700" y="650"/>    
   </GUI>
 </Tank>
