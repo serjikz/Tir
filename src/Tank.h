@@ -8,6 +8,7 @@
 class Tank
 {
 private:	
+	const int START_X = 440;
 	float MAX_SPEED;
 	float MOVE_DX;
 	float MAX_ANGLE;

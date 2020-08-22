@@ -42,3 +42,11 @@ void Interface::update(float dt) {
 		break;
 	}
 }
+
+void Interface::setState(Interface::State state) {
+	_state = state;
+}
+
+Interface::State Interface::getState() {
+	return _state;
+}

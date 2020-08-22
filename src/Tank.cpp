@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "Tank.h"
 
-Tank::Tank() //singleton?
-	: _x(0),
+Tank::Tank()
+	: _x(START_X),
 	_speed(0),
 	_angle(0)
 {	
