@@ -2,6 +2,7 @@
 #include "Tank.h"
 #include "Cloud.h"
 #include "Enemy.h"
+#include "Interface.h"
 ///
 /// Виджет - основной визуальный элемент на экране.
 /// Он отрисовывает себя, а также может содержать другие виджеты.
@@ -9,6 +10,7 @@
 class GameFieldWidget : public GUI::Widget
 {
 private:
+	Interface::HardPtr _gui;
 	Tank::HardPrt _tank;
 	std::vector<Cloud::HardPtr> _clouds;
 	float _timer;

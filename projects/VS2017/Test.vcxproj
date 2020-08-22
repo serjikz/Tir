@@ -122,15 +122,18 @@
     <ClCompile Include="..\..\src\Cloud.cpp" />
     <ClCompile Include="..\..\src\Dirt.cpp" />
     <ClCompile Include="..\..\src\Enemy.cpp" />
+    <ClCompile Include="..\..\src\Interface.cpp" />
     <ClCompile Include="..\..\src\Main.cpp" />
     <ClCompile Include="..\..\src\AppDelegate.cpp" />
     <ClCompile Include="..\..\src\GamefieldWidget.cpp" />
     <ClCompile Include="..\..\src\Missile.cpp" />
+    <ClCompile Include="..\..\src\Panel.cpp" />
     <ClCompile Include="..\..\src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\..\src\Tank.cpp" />
+    <ClCompile Include="..\..\src\TextAnimated.cpp" />
     <ClCompile Include="..\..\src\Wheel.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -140,9 +143,12 @@
     <ClInclude Include="..\..\src\Dirt.h" />
     <ClInclude Include="..\..\src\Enemy.h" />
     <ClInclude Include="..\..\src\GameFieldWidget.h" />
+    <ClInclude Include="..\..\src\Interface.h" />
     <ClInclude Include="..\..\src\Missile.h" />
+    <ClInclude Include="..\..\src\Panel.h" />
     <ClInclude Include="..\..\src\stdafx.h" />
     <ClInclude Include="..\..\src\Tank.h" />
+    <ClInclude Include="..\..\src\TextAnimated.h" />
     <ClInclude Include="..\..\src\Wheel.h" />
   </ItemGroup>
   <ItemGroup>

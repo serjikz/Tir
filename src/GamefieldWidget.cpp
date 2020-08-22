@@ -38,6 +38,7 @@ void GameFieldWidget::Init()
 		_enemies.push_back(Enemy::HardPtr(new Enemy(enemy)));
 		enemy = enemy->next_sibling();
 	}
+	_gui = Interface::HardPtr(new Interface(root->first_node("GUI")));
 } 
 
 void GameFieldWidget::Draw()
