@@ -73,6 +73,7 @@ void GameFieldWidget::Update(float dt)
 		_clouds[i]->update(dt);
 	}
 	
+	_gui->update(dt);
 	switch (_gui->getState()) {
 	case Interface::State::TAP_TO_PLAY:
 
@@ -100,6 +101,7 @@ bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)
 {
 	switch (_gui->getState()) {
 	case Interface::State::TAP_TO_PLAY:
+		_gui->setState(Interface::State::PLAY);
 		break;
 	case Interface::State::PLAY:
 		_tank->shot();

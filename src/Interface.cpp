@@ -10,7 +10,7 @@ Interface::Interface(rapidxml::xml_node<>* settings)
 	panel = panel->next_sibling();
 	_scorePanel = Panel::HardPtr(new Panel(panel));
 	_tapToPlayText = TextAnimated::HardPtr(new TextAnimated("TAP TO PLAY", Render::device.Width() / 2, Render::device.Height() / 2));
-	_state = State::TAP_TO_PLAY;
+	_state = Interface::State::TAP_TO_PLAY;
 }
 
 void Interface::draw() {
