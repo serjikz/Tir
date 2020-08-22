@@ -2,16 +2,23 @@
 
 class TextAnimated
 {
-private:	
+private:
 	const float SPEED = 4.f;
 	const float DELTA_SCALE = 0.05f;
+	const float EPS = 0.01f;
 	short int _x, _y;
 	float _scale;
 	float _t;
+	float _alpha;
 	std::string _text;
 public:
+	enum class State {
+		NORMAL,
+		DISSAPEARENCE
+	} _state;
 	TextAnimated(const std::string& text, int x, int y);
 	typedef boost::shared_ptr<TextAnimated> HardPtr;
 	void draw();
 	void update(float dt);
+	void setState(TextAnimated::State newState);
 };

@@ -14,9 +14,10 @@ Interface::Interface(rapidxml::xml_node<>* settings)
 }
 
 void Interface::draw() {
+	_tapToPlayText->draw();
 	switch (_state) {
 		case State::TAP_TO_PLAY: 
-			_tapToPlayText->draw();
+			
 			break;
 		case State::PLAY:
 			_rocketsPanel->draw();
@@ -29,9 +30,10 @@ void Interface::draw() {
 }
 
 void Interface::update(float dt) {
+	_tapToPlayText->update(dt);
 	switch (_state) {
 	case State::TAP_TO_PLAY:
-		_tapToPlayText->update(dt);
+	
 		break;
 	case State::PLAY:
 		_rocketsPanel->update(dt);
@@ -43,8 +45,11 @@ void Interface::update(float dt) {
 	}
 }
 
-void Interface::setState(Interface::State state) {
-	_state = state;
+void Interface::setState(Interface::State newState) {
+	if (_state == State::TAP_TO_PLAY && newState == State::PLAY) {
+		_tapToPlayText->setState(TextAnimated::State::DISSAPEARENCE);
+	}
+	_state = newState;
 }
 
 Interface::State Interface::getState() {

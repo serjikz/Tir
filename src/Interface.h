@@ -19,6 +19,6 @@ public:
 	typedef boost::shared_ptr<Interface> HardPtr;
 	void draw();
 	void update(float dt);
-	void setState(Interface::State state);
+	void setState(Interface::State newState);
 	State getState();
 };
