@@ -8,7 +8,7 @@ TextAnimated::TextAnimated(const std::string& text, int x, int y)
 	_scale(1.f),
 	_t(0.f),
 	_alpha(1.f),
-	_state(State::NORMAL)
+	_state(State::APEARENCE)
 {
 }
 
@@ -32,11 +32,15 @@ void TextAnimated::update(float dt) {
 		_t = 0.f;
 	}
 	_scale = 1.f + DELTA_SCALE * sinf(_t);
-	if (_state == State::DISSAPEARENCE) {
-		_alpha = math::clamp(0.f, 1.f, _alpha - dt);
-	}
+	_alpha = math::clamp(0.f, 1.f, _alpha + _multiplier * dt);
 }
 
 void TextAnimated::setState(TextAnimated::State newState) {
 	_state = newState;
+	if (_state == State::DISSAPEARENCE) {
+		_multiplier = -1.f;
+	}
+	else if (_state == State::APEARENCE) {
+		_multiplier = 1.f;
+	}
 }

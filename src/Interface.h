@@ -1,5 +1,6 @@
 #pragma once
 #include "Panel.h"
+#include "ScorePanel.h"
 #include "TextAnimated.h"
 
 class Interface
@@ -7,7 +8,7 @@ class Interface
 private:	
 	Panel::HardPtr _rocketsPanel;
 	Panel::HardPtr _timePanel;
-	Panel::HardPtr _scorePanel;
+	ScorePanel::HardPtr _scorePanel;
 	TextAnimated::HardPtr _tapToPlayText;
 public:
 	enum class State {

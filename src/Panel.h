@@ -2,21 +2,25 @@
 
 class Panel
 {
-private:	
+protected:	
+	const float EPS = 0.01f;
 	Render::Texture* _tex;
 	short int _x, _y;
+	float _splineVal;
 	float _t;
 	float _speed;
+	float _direction;
 	TimedSpline<float> _spline;
 public:
 	enum class State {
 		HIDEN,
 		NORMAL,
-		APEARENCE
+		APEARENCE,
+		DISSAPEARENCE
 	} _state;
 	Panel(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Panel> HardPtr;
-	void draw();
+	virtual void draw();
 	void update(float dt);
 	void setState(Panel::State newState);
 };

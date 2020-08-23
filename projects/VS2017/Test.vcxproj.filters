@@ -63,6 +63,9 @@
     <ClCompile Include="..\..\src\Interface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\ScorePanel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\stdafx.h">
@@ -102,6 +105,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\Interface.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ScorePanel.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

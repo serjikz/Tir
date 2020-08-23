@@ -39,6 +39,7 @@ void GameFieldWidget::Init()
 		enemy = enemy->next_sibling();
 	}
 	_gui = Interface::HardPtr(new Interface(root->first_node("GUI")));
+	_gui->setState(Interface::State::TAP_TO_PLAY);
 } 
 
 void GameFieldWidget::Draw()
@@ -146,6 +147,12 @@ void GameFieldWidget::KeyPressed(int keyCode)
 	}
 	else if (keyCode == VK_RIGHT || keyCode == VK_D) {
 		_tank->moveRight();
+	}
+	else if (keyCode == VK_ESCAPE) {
+		_gui->setState(Interface::State::IS_OVER);
+	}
+	else if (keyCode == VK_1) {
+		_gui->setState(Interface::State::TAP_TO_PLAY);
 	}
 }
 

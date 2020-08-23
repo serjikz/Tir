@@ -25,23 +25,31 @@
   </Enemies>
   <GUI>
     <Panel name="rockets" textureID="PanelRockets" x="500" y="670" speed="2">
-      <spline y="800" t="0"/>
-      <spline y="750" t="0.25"/>
-      <spline y="700" t="0.5"/>
-      <spline y="660" t="0.7"/>
-      <spline y="650" t="0.8"/>
-      <spline y="660" t="0.9"/>
-      <spline y="670" t="1"/>
+      <spline value="800" t="0"/>
+      <spline value="750" t="0.25"/>
+      <spline value="700" t="0.5"/>
+      <spline value="660" t="0.7"/>
+      <spline value="650" t="0.8"/>
+      <spline value="660" t="0.9"/>
+      <spline value="670" t="1"/>
     </Panel>
     <Panel name="time" textureID="PanelTime" x="750" y="670" speed="2">
-      <spline y="800" t="0"/>
-      <spline y="750" t="0.25"/>
-      <spline y="700" t="0.5"/>
-      <spline y="660" t="0.7"/>
-      <spline y="650" t="0.8"/>
-      <spline y="660" t="0.9"/>
-      <spline y="670" t="1"/>
+      <spline value="800" t="0"/>
+      <spline value="750" t="0.25"/>
+      <spline value="700" t="0.5"/>
+      <spline value="660" t="0.7"/>
+      <spline value="650" t="0.8"/>
+      <spline value="660" t="0.9"/>
+      <spline value="670" t="1"/>
     </Panel>
-    <Panel name="score" textureID="PanelScore" x="700" y="650"/>    
+    <Panel name="score" textureID="PanelScore" x="512" y="384" speed="2">
+      <spline value="1.7" t="0"/>
+      <spline value="1.6" t="0.2"/>
+      <spline value="1.5" t="0.3"/>
+      <spline value="1.4" t="0.4"/>
+      <spline value="1.3" t="0.5"/>
+      <spline value="0.9" t="0.6"/>
+      <spline value="1" t="1"/>
+    </Panel>
   </GUI>
 </Tank>
