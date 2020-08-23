@@ -8,7 +8,7 @@ Interface::Interface(rapidxml::xml_node<>* settings)
 	panel = panel->next_sibling();
 	_timePanel = Panel::HardPtr(new Panel(panel));
 	panel = panel->next_sibling();
-	_scorePanel = Panel::HardPtr(new Panel(panel));
+	//_scorePanel = Panel::HardPtr(new Panel(panel));
 	_tapToPlayText = TextAnimated::HardPtr(new TextAnimated("TAP TO PLAY", Render::device.Width() / 2, Render::device.Height() / 2));
 	_state = Interface::State::TAP_TO_PLAY;
 }
@@ -24,7 +24,7 @@ void Interface::draw() {
 			_timePanel->draw();
 			break;
 		case State::IS_OVER:
-			_scorePanel->draw();
+			//_scorePanel->draw();
 			break;
 	}
 }
@@ -40,7 +40,7 @@ void Interface::update(float dt) {
 		_timePanel->update(dt);
 		break;
 	case State::IS_OVER:
-		_scorePanel->update(dt);
+		//_scorePanel->update(dt);
 		break;
 	}
 }
@@ -48,6 +48,8 @@ void Interface::update(float dt) {
 void Interface::setState(Interface::State newState) {
 	if (_state == State::TAP_TO_PLAY && newState == State::PLAY) {
 		_tapToPlayText->setState(TextAnimated::State::DISSAPEARENCE);
+		//_scorePanel->setState(Panel::State::APEARENCE);
+		_timePanel->setState(Panel::State::APEARENCE);
 	}
 	_state = newState;
 }

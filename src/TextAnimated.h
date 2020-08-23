@@ -10,9 +10,9 @@ private:
 	float _scale;
 	float _t;
 	float _alpha;
-	std::string _text;
+	std::string _text;	
 public:
-	enum class State {
+	enum class State {		
 		NORMAL,
 		DISSAPEARENCE
 	} _state;
