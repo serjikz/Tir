@@ -9,6 +9,7 @@ ScorePanel::ScorePanel(rapidxml::xml_node<>* settings)
 	float x = Xml::GetFloatAttributeOrDef(backSideRectSettings, "x", 0.f);
 	float y = Xml::GetFloatAttributeOrDef(backSideRectSettings, "y", 0.f);
 	float scale = Xml::GetFloatAttributeOrDef(backSideRectSettings, "scale", 1.f);
+	_alphaMiultiplier = Xml::GetFloatAttributeOrDef(backSideRectSettings, "alpha", 1.f);
 	_backSideRect = IRect(x, y, scale * _textureCenter.x, scale * _textureCenter.y);
 }
 
@@ -19,7 +20,7 @@ void ScorePanel::draw() {
 		Render::device.MatrixTranslate(_x, _y, 0);
 		Render::device.MatrixScale(_splineVal, _splineVal, 1.f);
 		Render::device.MatrixTranslate(-_textureCenter.x, -_textureCenter.y, 0);	
-		Render::BeginAlphaMul(0.7f *_t);
+		Render::BeginAlphaMul(_alphaMiultiplier *_t);
 		Render::device.SetTexturing(false);
 		Render::BeginColor(Color::BLACK);
 		Render::DrawRect(_backSideRect);
