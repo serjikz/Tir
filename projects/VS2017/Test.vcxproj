@@ -135,6 +135,7 @@
     </ClCompile>
     <ClCompile Include="..\..\src\Tank.cpp" />
     <ClCompile Include="..\..\src\TextAnimated.cpp" />
+    <ClCompile Include="..\..\src\TimePanel.cpp" />
     <ClCompile Include="..\..\src\Wheel.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="..\..\src\stdafx.h" />
     <ClInclude Include="..\..\src\Tank.h" />
     <ClInclude Include="..\..\src\TextAnimated.h" />
+    <ClInclude Include="..\..\src\TimePanel.h" />
     <ClInclude Include="..\..\src\Wheel.h" />
   </ItemGroup>
   <ItemGroup>

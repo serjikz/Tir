@@ -6,7 +6,7 @@ Interface::Interface(rapidxml::xml_node<>* settings)
 	rapidxml::xml_node<>* panel = settings->first_node("Panel");
 	_rocketsPanel = Panel::HardPtr(new Panel(panel));
 	panel = panel->next_sibling();
-	_timePanel = Panel::HardPtr(new Panel(panel));
+	_timePanel = TimePanel::HardPtr(new TimePanel(panel));
 	panel = panel->next_sibling();
 	_scorePanel = ScorePanel::HardPtr(new ScorePanel(panel));
 	_tapToPlayText = TextAnimated::HardPtr(new TextAnimated("TAP TO PLAY", Render::device.Width() / 2, Render::device.Height() / 2));

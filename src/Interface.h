@@ -1,13 +1,14 @@
 #pragma once
 #include "Panel.h"
 #include "ScorePanel.h"
+#include "TimePanel.h"
 #include "TextAnimated.h"
 
 class Interface
 {
 private:	
 	Panel::HardPtr _rocketsPanel;
-	Panel::HardPtr _timePanel;
+	TimePanel::HardPtr _timePanel;
 	ScorePanel::HardPtr _scorePanel;
 	TextAnimated::HardPtr _tapToPlayText;
 public:
