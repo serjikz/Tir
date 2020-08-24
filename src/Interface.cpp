@@ -18,17 +18,6 @@ void Interface::draw() {
 	_rocketsPanel->draw();
 	_timePanel->draw();
 	_scorePanel->draw();
-	switch (_state) {
-		case State::TAP_TO_PLAY: 
-			
-			break;
-		case State::PLAY:
-	
-			break;
-		case State::IS_OVER:
-	
-			break;
-	}
 }
 
 void Interface::update(float dt) {
@@ -36,19 +25,6 @@ void Interface::update(float dt) {
 	_rocketsPanel->update(dt);
 	_timePanel->update(dt);
 	_scorePanel->update(dt);
-
-
-	switch (_state) {
-	case State::TAP_TO_PLAY:
-	
-		break;
-	case State::PLAY:
-	
-		break;
-	case State::IS_OVER:
-
-		break;
-	}
 }
 
 void Interface::setState(Interface::State newState) {
@@ -71,4 +47,8 @@ void Interface::setState(Interface::State newState) {
 
 Interface::State Interface::getState() {
 	return _state;
+}
+
+void Interface::showStatistics(int enemiesCount, int enemiesAlive) {
+	_scorePanel->showStatistics(enemiesCount, enemiesAlive);
 }

@@ -132,12 +132,10 @@ void GameFieldWidget::MouseUp(const IPoint &mouse_pos)
 
 void GameFieldWidget::AcceptMessage(const Message& message)
 {
-	//
-	// Виджету могут посылаться сообщения с параметрами.
-	//
-
-	const std::string& publisher = message.getPublisher();
-	const std::string& data = message.getData();
+	if (message.is("Interface", "TimeIsOver")) {
+		_gui->setState(Interface::State::IS_OVER);
+		_gui->showStatistics(2, (int)_enemies.size());
+	}
 }
 
 void GameFieldWidget::KeyPressed(int keyCode)

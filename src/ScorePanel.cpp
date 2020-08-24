@@ -2,7 +2,8 @@
 #include "ScorePanel.h"
 
 ScorePanel::ScorePanel(rapidxml::xml_node<>* settings)
-	:Panel(settings)
+	:Panel(settings),
+	_text("")
 {
 	_textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
 	rapidxml::xml_node<>* backSideRectSettings = settings->first_node("backSideRect");
@@ -26,9 +27,17 @@ void ScorePanel::draw() {
 		Render::DrawRect(_backSideRect);
 		Render::EndColor();
 		Render::EndAlphaMul();
+		Render::BindFont("FloralessTime");
+		Render::PrintString(100, 300, _text, 1.f, LeftAlign, CenterAlign);
 		Render::device.SetTexturing(true);
 		_tex->Draw();
 		Render::device.PopMatrix();
 		Render::EndAlphaMul();
+	}
+}
+
+void ScorePanel::showStatistics(int enemiesCount, int enemiesAlive) {
+	if (enemiesAlive > 0) {
+		_text = "Time is over";
 	}
 }

@@ -28,6 +28,10 @@ void TimePanel::update(float dt) {
 	Panel::update(dt);
 	if (_state != State::HIDEN) {
 		int t = _timeAvailable - (clock() - _t0) / 1000;
+		if (t == 0) {
+			Core::guiManager.getLayer("TestLayer")->getWidget("GameFieldWidget")->AcceptMessage(Message("Interface", "TimeIsOver"));
+			return;
+		}
 		int min = t / 60;
 		int sec = t % 60;
 		std::string m = std::to_string(min);
@@ -46,8 +50,5 @@ void TimePanel::setState(Panel::State newState) {
 	Panel::setState(newState);
 	if (newState == State::APEARENCE) {
 		_t0 = clock();
-	}
-	else if (newState == State::DISSAPEARENCE) {
-
 	}
 }
