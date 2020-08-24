@@ -21,6 +21,6 @@ public:
 	Panel(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Panel> HardPtr;
 	virtual void draw();
-	void update(float dt);
-	void setState(Panel::State newState);
+	virtual void update(float dt);
+	virtual void setState(Panel::State newState);
 };

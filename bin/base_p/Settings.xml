@@ -33,7 +33,8 @@
       <spline value="660" t="0.9"/>
       <spline value="670" t="1"/>
     </Panel>
-    <Panel name="time" textureID="PanelTime" x="750" y="670" speed="2">
+    <Panel name="time" time="125" textureID="PanelTime" x="750" y="670" speed="2">
+      <text x="115" y="41"/>
       <spline value="800" t="0"/>
       <spline value="750" t="0.25"/>
       <spline value="700" t="0.5"/>
