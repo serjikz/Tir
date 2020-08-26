@@ -22,6 +22,7 @@ private:
 	ParticleEffectPtr _eff;
 	TimedSpline<FPoint> spline;
 	std::vector <Enemy::HardPtr> _enemies;
+	int _enemiesToHit;
 	void Init();
 public:
 	GameFieldWidget(const std::string& name, rapidxml::xml_node<>* elem);

@@ -3,7 +3,9 @@
 
 ScorePanel::ScorePanel(rapidxml::xml_node<>* settings)
 	:Panel(settings),
-	_text("")
+	_text(""),
+	_textX(0),
+	_textY(0)
 {
 	_textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
 	rapidxml::xml_node<>* backSideRectSettings = settings->first_node("backSideRect");
@@ -12,6 +14,8 @@ ScorePanel::ScorePanel(rapidxml::xml_node<>* settings)
 	float scale = Xml::GetFloatAttributeOrDef(backSideRectSettings, "scale", 1.f);
 	_alphaMiultiplier = Xml::GetFloatAttributeOrDef(backSideRectSettings, "alpha", 1.f);
 	_backSideRect = IRect(x, y, scale * _textureCenter.x, scale * _textureCenter.y);
+	_textX = Xml::GetIntAttributeOrDef(settings, "textX", 0);
+	_textY = Xml::GetIntAttributeOrDef(settings, "textY", 0);
 }
 
 void ScorePanel::draw() {
@@ -28,7 +32,7 @@ void ScorePanel::draw() {
 		Render::EndColor();
 		Render::EndAlphaMul();
 		Render::BindFont("FloralessTime");
-		Render::PrintString(100, 300, _text, 1.f, LeftAlign, CenterAlign);
+		Render::PrintString(_textX, _textY, _text, 1.f, CenterAlign, CenterAlign);
 		Render::device.SetTexturing(true);
 		_tex->Draw();
 		Render::device.PopMatrix();
@@ -36,8 +40,6 @@ void ScorePanel::draw() {
 	}
 }
 
-void ScorePanel::showStatistics(int enemiesCount, int enemiesAlive) {
-	if (enemiesAlive > 0) {
-		_text = "Time is over";
-	}
+void ScorePanel::showStatistics(const std::string& msg) {
+	_text = msg;
 }

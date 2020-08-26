@@ -22,6 +22,6 @@ public:
 	void draw();
 	void update(float dt);
 	void setState(Interface::State newState);
-	void showStatistics(int enemiesCount, int enemiesAlive);
+	void showStatistics(const std::string& msg);
 	State getState();
 };

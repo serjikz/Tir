@@ -8,9 +8,11 @@ private:
 	IRect _backSideRect;
 	float _alphaMiultiplier;
 	std::string _text;
+	int _textX;
+	int _textY;
 public:
 	ScorePanel(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<ScorePanel> HardPtr;
 	virtual void draw();
-	void showStatistics(int enemiesCount, int enemiesAlive);
+	void showStatistics(const std::string &msg);
 };

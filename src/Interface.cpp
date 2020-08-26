@@ -49,6 +49,6 @@ Interface::State Interface::getState() {
 	return _state;
 }
 
-void Interface::showStatistics(int enemiesCount, int enemiesAlive) {
-	_scorePanel->showStatistics(enemiesCount, enemiesAlive);
+void Interface::showStatistics(const std::string& msg) {
+	_scorePanel->showStatistics(msg);
 }

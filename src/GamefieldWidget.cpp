@@ -8,6 +8,7 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 	, _angle(0)
 	, _eff(NULL)
 	, _scale(0.f)
+	, _enemiesToHit(0)
 {
 	Init();
 }
@@ -37,6 +38,7 @@ void GameFieldWidget::Init()
 	while (enemy) {
 		_enemies.push_back(Enemy::HardPtr(new Enemy(enemy)));
 		enemy = enemy->next_sibling();
+		_enemiesToHit++;
 	}
 	_gui = Interface::HardPtr(new Interface(root->first_node("GUI")));
 	_gui->setState(Interface::State::TAP_TO_PLAY);
@@ -134,7 +136,8 @@ void GameFieldWidget::AcceptMessage(const Message& message)
 {
 	if (message.is("Interface", "TimeIsOver")) {
 		_gui->setState(Interface::State::IS_OVER);
-		_gui->showStatistics(2, (int)_enemies.size());
+		_gui->showStatistics("TIME IS OVER!\n\nTargets left to hit: " + 
+			std::to_string((int) _enemies.size()) + "/" + std::to_string(_enemiesToHit));
 	}
 }
 
