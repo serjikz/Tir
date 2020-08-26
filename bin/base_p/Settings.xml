@@ -23,7 +23,7 @@
     <Enemy type="ship" textureID="Enemy1" x="500" y="400" speedX="100" speedY="160"  m="2" scale ="1.2" rotateDirection="-1"/>
     <Enemy type="ship" textureID="Enemy2" x="250" y="700" speedX="100" speedY="160" m="1" rotationSpeed="30"/-->
   </Enemies>
-  <GUI time="3">
+  <GUI time="2">
     <Panel name="rockets" textureID="PanelRockets" x="500" y="670" speed="2">
       <spline value="800" t="0"/>
       <spline value="750" t="0.25"/>
@@ -43,8 +43,9 @@
       <spline value="660" t="0.9"/>
       <spline value="670" t="1"/>
     </Panel>
-    <Panel name="score" textureID="PanelScore" x="512" y="384" speed="2" textX="245" textY="330">
+    <Panel name="score" textureID="PanelScore" x="512" y="384" speed="2" textX="215" textY="330">
       <backSideRect x="3" y="3" scale="1.96" alpha="0.7"/>
+      <button x="210" y ="100" textureID="RestartButton" speed="4.5"/>
       <spline value="1.7" t="0"/>
       <spline value="1.6" t="0.2"/>
       <spline value="1.5" t="0.3"/>
@@ -52,7 +53,6 @@
       <spline value="1.3" t="0.5"/>
       <spline value="0.95" t="0.8"/>
       <spline value="1" t="1"/>
-      <button x="240" y ="100" textureID="RestartButton" speed="4.5"/>
     </Panel>
   </GUI>
 </Tank>
