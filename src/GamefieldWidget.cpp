@@ -136,7 +136,7 @@ void GameFieldWidget::AcceptMessage(const Message& message)
 {
 	if (message.is("Interface", "TimeIsOver")) {
 		_gui->setState(Interface::State::IS_OVER);
-		_gui->showStatistics("TIME IS OVER!\n\nTargets left to hit: " + 
+		_gui->showStatistics("TIME IS OVER!\n\nYour score is: \n\nTargets left to hit: " + 
 			std::to_string((int) _enemies.size()) + "/" + std::to_string(_enemiesToHit));
 	}
 }

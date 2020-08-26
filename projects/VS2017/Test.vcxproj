@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\Button.cpp" />
     <ClCompile Include="..\..\src\Cannon.cpp" />
     <ClCompile Include="..\..\src\Cloud.cpp" />
     <ClCompile Include="..\..\src\Dirt.cpp" />
@@ -140,6 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\AppDelegate.h" />
+    <ClInclude Include="..\..\src\Button.h" />
     <ClInclude Include="..\..\src\Cannon.h" />
     <ClInclude Include="..\..\src\Cloud.h" />
     <ClInclude Include="..\..\src\Dirt.h" />

@@ -1,5 +1,6 @@
 #pragma once
 #include "Panel.h"
+#include "Button.h"
 
 class ScorePanel : public Panel
 {

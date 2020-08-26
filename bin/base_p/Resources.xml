@@ -31,5 +31,6 @@
     <texture id="PanelRockets" path="textures/PanelRockets" />
     <texture id="PanelTime" path="textures/PanelTime" />
     <texture id="PanelScore" path="textures/PanelScore" />
+    <texture id="RestartButton" path="textures/RestartButton" />
   </Textures>
 </Resources>
