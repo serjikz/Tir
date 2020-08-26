@@ -23,7 +23,7 @@
     <Enemy type="ship" textureID="Enemy1" x="500" y="400" speedX="100" speedY="160"  m="2" scale ="1.2" rotateDirection="-1"/>
     <Enemy type="ship" textureID="Enemy2" x="250" y="700" speedX="100" speedY="160" m="1" rotationSpeed="30"/-->
   </Enemies>
-  <GUI>
+  <GUI time="3">
     <Panel name="rockets" textureID="PanelRockets" x="500" y="670" speed="2">
       <spline value="800" t="0"/>
       <spline value="750" t="0.25"/>
@@ -33,7 +33,7 @@
       <spline value="660" t="0.9"/>
       <spline value="670" t="1"/>
     </Panel>
-    <Panel name="time" time="3" textureID="PanelTime" x="750" y="670" speed="2">
+    <Panel name="time" textureID="PanelTime" x="750" y="670" speed="2">
       <text x="115" y="41"/>
       <spline value="800" t="0"/>
       <spline value="750" t="0.25"/>

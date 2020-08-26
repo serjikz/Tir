@@ -1,13 +1,13 @@
 #include "stdafx.h"
 #include "TimePanel.h"
 
-TimePanel::TimePanel(rapidxml::xml_node<>* settings)
+TimePanel::TimePanel(rapidxml::xml_node<>* settings, int time)
 	:Panel(settings),
 	_text(""),
 	_timeAvailable(0.f),
 	_t0(0)
 {
-	_timeAvailable = Xml::GetFloatAttributeOrDef(settings, "time", 0.f);
+	_timeAvailable = time;
 	rapidxml::xml_node<>* timeText = settings->first_node("text");
 	_textX = Xml::GetIntAttributeOrDef(timeText, "x", 0);
 	_textY = Xml::GetIntAttributeOrDef(timeText, "y", 0);
