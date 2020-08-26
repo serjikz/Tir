@@ -16,5 +16,7 @@ public:
 	ScorePanel(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<ScorePanel> HardPtr;
 	virtual void draw();
+	virtual void update(float dt);
 	void showStatistics(const std::string &msg);
+	void mouseMove(const IPoint& mouse_pos);
 };

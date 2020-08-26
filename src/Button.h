@@ -3,6 +3,7 @@
 class Button
 {
 protected:	
+	const float DELTA_SCALE = 0.05f;
 	Render::Texture* _tex;
 	short int _x, _y;
 	float _scale;

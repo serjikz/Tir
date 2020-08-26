@@ -52,3 +52,7 @@ Interface::State Interface::getState() {
 void Interface::showStatistics(const std::string& msg) {
 	_scorePanel->showStatistics(msg);
 }
+
+void Interface::mouseMove(const IPoint& mouse_pos) {
+	_scorePanel->mouseMove(mouse_pos);
+}

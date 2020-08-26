@@ -19,6 +19,12 @@ ScorePanel::ScorePanel(rapidxml::xml_node<>* settings)
 	_restartButton = Button::HardPtr(new Button(settings->first_node("button")));
 }
 
+
+void ScorePanel::update(float dt) {
+	Panel::update(dt);
+	_restartButton->update(dt);
+}
+
 void ScorePanel::draw() {
 	if (_state != State::HIDEN) {
 		Render::BeginAlphaMul(_t);
@@ -44,4 +50,9 @@ void ScorePanel::draw() {
 
 void ScorePanel::showStatistics(const std::string& msg) {
 	_text = msg;
+}
+
+void ScorePanel::mouseMove(const IPoint& mouse_pos) {
+	IPoint shift = IPoint(_x - _textureCenter.x, _y - _textureCenter.y);
+	_restartButton->mouseMove(mouse_pos - shift);
 }

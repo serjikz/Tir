@@ -23,5 +23,6 @@ public:
 	void update(float dt);
 	void setState(Interface::State newState);
 	void showStatistics(const std::string& msg);
+	void mouseMove(const IPoint& mouse_pos);
 	State getState();
 };

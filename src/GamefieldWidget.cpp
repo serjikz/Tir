@@ -116,8 +116,10 @@ bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)
 	return false;
 }
 
-void GameFieldWidget::MouseMove(const IPoint &mouse_pos)
-{
+void GameFieldWidget::MouseMove(const IPoint &mouse_pos) {
+	if (_gui->getState() == Interface::State::IS_OVER) {
+		_gui->mouseMove(mouse_pos);
+	}
 }
 
 void GameFieldWidget::MouseUp(const IPoint &mouse_pos)
