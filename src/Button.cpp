@@ -4,39 +4,47 @@
 Button::Button(rapidxml::xml_node<>* settings)
 	: _x(0),
 	  _y(0),
-	_t(0.f)
+	_t(0.f),
+	_state(State::NORMAL),
+	_scale(1.f)
 {
 	std::string textureID = Xml::GetStringAttributeOrDef(settings, "textureID", "");
 	_tex = Core::resourceManager.Get<Render::Texture>(textureID);
 	_x = Xml::GetIntAttributeOrDef(settings, "x", 0);
 	_y = Xml::GetIntAttributeOrDef(settings, "y", 0);
 	_speed = Xml::GetIntAttributeOrDef(settings, "speed", 1.f);
-	rapidxml::xml_node<>* splinePoints = settings->first_node("spline");
-	while (splinePoints) {
-		float t = Xml::GetFloatAttributeOrDef(splinePoints, "t", 0.f);
-		float value = Xml::GetFloatAttributeOrDef(splinePoints, "value", 0.f);
-		_spline.addKey(t, value);
-		splinePoints = splinePoints->next_sibling();
-	}
-	_spline.CalculateGradient();
+	_textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
 }
 
 void Button::draw() {
 	Render::device.PushMatrix();
-	Render::device.MatrixTranslate(_x, _splineVal, 0);
+	Render::device.MatrixTranslate(_x, _y, 0);
+	Render::device.MatrixScale(_scale, _scale, 1.f);
+	Render::device.MatrixTranslate(-_textureCenter.x, -_textureCenter.y, 0);
 	_tex->Draw();
 	Render::device.PopMatrix();
 }
 
 void Button::update(float dt) {
-	_t = math::clamp(0.f, 1.f, _t + _speed *  dt);
-	_splineVal = _spline.getGlobalFrame(_t);
+	if (_state == State::OVER) {
+		_t += _speed * dt;
+		if (_t > 1.f) {
+			_t = 0.f;
+		}
+		_scale = 1.f + 0.15f * sinf(_t);
+	}
 }
 
 void Button::mouseDown(const IPoint& mouse_pos) {
 
 }
 
-void mouseMove(const IPoint& mouse_pos) {
-	
+void Button::mouseMove(const IPoint& mouse_pos) {
+	if (_tex->HitTest(mouse_pos.x, mouse_pos.y)) {
+		_state = State::OVER;
+	}
+	else {
+		_state = State::NORMAL;
+		_t = 0;
+	}
 }

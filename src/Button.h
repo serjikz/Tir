@@ -5,10 +5,14 @@ class Button
 protected:	
 	Render::Texture* _tex;
 	short int _x, _y;
-	float _splineVal;
+	float _scale;
 	float _t;
 	float _speed;
-	TimedSpline<float> _spline;
+	FPoint _textureCenter;
+	enum class State {
+		NORMAL,
+		OVER
+	} _state;
 public:
 	Button(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Button> HardPtr;

@@ -11,6 +11,7 @@ private:
 	std::string _text;
 	int _textX;
 	int _textY;
+	Button::HardPtr _restartButton;
 public:
 	ScorePanel(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<ScorePanel> HardPtr;

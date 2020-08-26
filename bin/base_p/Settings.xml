@@ -52,6 +52,7 @@
       <spline value="1.3" t="0.5"/>
       <spline value="0.95" t="0.8"/>
       <spline value="1" t="1"/>
+      <button x="250" y ="100" textureID="RestartButton"/>
     </Panel>
   </GUI>
 </Tank>
