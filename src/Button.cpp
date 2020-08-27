@@ -37,7 +37,10 @@ void Button::update(float dt) {
 }
 
 void Button::mouseDown(const IPoint& mouse_pos) {
-
+	if (_tex->HitTest(mouse_pos.x + _textureCenter.x - _x, mouse_pos.y + _textureCenter.y - _y)) {
+		Message msg = Message("Interface", "SetStateTapToPlay");
+		Core::guiManager.getLayer("TestLayer")->getWidget("GameFieldWidget")->AcceptMessage(msg);
+	}
 }
 
 void Button::mouseMove(const IPoint& mouse_pos) {

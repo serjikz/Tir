@@ -56,3 +56,7 @@ void Interface::setStatisticsMsg(const std::string& msg) {
 void Interface::mouseMove(const IPoint& mouse_pos) {
 	_scorePanel->mouseMove(mouse_pos);
 }
+
+void Interface::mouseDown(const IPoint& mouse_pos) {
+	_scorePanel->mouseDown(mouse_pos);
+}

@@ -110,7 +110,7 @@ bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)
 		_tank->shot();
 		break;
 	case Interface::State::IS_OVER:
-
+		_gui->mouseDown(mouse_pos);
 		break;
 	}
 	return false;
@@ -140,6 +140,9 @@ void GameFieldWidget::AcceptMessage(const Message& message)
 		_gui->setState(Interface::State::IS_OVER);
 		_gui->setStatisticsMsg("TIME IS OVER!\n\n\nTargets left to hit:\n" +
 			std::to_string((int) _enemies.size()) + "/" + std::to_string(_enemiesToHit));
+	}
+	else if (message.is("Interface", "SetStateTapToPlay")) {
+		_gui->setState(Interface::State::TAP_TO_PLAY);
 	}
 }
 

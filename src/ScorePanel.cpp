@@ -56,3 +56,8 @@ void ScorePanel::mouseMove(const IPoint& mouse_pos) {
 	IPoint shift = IPoint(_x - _textureCenter.x, _y - _textureCenter.y);
 	_restartButton->mouseMove(mouse_pos - shift);
 }
+
+void ScorePanel::mouseDown(const IPoint& mouse_pos) {
+	IPoint shift = IPoint(_x - _textureCenter.x, _y - _textureCenter.y);
+	_restartButton->mouseDown(mouse_pos - shift);
+}

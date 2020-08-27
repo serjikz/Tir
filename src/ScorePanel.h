@@ -19,4 +19,5 @@ public:
 	virtual void update(float dt);
 	void setStatisticsMsg(const std::string &msg);
 	void mouseMove(const IPoint& mouse_pos);
+	void mouseDown(const IPoint& mouse_pos);
 };
