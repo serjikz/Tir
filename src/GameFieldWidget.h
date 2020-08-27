@@ -19,8 +19,6 @@ private:
 	int _curTex;
 	Render::Texture* _bkg;
 	EffectsContainer _effCont;
-	ParticleEffectPtr _eff;
-	TimedSpline<FPoint> spline;
 	std::vector <Enemy::HardPtr> _enemies;
 	int _enemiesToHit;
 	void Init();

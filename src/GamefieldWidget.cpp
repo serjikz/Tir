@@ -6,7 +6,6 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 	, _curTex(0)
 	, _timer(0)
 	, _angle(0)
-	, _eff(NULL)
 	, _scale(0.f)
 	, _enemiesToHit(0)
 {
@@ -19,14 +18,6 @@ void GameFieldWidget::Init()
 	_bkg = Core::resourceManager.Get<Render::Texture>("Background");
 	_curTex = 0;
 	_angle = 0;
-
-	spline.addKey(0.0f, FPoint(100.0f, 100.0f));
-	spline.addKey(0.25f, FPoint(150.0f, 300.0f));
-	spline.addKey(0.5f, FPoint(500.0f, 300.0f));
-	spline.addKey(0.75f, FPoint(630.0f, 450.0f));
-	spline.addKey(1.0f, FPoint(600.0f, 550.0f));
-	spline.CalculateGradient();
-
 	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
 	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
 	rapidxml::xml_node<>* cloud = root->first_node("Clouds")->first_node("Cloud");
@@ -129,14 +120,7 @@ void GameFieldWidget::MouseMove(const IPoint &mouse_pos) {
 
 void GameFieldWidget::MouseUp(const IPoint &mouse_pos)
 {
-	if (_eff)
-	{
-		//
-		// Если эффект создан, то при отпускании мыши завершаем его.
-		//
-		_eff->Finish();
-		_eff = NULL;
-	}
+
 }
 
 void GameFieldWidget::AcceptMessage(const Message& message)
@@ -173,5 +157,4 @@ void GameFieldWidget::KeyPressed(int keyCode)
 
 void GameFieldWidget::CharPressed(int unicodeChar)
 {
-
 }
