@@ -22,6 +22,7 @@ private:
 	std::vector <Enemy::HardPtr> _enemies;
 	int _enemiesToHit;
 	void Init();
+	void createNewEnemies();
 public:
 	GameFieldWidget(const std::string& name, rapidxml::xml_node<>* elem);
 	void Draw() override;

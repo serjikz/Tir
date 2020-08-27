@@ -53,3 +53,7 @@ void Button::mouseMove(const IPoint& mouse_pos) {
 		_t = 0.f;
 	}
 }
+
+void Button::setState(State newState) {
+	_state = newState;
+}

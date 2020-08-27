@@ -25,12 +25,7 @@ void GameFieldWidget::Init()
 		_clouds.push_back(Cloud::HardPtr(new Cloud(cloud)));
 		cloud = cloud->next_sibling();
 	}
-	rapidxml::xml_node<>* enemy = root->first_node("Enemies")->first_node("Enemy");
-	while (enemy) {
-		_enemies.push_back(Enemy::HardPtr(new Enemy(enemy)));
-		enemy = enemy->next_sibling();
-		_enemiesToHit++;
-	}
+	createNewEnemies();
 	_gui = Interface::HardPtr(new Interface(root->first_node("GUI")));
 	_gui->setState(Interface::State::TAP_TO_PLAY);
 } 
@@ -66,17 +61,15 @@ void GameFieldWidget::Update(float dt)
 	for (int i = 0; i < (int)_clouds.size(); i++) {
 		_clouds[i]->update(dt);
 	}
-	
 	_gui->update(dt);
+	_tank->update(dt, _enemies);
 	switch (_gui->getState()) {
 	case Interface::State::TAP_TO_PLAY:
-
 		break;
 	case Interface::State::PLAY:
 		for (int i = 0; i < (int)_enemies.size(); i++) {
 			_enemies[i]->update(dt);
 		}
-		_tank->update(dt, _enemies);
 		if ((int)_enemies.size() == 0 && _gui->getTime() > 0) {
 			Message msg = Message("Interface", "Victory");
 			AcceptMessage(msg);
@@ -91,7 +84,6 @@ void GameFieldWidget::Update(float dt)
 		}
 		break;
 	case Interface::State::IS_OVER:
-
 		break;
 	}
 }
@@ -132,6 +124,7 @@ void GameFieldWidget::AcceptMessage(const Message& message)
 	}
 	else if (message.is("Interface", "SetStateTapToPlay")) {
 		_gui->setState(Interface::State::TAP_TO_PLAY);
+		createNewEnemies();
 	}
 	else if (message.is("Interface", "Victory")) {
 		_gui->setState(Interface::State::IS_OVER);
@@ -157,4 +150,16 @@ void GameFieldWidget::KeyPressed(int keyCode)
 
 void GameFieldWidget::CharPressed(int unicodeChar)
 {
+}
+
+
+void GameFieldWidget::createNewEnemies() {
+	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
+	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
+	rapidxml::xml_node<>* enemy = root->first_node("Enemies")->first_node("Enemy");
+	while (enemy) {
+		_enemies.push_back(Enemy::HardPtr(new Enemy(enemy)));
+		enemy = enemy->next_sibling();
+		_enemiesToHit++;
+	}
 }

@@ -50,6 +50,7 @@ void ScorePanel::draw() {
 
 void ScorePanel::setStatisticsMsg(const std::string& msg) {
 	_text = msg;
+	_restartButton->setState(Button::State::OVER);
 }
 
 void ScorePanel::mouseMove(const IPoint& mouse_pos) {

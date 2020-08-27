@@ -10,15 +10,16 @@ protected:
 	float _t;
 	float _speed;
 	FPoint _textureCenter;
+public:
 	enum class State {
 		NORMAL,
 		OVER
 	} _state;
-public:
 	Button(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Button> HardPtr;
 	void draw();
 	void update(float dt);
 	void mouseDown(const IPoint& mouse_pos);
 	void mouseMove(const IPoint& mouse_pos);
+	void setState(State newState);
 };
