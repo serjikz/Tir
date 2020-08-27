@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\src\ArrowHintPanel.cpp" />
     <ClCompile Include="..\..\src\Button.cpp" />
     <ClCompile Include="..\..\src\Cannon.cpp" />
     <ClCompile Include="..\..\src\Cloud.cpp" />
@@ -141,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\AppDelegate.h" />
+    <ClInclude Include="..\..\src\ArrowHintPanel.h" />
     <ClInclude Include="..\..\src\Button.h" />
     <ClInclude Include="..\..\src\Cannon.h" />
     <ClInclude Include="..\..\src\Cloud.h" />

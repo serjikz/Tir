@@ -42,5 +42,6 @@ void TextAnimated::setState(TextAnimated::State newState) {
 	}
 	else if (_state == State::APEARENCE) {
 		_multiplier = 1.f;
+		_t = 0.f;
 	}
 }

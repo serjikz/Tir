@@ -9,6 +9,10 @@ Interface::Interface(rapidxml::xml_node<>* settings)
 	_timePanel = TimePanel::HardPtr(new TimePanel(panel, Xml::GetIntAttributeOrDef(settings, "time", 0)));
 	panel = panel->next_sibling();
 	_scorePanel = ScorePanel::HardPtr(new ScorePanel(panel));
+	panel = panel->next_sibling();
+	_leftArrowHintPanel = ArrowHintPanel::HardPtr(new ArrowHintPanel(panel));
+	panel = panel->next_sibling();
+	_rightArrowHintPanel = ArrowHintPanel::HardPtr(new ArrowHintPanel(panel));
 	_tapToPlayText = TextAnimated::HardPtr(new TextAnimated("TAP TO PLAY", Render::device.Width() / 2, Render::device.Height() / 2));
 	_state = Interface::State::TAP_TO_PLAY;
 }
@@ -18,6 +22,8 @@ void Interface::draw() {
 	_rocketsPanel->draw();
 	_timePanel->draw();
 	_scorePanel->draw();
+	_leftArrowHintPanel->draw();
+	_rightArrowHintPanel->draw();
 }
 
 void Interface::update(float dt) {
@@ -25,6 +31,8 @@ void Interface::update(float dt) {
 	_rocketsPanel->update(dt);
 	_timePanel->update(dt);
 	_scorePanel->update(dt);
+	_leftArrowHintPanel->update(dt);
+	_rightArrowHintPanel->update(dt);
 }
 
 void Interface::setState(Interface::State newState) {
@@ -32,6 +40,8 @@ void Interface::setState(Interface::State newState) {
 		_tapToPlayText->setState(TextAnimated::State::DISSAPEARENCE);
 		_timePanel->setState(Panel::State::APEARENCE);
 		_rocketsPanel->setState(Panel::State::APEARENCE);
+		_leftArrowHintPanel->setState(Panel::State::DISSAPEARENCE);
+		_rightArrowHintPanel->setState(Panel::State::DISSAPEARENCE);
 	}
 	else if (newState == State::IS_OVER) {
 		_timePanel->setState(Panel::State::DISSAPEARENCE);
@@ -41,6 +51,8 @@ void Interface::setState(Interface::State newState) {
 	else if (newState == State::TAP_TO_PLAY) {
 		_scorePanel->setState(Panel::State::DISSAPEARENCE);
 		_tapToPlayText->setState(TextAnimated::State::APEARENCE);
+		_leftArrowHintPanel->setState(Panel::State::APEARENCE);
+		_rightArrowHintPanel->setState(Panel::State::APEARENCE);
 	}
 	_state = newState;
 }

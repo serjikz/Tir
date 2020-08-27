@@ -10,6 +10,7 @@ Panel::Panel(rapidxml::xml_node<>* settings)
 {
 	std::string textureID = Xml::GetStringAttributeOrDef(settings, "textureID", "");
 	_tex = Core::resourceManager.Get<Render::Texture>(textureID);
+	_textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
 	_x = Xml::GetIntAttributeOrDef(settings, "x", 0);
 	_y = Xml::GetIntAttributeOrDef(settings, "y", 0);
 	_speed = Xml::GetIntAttributeOrDef(settings, "speed", 1.f);
@@ -20,7 +21,9 @@ Panel::Panel(rapidxml::xml_node<>* settings)
 		_spline.addKey(t, value);
 		splinePoints = splinePoints->next_sibling();
 	}
-	_spline.CalculateGradient();
+	if (!_spline.empty()) {
+		_spline.CalculateGradient();
+	}
 }
 
 void Panel::draw() {

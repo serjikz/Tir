@@ -5,7 +5,6 @@
 class ScorePanel : public Panel
 {
 private:	
-	FPoint _textureCenter;
 	IRect _backSideRect;
 	float _alphaMiultiplier;
 	std::string _text;

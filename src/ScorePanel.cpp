@@ -7,7 +7,6 @@ ScorePanel::ScorePanel(rapidxml::xml_node<>* settings)
 	_textX(0),
 	_textY(0)
 {
-	_textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
 	rapidxml::xml_node<>* backSideRectSettings = settings->first_node("backSideRect");
 	float x = Xml::GetFloatAttributeOrDef(backSideRectSettings, "x", 0.f);
 	float y = Xml::GetFloatAttributeOrDef(backSideRectSettings, "y", 0.f);

@@ -54,5 +54,7 @@
       <spline value="0.95" t="0.8"/>
       <spline value="1" t="1"/>
     </Panel>
+    <Panel name="arrowHint" textureID="PanelHint" x="80" y="20" speed="4"  mirror="true"/>
+    <Panel name="arrowHint" textureID="PanelHint" x="940" y="20" speed="4" mirror="false"/>
   </GUI>
 </Tank>

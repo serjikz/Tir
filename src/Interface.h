@@ -3,6 +3,7 @@
 #include "ScorePanel.h"
 #include "TimePanel.h"
 #include "TextAnimated.h"
+#include "ArrowHintPanel.h"
 
 class Interface
 {
@@ -11,6 +12,8 @@ private:
 	TimePanel::HardPtr _timePanel;
 	ScorePanel::HardPtr _scorePanel;
 	TextAnimated::HardPtr _tapToPlayText;
+	ArrowHintPanel::HardPtr _leftArrowHintPanel;
+	ArrowHintPanel::HardPtr _rightArrowHintPanel;
 public:
 	enum class State {
 		TAP_TO_PLAY,

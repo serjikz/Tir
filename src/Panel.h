@@ -5,6 +5,7 @@ class Panel
 protected:	
 	const float EPS = 0.01f;
 	Render::Texture* _tex;
+	FPoint _textureCenter;
 	short int _x, _y;
 	float _splineVal;
 	float _t;

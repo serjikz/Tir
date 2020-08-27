@@ -28,7 +28,7 @@ void TimePanel::update(float dt) {
 	Panel::update(dt);
 	if (_state != State::HIDEN) {
 		int t = _timeAvailable - (clock() - _t0) / 1000;
-		if (t == 0) {
+		if (t <= 0) {
 			Message msg = Message(Message("Interface", "TimeIsOver"));
 			Core::guiManager.getLayer("TestLayer")->getWidget("GameFieldWidget")->AcceptMessage(msg);
 			return;
