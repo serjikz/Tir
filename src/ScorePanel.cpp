@@ -26,7 +26,6 @@ void ScorePanel::update(float dt) {
 }
 
 void ScorePanel::draw() {
-	
 	if (_state != State::HIDEN) {
 		Render::BeginAlphaMul(_t);
 		Render::device.PushMatrix();
@@ -43,13 +42,13 @@ void ScorePanel::draw() {
 		Render::PrintString(_textX, _textY, _text, 1.f, CenterAlign, CenterAlign);
 		Render::device.SetTexturing(true);
 		_tex->Draw();
-		//_restartButton->draw();
+		_restartButton->draw();
 		Render::device.PopMatrix();
 		Render::EndAlphaMul();
 	}
 }
 
-void ScorePanel::showStatistics(const std::string& msg) {
+void ScorePanel::setStatisticsMsg(const std::string& msg) {
 	_text = msg;
 }
 
