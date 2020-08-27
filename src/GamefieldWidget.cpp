@@ -86,6 +86,11 @@ void GameFieldWidget::Update(float dt)
 			_enemies[i]->update(dt);
 		}
 		_tank->update(dt, _enemies);
+		if ((int)_enemies.size() == 0 && _gui->getTime() > 0) {
+			Message msg = Message("Interface", "Victory");
+			AcceptMessage(msg);
+			return;
+		}
 		for (int i = 0; i < (int)_enemies.size(); i++) {
 			for (int j = i + 1; j < (int)_enemies.size(); j++) {
 				if (_enemies[i]->isIntersect(_enemies[j])) {
@@ -143,6 +148,10 @@ void GameFieldWidget::AcceptMessage(const Message& message)
 	}
 	else if (message.is("Interface", "SetStateTapToPlay")) {
 		_gui->setState(Interface::State::TAP_TO_PLAY);
+	}
+	else if (message.is("Interface", "Victory")) {
+		_gui->setState(Interface::State::IS_OVER);
+		_gui->setStatisticsMsg("CONGRATULATIONS!\n\nYou win!\n\nAll targets defeated");
 	}
 }
 

@@ -60,3 +60,7 @@ void Interface::mouseMove(const IPoint& mouse_pos) {
 void Interface::mouseDown(const IPoint& mouse_pos) {
 	_scorePanel->mouseDown(mouse_pos);
 }
+
+int Interface::getTime() {
+	return _timePanel->getTime();
+}

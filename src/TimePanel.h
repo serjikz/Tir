@@ -16,4 +16,5 @@ public:
 	virtual void draw();
 	virtual void update(float dt);
 	virtual void setState(Panel::State newState);
+	int getTime();
 };

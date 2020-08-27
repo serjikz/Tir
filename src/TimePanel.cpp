@@ -53,3 +53,7 @@ void TimePanel::setState(Panel::State newState) {
 		_t0 = clock();
 	}
 }
+
+int TimePanel::getTime() {
+	return _timeAvailable;
+}
