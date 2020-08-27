@@ -4,7 +4,7 @@
 Wheel::Wheel(rapidxml::xml_node<>* settings)
 	: _x(0),
 	  _y(0),
-	_angle(0)
+	_angle(math::random(0, 360))
 {
 	std::string textureID = Xml::GetStringAttributeOrDef(settings, "textureID", "");
 	_wheel = Core::resourceManager.Get<Render::Texture>(textureID);

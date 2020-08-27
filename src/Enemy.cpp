@@ -14,6 +14,7 @@ Enemy::Enemy(rapidxml::xml_node<>* settings)
 	_scale = Xml::GetFloatAttributeOrDef(settings, "scale", 1.f);
 	_rotationSpeed = Xml::GetFloatAttributeOrDef(settings, "rotationSpeed", 10.f);
 	_rotateDirection = Xml::GetIntAttributeOrDef(settings, "rotateDirection", 1);
+	_health = Xml::GetIntAttributeOrDef(settings, "health", 1);
 	_speed = _vecMove;
 	_t = 0;
 	_angle = 0;
@@ -25,7 +26,7 @@ void Enemy::update(float dt) {
 	_y += _vecMove.y * dt;
 	_vecMove.x = math::clamp(-2*_speed.x, 2*_speed.x, _vecMove.x);
 	_vecMove.y = math::clamp(-2*_speed.y, 2*_speed.y, _vecMove.y);
-	if (_t < 2 *dt) {
+	if (_t < 4 *dt) {
 		_t += dt;
 	}
 	else {
@@ -132,4 +133,12 @@ void Enemy::bounceWith(Enemy::HardPtr anotherEnemy) {
 	_vecMove.x = p1X * cosA - p1Y * sinA;
 	_vecMove.y = p1Y * cosA + p1X * sinA;
 	anotherEnemy->setMoveVec(p2X * cosA - p2Y * sinA, p2Y * cosA + p2X * sinA);
+}
+
+void Enemy::reduceHealth() {
+	_health--;
+}
+
+int Enemy::getHealth() {
+	return _health;
 }

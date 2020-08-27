@@ -16,6 +16,7 @@ private:
 	FPoint _vecMove;
 	void checkScreenBounce();	
 	bool _isBounced;
+	int _health;
 public:
 	Enemy(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Enemy> HardPtr;
@@ -29,5 +30,7 @@ public:
 	float getScale() const;
 	void setMoveVec(float x, float y);
 	float getMass();
+	void reduceHealth();
+	int getHealth();
 };
 

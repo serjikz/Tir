@@ -22,7 +22,7 @@ public:
 	void draw();
 	void update(float dt);
 	bool isNotVisible();
-	void tryHit(const std::vector<Enemy::HardPtr> &enemies);
+	void tryHit(std::vector<Enemy::HardPtr> &enemies);
 	FPoint getCenterPos() const;
 	FPoint getMoveVec() const;
 	float getMass() const;	
