@@ -5,6 +5,8 @@ class ArrowHintPanel : public Panel
 {
 private:
 	const float DELTA_POS = 4.f;
+	const float MAX_DX = 200.f;
+	const float DISSAPEARENCE_SPEED = 150.f;
 	bool _isMirrored;
 	float _alpha;
 	float _dx;

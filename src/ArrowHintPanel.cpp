@@ -28,16 +28,26 @@ void ArrowHintPanel::draw() {
 void ArrowHintPanel::update(float dt) {
 	if (_state != State::HIDEN) {
 		_alpha = math::clamp(0.f, 1.f, _alpha + _direction * dt);
-		_dx = 1.f + DELTA_POS * sinf(_t);
+		if (_state == State::DISSAPEARENCE) {
+			if (_isMirrored) {
+				_dx = math::clamp(-MAX_DX, 0.f, _dx - DISSAPEARENCE_SPEED * dt);
+			}
+			else {
+				_dx = math::clamp(0.f, MAX_DX, _dx + DISSAPEARENCE_SPEED * dt);
+			}
+		}
+		else {
+			_dx = 1.f + DELTA_POS * sinf(_t);
+			if (_isMirrored) {
+				_dx *= -1;
+			}
+		}
 		_t += _speed * dt;
 		if (_t > 2 * math::PI) {
 			_t = 0.f;
 		}
 		if (_alpha < EPS) {
 			_state = State::HIDEN;
-		}
-		if (_isMirrored) {
-			_dx *= -1;
 		}
 	}
 }
