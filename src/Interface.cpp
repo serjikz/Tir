@@ -4,7 +4,7 @@
 Interface::Interface(rapidxml::xml_node<>* settings)
 {
 	rapidxml::xml_node<>* panel = settings->first_node("Panel");
-	_rocketsPanel = Panel::HardPtr(new Panel(panel));
+	_rocketsPanel = RocketsPanel::HardPtr(new RocketsPanel(panel, Xml::GetIntAttributeOrDef(settings, "rockets", 0)));
 	panel = panel->next_sibling();
 	_timePanel = TimePanel::HardPtr(new TimePanel(panel, Xml::GetIntAttributeOrDef(settings, "time", 0)));
 	panel = panel->next_sibling();
@@ -75,4 +75,8 @@ void Interface::mouseDown(const IPoint& mouse_pos) {
 
 int Interface::getTime() {
 	return _timePanel->getTime();
+}
+
+void Interface::decreaseRockets() {
+	_rocketsPanel->decreaseRockets();
 }

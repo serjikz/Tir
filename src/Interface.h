@@ -4,11 +4,12 @@
 #include "TimePanel.h"
 #include "TextAnimated.h"
 #include "ArrowHintPanel.h"
+#include "RocketsPanel.h"
 
 class Interface
 {
 private:	
-	Panel::HardPtr _rocketsPanel;
+	RocketsPanel::HardPtr _rocketsPanel;
 	TimePanel::HardPtr _timePanel;
 	ScorePanel::HardPtr _scorePanel;
 	TextAnimated::HardPtr _tapToPlayText;
@@ -28,6 +29,7 @@ public:
 	void setStatisticsMsg(const std::string& msg);
 	void mouseMove(const IPoint& mouse_pos);
 	void mouseDown(const IPoint& mouse_pos);
+	void decreaseRockets();
 	int getTime();
 	State getState();
 };

@@ -96,6 +96,7 @@ bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)
 		break;
 	case Interface::State::PLAY:
 		_tank->shot();
+		_gui->decreaseRockets();
 		break;
 	case Interface::State::IS_OVER:
 		_gui->mouseDown(mouse_pos);
@@ -121,6 +122,10 @@ void GameFieldWidget::AcceptMessage(const Message& message)
 		_gui->setState(Interface::State::IS_OVER);
 		_gui->setStatisticsMsg("TIME IS OVER!\n\n\nTargets left to hit:\n" +
 			std::to_string((int) _enemies.size()) + "/" + std::to_string(_enemiesToHit));
+	} if (message.is("Interface", "RocketsIsOver")) {
+		_gui->setState(Interface::State::IS_OVER);
+		_gui->setStatisticsMsg("Rockets is over!\n\n\nTargets left to hit:\n" +
+			std::to_string((int)_enemies.size()) + "/" + std::to_string(_enemiesToHit));
 	}
 	else if (message.is("Interface", "SetStateTapToPlay")) {
 		_gui->setState(Interface::State::TAP_TO_PLAY);
@@ -152,11 +157,12 @@ void GameFieldWidget::CharPressed(int unicodeChar)
 {
 }
 
-
 void GameFieldWidget::createNewEnemies() {
 	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
 	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
 	rapidxml::xml_node<>* enemy = root->first_node("Enemies")->first_node("Enemy");
+	_enemies.clear();
+	_enemiesToHit = 0;
 	while (enemy) {
 		_enemies.push_back(Enemy::HardPtr(new Enemy(enemy)));
 		enemy = enemy->next_sibling();
