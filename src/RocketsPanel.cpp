@@ -28,11 +28,6 @@ void RocketsPanel::update(float dt) {
 	Panel::update(dt);
 	if (_state != State::HIDEN) {
 		_text = std::to_string(_rockets);
-		if (_rockets <= 0) {
-			Message msg = Message(Message("Interface", "RocketsIsOver"));
-			Core::guiManager.getLayer("TestLayer")->getWidget("GameFieldWidget")->AcceptMessage(msg);
-			return;
-		}
 	}
 }
 
@@ -42,6 +37,11 @@ int RocketsPanel::getRocketsCount() {
 
 void RocketsPanel::decreaseRockets() {
 	_rockets--;
+	if (_rockets <= 0) {
+		Message msg = Message(Message("Interface", "RocketsIsOver"));
+		Core::guiManager.getLayer("TestLayer")->getWidget("GameFieldWidget")->AcceptMessage(msg);
+		return;
+	}
 }
 
 void RocketsPanel::setState(Panel::State newState) {

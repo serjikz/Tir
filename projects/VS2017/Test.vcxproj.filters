@@ -19,6 +19,15 @@
     <Filter Include="XML">
       <UniqueIdentifier>{582ad4ec-2022-4b82-bb37-74eeac449897}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Panels">
+      <UniqueIdentifier>{84e64bff-e05c-4676-9cbb-242148cff089}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Tank">
+      <UniqueIdentifier>{6d7dc987-88b1-4987-9c28-e0f295bb415a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interface">
+      <UniqueIdentifier>{645cd684-3ae4-48eb-b5d8-f34068ec6992}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Main.cpp">
@@ -33,50 +42,50 @@
     <ClCompile Include="..\..\src\AppDelegate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Tank.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Wheel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Cloud.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Cannon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Dirt.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Enemy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Missile.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\src\ArrowHintPanel.cpp">
+      <Filter>Source Files\Panels</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Panel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\TextAnimated.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Interface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ScorePanel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\TimePanel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\ArrowHintPanel.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Panels</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\RocketsPanel.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ScorePanel.cpp">
+      <Filter>Source Files\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TimePanel.cpp">
+      <Filter>Source Files\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Missile.cpp">
+      <Filter>Source Files\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Tank.cpp">
+      <Filter>Source Files\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Wheel.cpp">
+      <Filter>Source Files\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Dirt.cpp">
+      <Filter>Source Files\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Button.cpp">
+      <Filter>Source Files\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Cloud.cpp">
+      <Filter>Source Files\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Cannon.cpp">
+      <Filter>Source Files\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TextAnimated.cpp">
+      <Filter>Source Files\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Interface.cpp">
+      <Filter>Source Files\Interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,53 +95,53 @@
     <ClInclude Include="..\..\src\AppDelegate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\Tank.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\Wheel.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\Cloud.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\Cannon.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\Dirt.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\Enemy.h">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\GameFieldWidget.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\Missile.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="..\..\src\ArrowHintPanel.h">
+      <Filter>Source Files\Panels</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\Panel.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\TextAnimated.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\Interface.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ScorePanel.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\TimePanel.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\Button.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\ArrowHintPanel.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Panels</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\RocketsPanel.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ScorePanel.h">
+      <Filter>Source Files\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TimePanel.h">
+      <Filter>Source Files\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Missile.h">
+      <Filter>Source Files\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Tank.h">
+      <Filter>Source Files\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Wheel.h">
+      <Filter>Source Files\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Dirt.h">
+      <Filter>Source Files\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Button.h">
+      <Filter>Source Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Cloud.h">
+      <Filter>Source Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Cannon.h">
+      <Filter>Source Files\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TextAnimated.h">
+      <Filter>Source Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Interface.h">
+      <Filter>Source Files\Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
