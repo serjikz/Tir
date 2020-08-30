@@ -1,14 +1,12 @@
 #include "stdafx.h"
 #include "Tank.h"
 
-Tank::Tank()
+Tank::Tank(rapidxml::xml_node<>* settings)
 	: _x(START_X),
 	_speed(0),
 	_angle(0)
 {	
-	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
-	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
-	rapidxml::xml_node<>* tankSpeed = root->first_node("TankSpeed");
+	rapidxml::xml_node<>* tankSpeed = settings->first_node("TankSpeed");
 	MAX_SPEED = Xml::GetFloatAttributeOrDef(tankSpeed, "maxSpeed", 0.f);
 	MOVE_DX = Xml::GetFloatAttributeOrDef(tankSpeed, "moveDX", 0.f);
 	MAX_ANGLE = Xml::GetFloatAttributeOrDef(tankSpeed, "maxAngle", 0.f);
@@ -17,18 +15,20 @@ Tank::Tank()
 	GRAVITY_FORCE = Xml::GetFloatAttributeOrDef(tankSpeed, "gravityForce", 0.f);
 	SWING_FORCE = Xml::GetFloatAttributeOrDef(tankSpeed, "swingForce", 0.f);
 	_tex = Core::resourceManager.Get<Render::Texture>("Tank");
-	rapidxml::xml_node<>* wheels = root->first_node("Wheels");
+	rapidxml::xml_node<>* wheels = settings->first_node("Wheels");
 	rapidxml::xml_node<>* wheel = wheels->first_node("Wheel");
 	while (wheel) {
 		_wheels.push_back(Wheel::HardPtr(new Wheel(wheel)));
 		wheel = wheel->next_sibling();
 	}
-	rapidxml::xml_node<>* cannon = root->first_node("Cannon");
-	_cannon = Cannon::HardPtr(new Cannon(cannon));
+	rapidxml::xml_node<>* cannon = settings->first_node("Cannon");
+	rapidxml::xml_node<>* guiSettings = settings->first_node("GUI");
+	_cannon = Cannon::HardPtr(new Cannon(cannon, Xml::GetIntAttributeOrDef(guiSettings, "rockets", 0)));
 	_exhaustGasEff = _effCont.AddEffect("ExhaustGas");
-	_exhaustGasEff->posY = Xml::GetFloatAttributeOrDef(root, "exhaustGasPosY", 0);
-	_exhaustGasEff->posX = Xml::GetFloatAttributeOrDef(root, "exhaustGasPosX", 0);
-	_dirtEff = Dirt::HardPrt(new Dirt(root));
+	_exhaustGasEff->posY = Xml::GetFloatAttributeOrDef(settings, "exhaustGasPosY", 0);
+	_exhaustGasEff->posX = Xml::GetFloatAttributeOrDef(settings, "exhaustGasPosX", 0);
+	_dirtEff = Dirt::HardPrt(new Dirt(settings));
+	_textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
 };
 
 void Tank::update(float dt, std::vector<Enemy::HardPtr>& enemies) {
@@ -47,12 +47,11 @@ void Tank::update(float dt, std::vector<Enemy::HardPtr>& enemies) {
 }
 
 void Tank::draw() {
-	FPoint textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
 	Render::device.PushMatrix();
-	Render::device.MatrixTranslate(_x + textureCenter.x, textureCenter.y, 0);
+	Render::device.MatrixTranslate(_x + _textureCenter.x, _textureCenter.y, 0);
 	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
 	//Render::device.MatrixScale(1.f, _scaleY, 1.f);
-	Render::device.MatrixTranslate(-textureCenter.x, -textureCenter.y, 0);
+	Render::device.MatrixTranslate(-_textureCenter.x, -_textureCenter.y, 0);
 	_cannon->draw();
 	_tex->Draw();	
 	for (int i = 0; i < (int)_wheels.size(); i++) {
@@ -76,6 +75,13 @@ void Tank::moveRight() {
 }
 
 void Tank::shot() {
-	FPoint textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
-	_cannon->shot(IPoint(_x + textureCenter.x, textureCenter.y));
+	_cannon->shot(IPoint(_x + _textureCenter.x, _textureCenter.y));
+}
+
+bool Tank::isAllRocketsExploaded() {
+	return _cannon->isAllRocketsExploaded();
+}
+
+void Tank::reloadRockets() {
+	_cannon->reloadRockets();
 }

@@ -20,6 +20,7 @@ private:
 	float _speed;
 	float _scaleY;
 	float _angle;
+	FPoint _textureCenter;
 	EffectsContainer _effCont;
 	ParticleEffectPtr _exhaustGasEff;
 	Render::Texture* _tex;
@@ -27,12 +28,14 @@ private:
 	Cannon::HardPtr _cannon;
 	Dirt::HardPrt _dirtEff;
 public:
-	Tank();
+	Tank(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Tank> HardPrt;
 	void draw();
 	void update(float dt, std::vector<Enemy::HardPtr> &enemies);
 	void moveLeft();
 	void moveRight();
 	void shot();
+	bool isAllRocketsExploaded();
+	void reloadRockets();
 };
 

@@ -37,11 +37,6 @@ int RocketsPanel::getRocketsCount() {
 
 void RocketsPanel::decreaseRockets() {
 	_rockets--;
-	if (_rockets <= 0) {
-		Message msg = Message(Message("Interface", "RocketsIsOver"));
-		Core::guiManager.getLayer("TestLayer")->getWidget("GameFieldWidget")->AcceptMessage(msg);
-		return;
-	}
 }
 
 void RocketsPanel::setState(Panel::State newState) {

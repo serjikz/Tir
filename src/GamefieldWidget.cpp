@@ -14,12 +14,13 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 
 void GameFieldWidget::Init()
 {
-	_tank = Tank::HardPrt(new Tank());
+
 	_bkg = Core::resourceManager.Get<Render::Texture>("Background");
 	_curTex = 0;
 	_angle = 0;
-	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
-	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
+	Xml::RapidXmlDocument settingsXml("Settings.xml");
+	rapidxml::xml_node<>* root = settingsXml.first_node();
+	_tank = Tank::HardPrt(new Tank(root));
 	rapidxml::xml_node<>* cloud = root->first_node("Clouds")->first_node("Cloud");
 	while (cloud) {
 		_clouds.push_back(Cloud::HardPtr(new Cloud(cloud)));
@@ -81,6 +82,9 @@ void GameFieldWidget::Update(float dt)
 					_enemies[i]->bounceWith(_enemies[j]);
 				}
 			}
+		} if (_tank->isAllRocketsExploaded()) {
+			Message msg = Message(Message("Interface", "RocketsIsOver"));
+			AcceptMessage(msg);
 		}
 		break;
 	case Interface::State::IS_OVER:
@@ -168,4 +172,5 @@ void GameFieldWidget::createNewEnemies() {
 		enemy = enemy->next_sibling();
 		_enemiesToHit++;
 	}
+	_tank->reloadRockets();
 }

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Cannon.h"
 
-Cannon::Cannon(rapidxml::xml_node<>* settings)
+Cannon::Cannon(rapidxml::xml_node<>* settings, int rocketsAvailable)
 	: _x(0),
 	_y(0),
 	_dx(0),
@@ -20,15 +20,17 @@ Cannon::Cannon(rapidxml::xml_node<>* settings)
 	INTERTIA_SPEED = Xml::GetFloatAttributeOrDef(settings, "inertiaSpeed", 0);
 	CANNON_X0 = Xml::GetIntAttributeOrDef(settings, "cannonX0", 0);
 	CANNON_Y0 = Xml::GetIntAttributeOrDef(settings, "cannonY0", 0);
+	_textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
+	_rocketsAvailable = rocketsAvailable;
+	_rockets = rocketsAvailable;
 }
 
 void Cannon::draw() {
 	assert(_tex);
-	FPoint textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
 	Render::device.PushMatrix();
 	Render::device.MatrixTranslate(_x - _dx, _y - _dy, 0);
 	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
-	Render::device.MatrixTranslate(-textureCenter.x, 0, 0);
+	Render::device.MatrixTranslate(-_textureCenter.x, 0, 0);
 	_tex->Draw();
 	for (int i = 0; i < (int)_missiles.size(); i++) {
 		_missiles[i]->draw();
@@ -53,12 +55,14 @@ void Cannon::update(float dt, float tankPosx, std::vector<Enemy::HardPtr> &enemi
 		(*it)->update(dt);
 		if ((*it)->isNotVisible()) {
 			it = _missiles.erase(it);
+			
 		}
 		else {
 			(*it)->tryHit(enemies);
 			it++;
 		}
 	}
+
 }
 
 void Cannon::shot(IPoint atTankPos) {
@@ -67,5 +71,16 @@ void Cannon::shot(IPoint atTankPos) {
 	float r = _tex->getBitmapRect().Height();
 	float x0 = CANNON_X0 + atTankPos.x + r * cos(alpha);
 	float y0 = CANNON_Y0 +  atTankPos.y + r * sin(alpha);
-	_missiles.push_back(Missile::HardPtr(new Missile(_directionVec, _angle,  x0, y0)));
+	_rocketsAvailable--;
+	if (_rocketsAvailable >= 0) {
+		_missiles.push_back(Missile::HardPtr(new Missile(_directionVec, _angle, x0, y0)));
+	}
+}
+
+bool Cannon::isAllRocketsExploaded() {
+	return _rocketsAvailable <= 0 && _missiles.empty();
+}
+
+void Cannon::reloadRockets() {
+	_rocketsAvailable = _rockets;
 }
