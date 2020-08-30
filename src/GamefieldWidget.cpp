@@ -115,11 +115,6 @@ void GameFieldWidget::MouseMove(const IPoint &mouse_pos) {
 	}
 }
 
-void GameFieldWidget::MouseUp(const IPoint &mouse_pos)
-{
-
-}
-
 void GameFieldWidget::AcceptMessage(const Message& message)
 {
 	if (message.is("Interface", "TimeIsOver")) {
@@ -155,10 +150,6 @@ void GameFieldWidget::KeyPressed(int keyCode)
 	else if (keyCode == VK_1) {
 		_gui->setState(Interface::State::TAP_TO_PLAY);
 	}
-}
-
-void GameFieldWidget::CharPressed(int unicodeChar)
-{
 }
 
 void GameFieldWidget::createNewEnemies() {
