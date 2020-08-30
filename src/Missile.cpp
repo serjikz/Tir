@@ -13,6 +13,8 @@ Missile::Missile(FPoint directionVec, float angle, float x0, float y0)
 {
 	_tex = Core::resourceManager.Get<Render::Texture>("Missile");
 	_t = 0.f;
+	_rocketTailEff = RocketTailEff::HardPtr(new RocketTailEff());
+	_rocketTailEff->reset();
 }
 
 void Missile::draw() {
@@ -23,6 +25,7 @@ void Missile::draw() {
 	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
 	Render::device.MatrixTranslate(-textureCenter.x, 0, 0);
 	_tex->Draw();
+	_rocketTailEff->draw();
 	Render::device.PopMatrix();
 }
 
@@ -32,6 +35,7 @@ void Missile::update(float dt) {
 	_moveVec.y -= M * G * _t * _t / 2.f;
 	_dy += _moveVec.y * dt;
 	_angle = -90.f + 180.f / math::PI * atan2(_moveVec.y, _moveVec.x);
+	_rocketTailEff->update(dt);
 }
 
 bool Missile::isNotVisible() {

@@ -37,6 +37,7 @@ void AppDelegate::RegisterTypes()
 	REGISTER_WIDGET_XML(GameFieldWidget, "GameFieldWidget");
 }
 
+
 void AppDelegate::LoadResources()
 {
 	//
