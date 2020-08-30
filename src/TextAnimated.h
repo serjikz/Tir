@@ -4,7 +4,7 @@ class TextAnimated
 {
 private:
 	const float SPEED = 4.f;
-	const float DELTA_SCALE = 0.05f;
+	const float DELTA_SCALE = 0.03f;
 	const float EPS = 0.01f;
 	short int _x, _y;
 	float _scale;

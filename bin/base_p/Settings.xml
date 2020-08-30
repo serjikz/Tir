@@ -25,7 +25,7 @@
   </Enemies>
   <GUI time="200" rockets="10">
     <Panel name="rockets" textureID="PanelRockets" x="500" y="670" speed="2">
-      <text x="110" y="41"/>
+      <text x="120" y="41"/>
       <spline value="800" t="0"/>
       <spline value="750" t="0.25"/>
       <spline value="700" t="0.5"/>
