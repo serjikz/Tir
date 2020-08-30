@@ -22,6 +22,8 @@ private:
 	int _rocketsAvailable;
 	int _rockets;
 	FPoint _textureCenter;
+	EffectsContainer _effCont;
+	ParticleEffectPtr _eff;
 public:
 	Cannon(rapidxml::xml_node<>* settings, int rocketsAvailable);
 	typedef boost::shared_ptr<Cannon> HardPtr;

@@ -35,6 +35,7 @@ void Cannon::draw() {
 	for (int i = 0; i < (int)_missiles.size(); i++) {
 		_missiles[i]->draw();
 	}
+	_effCont.Draw();
 	Render::device.PopMatrix();
 }
 
@@ -43,6 +44,9 @@ void Cannon::update(float dt, float tankPosx, std::vector<Enemy::HardPtr> &enemi
 	IPoint v1 = IPoint(mousePos.x - tankPosx, mousePos.y - _tex->getBitmapRect().Height());
 	IPoint v2 = IPoint(0, 1);
 	float len = sqrt(pow(v1.x, 2) + pow(v1.y, 2));
+	if (len < 0.001f) {
+		return;
+	}
 	_directionVec = FPoint(v1.x / len, v1.y / len);
 	_angle = math::clamp(MIN_ANGLE, MAX_ANGLE, 180.f / math::PI * (float) acos(_directionVec.y));
 	if (v1.x > 0) {
@@ -62,7 +66,7 @@ void Cannon::update(float dt, float tankPosx, std::vector<Enemy::HardPtr> &enemi
 			it++;
 		}
 	}
-
+	_effCont.Update(dt);
 }
 
 void Cannon::shot(IPoint atTankPos) {
@@ -75,6 +79,10 @@ void Cannon::shot(IPoint atTankPos) {
 	if (_rocketsAvailable >= 0) {
 		_missiles.push_back(Missile::HardPtr(new Missile(_directionVec, _angle, x0, y0)));
 	}
+	_eff = _effCont.AddEffect("MissileShot");
+	_eff->posX = _tex->getBitmapRect().Width() / 2.f;
+	_eff->posY = _y;
+	_eff->Reset();
 }
 
 bool Cannon::isAllRocketsExploaded() {

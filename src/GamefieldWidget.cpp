@@ -99,8 +99,10 @@ bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)
 		_gui->setState(Interface::State::PLAY);
 		break;
 	case Interface::State::PLAY:
-		_tank->shot();
-		_gui->decreaseRockets();
+		if (mouse_pos.y > MIN_Y_SHOT) {
+			_tank->shot();
+			_gui->decreaseRockets();
+		}
 		break;
 	case Interface::State::IS_OVER:
 		_gui->mouseDown(mouse_pos);

@@ -15,6 +15,7 @@ LoadEffects("Example3_FindObject.xml")
 LoadEffects("ExhaustGas.xml")
 LoadEffects("Dirt.xml")
 LoadEffects("RocketTail.xml")
+LoadEffects("MissileShot.xml")
 
 --
 -- Загрузка слоёв.
