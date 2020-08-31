@@ -52,6 +52,9 @@ bool Missile::isNotVisible() {
 }
 
 void Missile::tryHit(std::vector<Enemy::HardPtr> &enemies) {
+	if (_exploded) {
+		return;
+	}
 	for (auto it = enemies.begin(); it != enemies.end();) {
 		FPoint interactionVec = (*it)->getCenterPos() - this->getCenterPos();
 		float sqrLen = pow(interactionVec.x, 2) + pow(interactionVec.y, 2);
