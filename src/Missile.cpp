@@ -9,24 +9,30 @@ Missile::Missile(FPoint directionVec, float angle, float x0, float y0)
 	_dy(0.f),
 	_x0(x0),
 	_y0(y0),
-	_exploaded(false)
+	_exploded(false)
 {
 	_tex = Core::resourceManager.Get<Render::Texture>("Missile");
 	_t = 0.f;
-	_rocketTailEff = RocketTailEff::HardPtr(new RocketTailEff());
-	_rocketTailEff->reset();
+	_missileTailEff = MissileTailEff::HardPtr(new MissileTailEff());
+	_missileTailEff->reset();
+	_missileExplEff = MissileExplodeEff::HardPtr(new MissileExplodeEff());
 }
 
 void Missile::draw() {
-	FPoint textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
-	Render::device.PushMatrix();
-	Render::device.ResetMatrix();
-	Render::device.MatrixTranslate(_x0 + _dx, _y0 + _dy, 0);
-	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
-	Render::device.MatrixTranslate(-textureCenter.x, 0, 0);
-	_tex->Draw();
-	_rocketTailEff->draw();
-	Render::device.PopMatrix();
+	if (!_exploded) {
+		FPoint textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
+		Render::device.PushMatrix();
+		Render::device.ResetMatrix();
+		Render::device.MatrixTranslate(_x0 + _dx, _y0 + _dy, 0);
+		Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
+		Render::device.MatrixTranslate(-textureCenter.x, 0, 0);
+		_tex->Draw();
+		_missileTailEff->draw();
+		Render::device.PopMatrix();
+	}
+	else {
+		_missileExplEff->draw();
+	}
 }
 
 void Missile::update(float dt) {
@@ -35,13 +41,14 @@ void Missile::update(float dt) {
 	_moveVec.y -= M * G * _t * _t / 2.f;
 	_dy += _moveVec.y * dt;
 	_angle = -90.f + 180.f / math::PI * atan2(_moveVec.y, _moveVec.x);
-	_rocketTailEff->update(dt);
+	_missileTailEff->update(dt);
+	_missileExplEff->update(dt);
 }
 
 bool Missile::isNotVisible() {
 	IRect screen = IRect(0, 0, Render::device.Width(), 2 * Render::device.Height());
 	IRect textureRect = IRect(_x0 + _dx, _y0 + _dy, _tex->getBitmapRect().Width(), _tex->getBitmapRect().Height());
-	return _exploaded || !textureRect.Intersects(screen);
+	return (_exploded && _missileExplEff->isFinished()) || !textureRect.Intersects(screen);
 }
 
 void Missile::tryHit(std::vector<Enemy::HardPtr> &enemies) {
@@ -55,7 +62,10 @@ void Missile::tryHit(std::vector<Enemy::HardPtr> &enemies) {
 			if ((*it)->getHealth() <= 0) {
 				it = enemies.erase(it);
 				return;
-			} 
+			}
+			else {
+				_missileExplEff->reset(this->getCenterPos().x, this->getCenterPos().y);
+			}
 		}
 		it++;
 	}
@@ -95,10 +105,11 @@ void Missile::bounceWith(Enemy::HardPtr enemy) {
 	// обратное проецирование
 	enemy->setMoveVec(p2X * cosA - p2Y * sinA, p2Y * cosA + p2X * sinA);
 	explode();
+
 }
 
 void Missile::explode() {
 	_moveVec.x = 0.f;
 	_moveVec.y = 0.f;
-	_exploaded = true;
+	_exploded = true;
 }

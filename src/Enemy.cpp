@@ -26,7 +26,7 @@ void Enemy::update(float dt) {
 	_y += _vecMove.y * dt;
 	_vecMove.x = math::clamp(-2*_speed.x, 2*_speed.x, _vecMove.x);
 	_vecMove.y = math::clamp(-2*_speed.y, 2*_speed.y, _vecMove.y);
-	if (_t < 10 * dt) {
+	if (_t < dt) {
 		_t += dt;
 	}
 	else {

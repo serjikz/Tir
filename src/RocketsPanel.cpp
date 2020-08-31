@@ -27,7 +27,7 @@ void RocketsPanel::draw() {
 void RocketsPanel::update(float dt) {
 	Panel::update(dt);
 	if (_state != State::HIDEN) {
-		_text = std::to_string(_rockets);
+		_text = std::to_string(math::clamp(0, _rocketsAvailable, _rockets));
 	}
 }
 

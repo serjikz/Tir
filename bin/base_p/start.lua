@@ -16,6 +16,7 @@ LoadEffects("ExhaustGas.xml")
 LoadEffects("Dirt.xml")
 LoadEffects("RocketTail.xml")
 LoadEffects("MissileShot.xml")
+LoadEffects("MissileExploded.xml")
 
 --
 -- Загрузка слоёв.

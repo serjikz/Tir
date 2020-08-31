@@ -87,7 +87,10 @@
     <ClCompile Include="..\..\src\Interface.cpp">
       <Filter>Source Files\Interface</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\RocketTailEff.cpp">
+    <ClCompile Include="..\..\src\MissileTailEff.cpp">
+      <Filter>Source Files\Tank</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\MissileExplodeEff.cpp">
       <Filter>Source Files\Tank</Filter>
     </ClCompile>
   </ItemGroup>
@@ -146,7 +149,10 @@
     <ClInclude Include="..\..\src\Interface.h">
       <Filter>Source Files\Interface</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\RocketTailEff.h">
+    <ClInclude Include="..\..\src\MissileTailEff.h">
+      <Filter>Source Files\Tank</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\MissileExplodeEff.h">
       <Filter>Source Files\Tank</Filter>
     </ClInclude>
   </ItemGroup>

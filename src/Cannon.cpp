@@ -58,8 +58,7 @@ void Cannon::update(float dt, float tankPosx, std::vector<Enemy::HardPtr> &enemi
 	for (auto it =_missiles.begin(); it != _missiles.end();) {
 		(*it)->update(dt);
 		if ((*it)->isNotVisible()) {
-			it = _missiles.erase(it);
-			
+			it = _missiles.erase(it);			
 		}
 		else {
 			(*it)->tryHit(enemies);
@@ -78,11 +77,12 @@ void Cannon::shot(IPoint atTankPos) {
 	_rocketsAvailable--;
 	if (_rocketsAvailable >= 0) {
 		_missiles.push_back(Missile::HardPtr(new Missile(_directionVec, _angle, x0, y0)));
+		_eff = _effCont.AddEffect("MissileShot");
+		_eff->posX = _tex->getBitmapRect().Width() / 2.f;
+		_eff->posY = _y;
+		_eff->Reset();
 	}
-	_eff = _effCont.AddEffect("MissileShot");
-	_eff->posX = _tex->getBitmapRect().Width() / 2.f;
-	_eff->posY = _y;
-	_eff->Reset();
+	
 }
 
 bool Cannon::isAllRocketsExploaded() {

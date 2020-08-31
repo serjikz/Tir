@@ -1,6 +1,7 @@
 #pragma once
 #include "Enemy.h"
-#include "RocketTailEff.h"
+#include "MissileTailEff.h"
+#include "MissileExplodeEff.h"
 
 class Missile
 {
@@ -15,8 +16,9 @@ private:
 	float _t;	
 	float _dx, _dy;
 	float _angle;
-	bool _exploaded;
-	RocketTailEff::HardPtr _rocketTailEff;
+	bool _exploded;
+	MissileTailEff::HardPtr _missileTailEff;
+	MissileExplodeEff::HardPtr _missileExplEff;
 	void explode();
 public:
 	Missile(FPoint directionVec, float angle, float x0, float y0);

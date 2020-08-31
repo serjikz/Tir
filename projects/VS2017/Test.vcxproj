@@ -129,9 +129,10 @@
     <ClCompile Include="..\..\src\AppDelegate.cpp" />
     <ClCompile Include="..\..\src\GamefieldWidget.cpp" />
     <ClCompile Include="..\..\src\Missile.cpp" />
+    <ClCompile Include="..\..\src\MissileExplodeEff.cpp" />
     <ClCompile Include="..\..\src\Panel.cpp" />
     <ClCompile Include="..\..\src\RocketsPanel.cpp" />
-    <ClCompile Include="..\..\src\RocketTailEff.cpp" />
+    <ClCompile Include="..\..\src\MissileTailEff.cpp" />
     <ClCompile Include="..\..\src\ScorePanel.cpp" />
     <ClCompile Include="..\..\src\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
@@ -153,9 +154,10 @@
     <ClInclude Include="..\..\src\GameFieldWidget.h" />
     <ClInclude Include="..\..\src\Interface.h" />
     <ClInclude Include="..\..\src\Missile.h" />
+    <ClInclude Include="..\..\src\MissileExplodeEff.h" />
     <ClInclude Include="..\..\src\Panel.h" />
     <ClInclude Include="..\..\src\RocketsPanel.h" />
-    <ClInclude Include="..\..\src\RocketTailEff.h" />
+    <ClInclude Include="..\..\src\MissileTailEff.h" />
     <ClInclude Include="..\..\src\ScorePanel.h" />
     <ClInclude Include="..\..\src\stdafx.h" />
     <ClInclude Include="..\..\src\Tank.h" />
