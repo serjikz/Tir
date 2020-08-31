@@ -10,6 +10,7 @@ private:
 	const float G = 9.8;
 	const float LIFE_TIME = 150.f;
 	const float M = 5.f;
+	const int MIN_Y = 10;
 	Render::Texture* _tex;
 	FPoint _moveVec;
 	float _x0, _y0;

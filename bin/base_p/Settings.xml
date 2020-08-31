@@ -19,12 +19,12 @@
     <Enemy type="ship" textureID="Enemy1" x="100" y="100" speedX="160" speedY="160" m="3"  health="4" scale ="1" rotateDirection="-1"/>
     <Enemy type="ship" textureID="Enemy2" x="300" y="400" speedX="100" speedY="160" m="1" health ="3" rotationSpeed="30"/>
     <Enemy type="ship" textureID="Enemy1" x="800" y="400" speedX="100" speedY="160"  m="1" health ="3" scale ="1" rotationSpeed="30"/>
-    <Enemy type="ship" textureID="Enemy1" x="700" y="700" speedX="100" speedY="160" m="2" health ="3" scale ="1"/>
+    <!--Enemy type="ship" textureID="Enemy1" x="700" y="700" speedX="100" speedY="160" m="2" health ="3" scale ="1"/>
     <Enemy type="ship" textureID="Enemy1" x="500" y="450" speedX="100" speedY="160"  m="2" health ="3" scale ="1" rotateDirection="-1"/>
     <Enemy type="ship" textureID="Enemy1" x="100" y="400" speedX="100" speedY="160"  m="1" health ="3" scale ="1" rotationSpeed="30"/>
     <Enemy type="ship" textureID="Enemy1" x="100" y="700" speedX="100" speedY="160" m="2" health ="3" scale ="1"/>
     <Enemy type="ship" textureID="Enemy1" x="200" y="450" speedX="100" speedY="160"  m="2" health ="3" scale ="1" rotateDirection="-1"/>
-    <Enemy type="ship" textureID="Enemy2" x="250" y="300" speedX="100" speedY="160" m="1" health ="3" rotationSpeed="30"/>
+    <Enemy type="ship" textureID="Enemy2" x="250" y="300" speedX="100" speedY="160" m="1" health ="3" rotationSpeed="30"/-->
   </Enemies>
   <GUI time="200" rockets="20">
     <Panel name="rockets" textureID="PanelRockets" x="500" y="670" speed="2">

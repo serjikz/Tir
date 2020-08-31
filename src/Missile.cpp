@@ -36,13 +36,21 @@ void Missile::draw() {
 }
 
 void Missile::update(float dt) {
-	_t = math::clamp(0.f, LIFE_TIME, _t + dt);
-	_dx += _moveVec.x * dt;
-	_moveVec.y -= M * G * _t * _t / 2.f;
-	_dy += _moveVec.y * dt;
-	_angle = -90.f + 180.f / math::PI * atan2(_moveVec.y, _moveVec.x);
-	_missileTailEff->update(dt);
-	_missileExplEff->update(dt);
+	if (_exploded) {
+		_missileTailEff->update(dt);
+		_missileExplEff->update(dt);
+	}
+	else {
+		_t = math::clamp(0.f, LIFE_TIME, _t + dt);
+		_dx += _moveVec.x * dt;
+		_moveVec.y -= M * G * _t * _t / 2.f;
+		_dy += _moveVec.y * dt;
+		_angle = -90.f + 180.f / math::PI * atan2(_moveVec.y, _moveVec.x);
+	}
+	if (!_exploded && (_y0 + _dy < MIN_Y)) {
+		explode();
+		_missileExplEff->reset(_x0 + _dx, MIN_Y);
+	}
 }
 
 bool Missile::isNotVisible() {
@@ -108,7 +116,6 @@ void Missile::bounceWith(Enemy::HardPtr enemy) {
 	// обратное проецирование
 	enemy->setMoveVec(p2X * cosA - p2Y * sinA, p2Y * cosA + p2X * sinA);
 	explode();
-
 }
 
 void Missile::explode() {
