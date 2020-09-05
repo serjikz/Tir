@@ -27,6 +27,7 @@
     <texture id="Cannon" path="textures/Cannon" />
     <texture id="Enemy1" path="textures/Enemy1" />
     <texture id="Enemy2" path="textures/Enemy2" />
+    <texture id="Enemy3" path="textures/Enemy3" />
     <texture id="Missile" path="textures/Missile" />
     <texture id="PanelRockets" path="textures/PanelRockets" />
     <texture id="PanelTime" path="textures/PanelTime" />

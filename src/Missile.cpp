@@ -2,8 +2,7 @@
 #include "Missile.h"
 
 Missile::Missile(FPoint directionVec, float angle, float x0, float y0)
-	: _moveVec(SPEED * directionVec),
-	_angle(angle)
+	:_angle(angle)
 	, _t(0.f),
 	_dx(0.f),
 	_dy(0.f),
@@ -11,6 +10,8 @@ Missile::Missile(FPoint directionVec, float angle, float x0, float y0)
 	_y0(y0),
 	_exploded(false)
 {
+	float alpha = atan2(directionVec.y, directionVec.x);
+	_moveVec = FPoint(SPEED * cos(alpha), SPEED * sin(alpha));
 	_tex = Core::resourceManager.Get<Render::Texture>("Missile");
 	_t = 0.f;
 	_missileTailEff = MissileTailEff::HardPtr(new MissileTailEff());
@@ -37,13 +38,13 @@ void Missile::draw() {
 
 void Missile::update(float dt) {
 	if (_exploded) {
-		_missileTailEff->update(dt);
 		_missileExplEff->update(dt);
 	}
 	else {
+		_missileTailEff->update(dt);
 		_t = math::clamp(0.f, LIFE_TIME, _t + dt);
 		_dx += _moveVec.x * dt;
-		_moveVec.y -= M * G * _t * _t / 2.f;
+		_moveVec.y -= G * _t * _t / 2.f;
 		_dy += _moveVec.y * dt;
 		_angle = -90.f + 180.f / math::PI * atan2(_moveVec.y, _moveVec.x);
 	}

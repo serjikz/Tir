@@ -6,10 +6,10 @@
 class Missile
 {
 private:	
-	const float SPEED = 900.f;
+	const float SPEED = 500;
 	const float G = 9.8;
 	const float LIFE_TIME = 150.f;
-	const float M = 5.f;
+	const float M = 0.15f;
 	const int MIN_Y = 10;
 	Render::Texture* _tex;
 	FPoint _moveVec;

@@ -42,7 +42,6 @@ void Cannon::draw() {
 void Cannon::update(float dt, float tankPosx, std::vector<Enemy::HardPtr> &enemies) {
 	IPoint mousePos = Core::mainInput.GetMousePos();
 	IPoint v1 = IPoint(mousePos.x - tankPosx, mousePos.y - _tex->getBitmapRect().Height());
-	IPoint v2 = IPoint(0, 1);
 	float len = sqrt(pow(v1.x, 2) + pow(v1.y, 2));
 	if (len < 0.001f) {
 		return;
@@ -53,8 +52,10 @@ void Cannon::update(float dt, float tankPosx, std::vector<Enemy::HardPtr> &enemi
 		_angle *= -1;
 	}
 	_t = math::clamp(0.f, 1.f, _t + INTERTIA_SPEED * dt);
-	_dx = math::lerp(int(INTERTIA_MOVE * _directionVec.x), 0, _t);
-	_dy = math::lerp(int(INTERTIA_MOVE * _directionVec.y ), 0, _t);
+	if (_rocketsAvailable >= 0) {
+		_dx = math::lerp(int(INTERTIA_MOVE * _directionVec.x), 0, _t);
+		_dy = math::lerp(int(INTERTIA_MOVE * _directionVec.y), 0, _t);
+	} 
 	for (auto it =_missiles.begin(); it != _missiles.end();) {
 		(*it)->update(dt);
 		if ((*it)->isNotVisible()) {
@@ -82,7 +83,6 @@ void Cannon::shot(IPoint atTankPos) {
 		_eff->posY = _y;
 		_eff->Reset();
 	}
-	
 }
 
 bool Cannon::isAllRocketsExploaded() {

@@ -13,27 +13,31 @@ Enemy::Enemy(rapidxml::xml_node<>* settings)
 	_m = Xml::GetFloatAttributeOrDef(settings, "m", 0);
 	_scale = Xml::GetFloatAttributeOrDef(settings, "scale", 1.f);
 	_rotationSpeed = Xml::GetFloatAttributeOrDef(settings, "rotationSpeed", 10.f);
-	_rotateDirection = Xml::GetIntAttributeOrDef(settings, "rotateDirection", 1);
 	_health = Xml::GetIntAttributeOrDef(settings, "health", 1);
 	_speed = _vecMove;
 	_t = 0;
 	_angle = 0;
 	_isBounced = false;
+	_enemyLastBounced = 0;
 };
 
 void Enemy::update(float dt) {
 	_x += _vecMove.x * dt;
 	_y += _vecMove.y * dt;
-	_vecMove.x = math::clamp(-2*_speed.x, 2*_speed.x, _vecMove.x);
-	_vecMove.y = math::clamp(-2*_speed.y, 2*_speed.y, _vecMove.y);
-	if (_t < dt) {
-		_t += dt;
+	if (fabs(_vecMove.x) > MAX_SPEED) {
+		_vecMove.x *= FRICTION;
+	}
+	if (fabs(_vecMove.y) > 200) {
+		_vecMove.y *= FRICTION;
+	}
+	if (_t < TIME_TO_BOUNCE * dt) {
+		_t += dt; 
 	}
 	else {
 		_isBounced = false;
 	}
 	checkScreenBounce();
-	_angle += _rotateDirection * _rotationSpeed *dt;
+	_angle += _rotationSpeed *dt;
 	if (_angle > 360) {
 		_angle = _angle - 360;
 	}
@@ -103,7 +107,7 @@ bool Enemy::isIntersect(Enemy::HardPtr anotherEnemy) {
 
 void Enemy::bounceWith(Enemy::HardPtr anotherEnemy) {
 	// даем время разлететься, чтобы тексутры не "слиплись"
-	if (_isBounced) {
+	if (_isBounced && _enemyLastBounced == anotherEnemy) {
 		return;
 	}
 	_t = 0.f;
@@ -133,6 +137,7 @@ void Enemy::bounceWith(Enemy::HardPtr anotherEnemy) {
 	_vecMove.x = p1X * cosA - p1Y * sinA;
 	_vecMove.y = p1Y * cosA + p1X * sinA;
 	anotherEnemy->setMoveVec(p2X * cosA - p2Y * sinA, p2Y * cosA + p2X * sinA);
+	_enemyLastBounced = anotherEnemy;
 }
 
 void Enemy::reduceHealth() {
