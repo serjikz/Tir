@@ -1,16 +1,27 @@
 #include "stdafx.h"
 #include "TimePanel.h"
 
-TimePanel::TimePanel(rapidxml::xml_node<>* settings, int time)
+TimePanel::TimePanel(rapidxml::xml_node<>* settings)
 	:Panel(settings),
 	_text(""),
 	_timeAvailable(0.f),
 	_t0(0)
 {
-	_timeAvailable = time;
 	rapidxml::xml_node<>* timeText = settings->first_node("text");
 	_textX = Xml::GetIntAttributeOrDef(timeText, "x", 0);
 	_textY = Xml::GetIntAttributeOrDef(timeText, "y", 0);
+	std::string params;
+	std::ifstream in("input.txt");
+	std::string paramToFound = "Time=";
+	if (in.is_open())
+	{
+		while (getline(in, params)) {
+			if (params.substr(0, std::string(paramToFound).length()) == paramToFound) {
+				_timeAvailable = stoi(params.substr(paramToFound.length(), params.length() - 1));
+			}
+		}
+	}
+	in.close();
 }
 
 void TimePanel::draw() {

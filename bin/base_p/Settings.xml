@@ -62,7 +62,7 @@
     <Enemy type="ship" textureID="Enemy2" x="300" y="200" speedX="200" speedY="200" m="1" health ="2" rotationSpeed="30"/>
     <Enemy type="ship" textureID="Enemy2" x="300" y="300" speedX="100" speedY="160" m="1" health ="2" rotationSpeed="50" rotateDirection="-1"/-->
   </Enemies>
-  <GUI time="187" rockets="50">
+  <GUI>
     <Panel name="rockets" textureID="PanelRockets" x="500" y="670" speed="2">
       <text x="120" y="41"/>
       <spline value="800" t="0"/>

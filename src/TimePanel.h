@@ -11,7 +11,7 @@ private:
 	int _textX;
 	int _textY;
 public:
-	TimePanel(rapidxml::xml_node<>* settings, int time);
+	TimePanel(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<TimePanel> HardPtr;
 	virtual void draw();
 	virtual void update(float dt);

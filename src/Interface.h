@@ -4,12 +4,12 @@
 #include "TimePanel.h"
 #include "TextAnimated.h"
 #include "ArrowHintPanel.h"
-#include "RocketsPanel.h"
+#include "MissilesPanel.h"
 
 class Interface
 {
 private:	
-	RocketsPanel::HardPtr _rocketsPanel;
+	MissilesPanel::HardPtr _rocketsPanel;
 	TimePanel::HardPtr _timePanel;
 	ScorePanel::HardPtr _scorePanel;
 	TextAnimated::HardPtr _tapToPlayText;

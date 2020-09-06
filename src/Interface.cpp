@@ -4,9 +4,9 @@
 Interface::Interface(rapidxml::xml_node<>* settings)
 {
 	rapidxml::xml_node<>* panel = settings->first_node("Panel");
-	_rocketsPanel = RocketsPanel::HardPtr(new RocketsPanel(panel, Xml::GetIntAttributeOrDef(settings, "rockets", 0)));
+	_rocketsPanel = MissilesPanel::HardPtr(new MissilesPanel(panel));
 	panel = panel->next_sibling();
-	_timePanel = TimePanel::HardPtr(new TimePanel(panel, Xml::GetIntAttributeOrDef(settings, "time", 0)));
+	_timePanel = TimePanel::HardPtr(new TimePanel(panel));
 	panel = panel->next_sibling();
 	_scorePanel = ScorePanel::HardPtr(new ScorePanel(panel));
 	panel = panel->next_sibling();

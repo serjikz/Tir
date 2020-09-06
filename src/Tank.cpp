@@ -23,7 +23,7 @@ Tank::Tank(rapidxml::xml_node<>* settings)
 	}
 	rapidxml::xml_node<>* cannon = settings->first_node("Cannon");
 	rapidxml::xml_node<>* guiSettings = settings->first_node("GUI");
-	_cannon = Cannon::HardPtr(new Cannon(cannon, Xml::GetIntAttributeOrDef(guiSettings, "rockets", 0)));
+	_cannon = Cannon::HardPtr(new Cannon(cannon));
 	_exhaustGasEff = _effCont.AddEffect("ExhaustGas");
 	_exhaustGasEff->posY = Xml::GetFloatAttributeOrDef(settings, "exhaustGasPosY", 0);
 	_exhaustGasEff->posX = Xml::GetFloatAttributeOrDef(settings, "exhaustGasPosX", 0);

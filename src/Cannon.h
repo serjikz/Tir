@@ -26,7 +26,7 @@ private:
 	ParticleEffectPtr _eff;
 	float _missileSpeed;
 public:
-	Cannon(rapidxml::xml_node<>* settings, int rocketsAvailable);
+	Cannon(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Cannon> HardPtr;
 	void draw();
 	void update(float dt, float tankPosx, std::vector<Enemy::HardPtr>& enemies);

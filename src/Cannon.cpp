@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Cannon.h"
 
-Cannon::Cannon(rapidxml::xml_node<>* settings, int rocketsAvailable)
+Cannon::Cannon(rapidxml::xml_node<>* settings)
 	: _x(0),
 	_y(0),
 	_dx(0),
@@ -21,8 +21,19 @@ Cannon::Cannon(rapidxml::xml_node<>* settings, int rocketsAvailable)
 	CANNON_X0 = Xml::GetIntAttributeOrDef(settings, "cannonX0", 0);
 	CANNON_Y0 = Xml::GetIntAttributeOrDef(settings, "cannonY0", 0);
 	_textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
-	_rocketsAvailable = rocketsAvailable;
-	_rockets = rocketsAvailable;
+	std::string params;
+	std::ifstream in("input.txt");
+	std::string paramToFound = "Missiles=";
+	if (in.is_open())
+	{
+		while (getline(in, params)) {
+			if (params.substr(0, std::string(paramToFound).length()) == paramToFound) {
+				_rocketsAvailable = stoi(params.substr(paramToFound.length(), params.length() - 1));
+			}
+		}
+	}
+	in.close();
+	_rockets = _rocketsAvailable;
 }
 
 void Cannon::draw() {

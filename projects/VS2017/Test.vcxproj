@@ -131,7 +131,7 @@
     <ClCompile Include="..\..\src\Missile.cpp" />
     <ClCompile Include="..\..\src\MissileExplodeEff.cpp" />
     <ClCompile Include="..\..\src\Panel.cpp" />
-    <ClCompile Include="..\..\src\RocketsPanel.cpp" />
+    <ClCompile Include="..\..\src\MissilesPanel.cpp" />
     <ClCompile Include="..\..\src\MissileTailEff.cpp" />
     <ClCompile Include="..\..\src\ScorePanel.cpp" />
     <ClCompile Include="..\..\src\stdafx.cpp">
@@ -156,7 +156,7 @@
     <ClInclude Include="..\..\src\Missile.h" />
     <ClInclude Include="..\..\src\MissileExplodeEff.h" />
     <ClInclude Include="..\..\src\Panel.h" />
-    <ClInclude Include="..\..\src\RocketsPanel.h" />
+    <ClInclude Include="..\..\src\MissilesPanel.h" />
     <ClInclude Include="..\..\src\MissileTailEff.h" />
     <ClInclude Include="..\..\src\ScorePanel.h" />
     <ClInclude Include="..\..\src\stdafx.h" />
