@@ -27,7 +27,7 @@ void Enemy::update(float dt) {
 	if (fabs(_vecMove.x) > MAX_SPEED) {
 		_vecMove.x *= FRICTION;
 	}
-	if (fabs(_vecMove.y) > 200) {
+	if (fabs(_vecMove.y) > MAX_SPEED) {
 		_vecMove.y *= FRICTION;
 	}
 	if (_t < TIME_TO_BOUNCE * dt) {

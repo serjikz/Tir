@@ -14,7 +14,6 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 
 void GameFieldWidget::Init()
 {
-
 	_bkg = Core::resourceManager.Get<Render::Texture>("Background");
 	_curTex = 0;
 	_angle = 0;
@@ -29,6 +28,19 @@ void GameFieldWidget::Init()
 	createNewEnemies();
 	_gui = Interface::HardPtr(new Interface(root->first_node("GUI")));
 	_gui->setState(Interface::State::TAP_TO_PLAY);
+	std::string params;
+	std::ifstream in("input.txt");
+	std::string paramToFound = "Speed=";
+	if (in.is_open())
+	{
+		while (getline(in, params)) {
+			if (params.substr(0, std::string(paramToFound).length()) == paramToFound) {
+				int speed = stoi(params.substr(paramToFound.length(), params.length() - 1));
+				_tank->setMissileSpeed(speed);
+			}
+		}		
+	}
+	in.close();
 } 
 
 void GameFieldWidget::Draw()
@@ -155,12 +167,25 @@ void GameFieldWidget::KeyPressed(int keyCode)
 }
 
 void GameFieldWidget::createNewEnemies() {
+	std::string params;
+	std::ifstream in("input.txt"); 
+	int enemies = 0;
+	std::string paramToFound = "CountTarget=";
+	if (in.is_open())
+	{
+		while (getline(in, params)) {
+			if (params.substr(0, std::string(paramToFound).length()) == paramToFound) {
+				enemies = stoi(params.substr(paramToFound.length(), params.length() - 1));
+			}
+		}
+	}
+	in.close(); 
 	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
 	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
 	rapidxml::xml_node<>* enemy = root->first_node("Enemies")->first_node("Enemy");
 	_enemies.clear();
 	_enemiesToHit = 0;
-	while (enemy) {
+	while (enemy && _enemiesToHit < enemies) {
 		_enemies.push_back(Enemy::HardPtr(new Enemy(enemy)));
 		enemy = enemy->next_sibling();
 		_enemiesToHit++;

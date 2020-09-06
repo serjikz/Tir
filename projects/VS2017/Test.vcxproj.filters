@@ -177,4 +177,7 @@
       <Filter>Resource Files</Filter>
     </ResourceCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\bin\input.txt" />
+  </ItemGroup>
 </Project>

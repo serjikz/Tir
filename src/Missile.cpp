@@ -1,9 +1,9 @@
 #include "stdafx.h"
 #include "Missile.h"
 
-Missile::Missile(FPoint directionVec, float angle, float x0, float y0)
-	:_angle(angle)
-	, _t(0.f),
+Missile::Missile(FPoint directionVec, float speed, float x0, float y0)
+	:_speed(speed),
+	_t(0.f),
 	_dx(0.f),
 	_dy(0.f),
 	_x0(x0),
@@ -11,7 +11,7 @@ Missile::Missile(FPoint directionVec, float angle, float x0, float y0)
 	_exploded(false)
 {
 	float alpha = atan2(directionVec.y, directionVec.x);
-	_moveVec = FPoint(SPEED * cos(alpha), SPEED * sin(alpha));
+	_moveVec = FPoint(_speed * cos(alpha), _speed * sin(alpha));
 	_tex = Core::resourceManager.Get<Render::Texture>("Missile");
 	_t = 0.f;
 	_missileTailEff = MissileTailEff::HardPtr(new MissileTailEff());

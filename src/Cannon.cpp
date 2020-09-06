@@ -77,7 +77,7 @@ void Cannon::shot(IPoint atTankPos) {
 	float y0 = CANNON_Y0 +  atTankPos.y + r * sin(alpha);
 	_rocketsAvailable--;
 	if (_rocketsAvailable >= 0) {
-		_missiles.push_back(Missile::HardPtr(new Missile(_directionVec, _angle, x0, y0)));
+		_missiles.push_back(Missile::HardPtr(new Missile(_directionVec, _missileSpeed, x0, y0)));
 		_eff = _effCont.AddEffect("MissileShot");
 		_eff->posX = _tex->getBitmapRect().Width() / 2.f;
 		_eff->posY = _y;
@@ -91,4 +91,8 @@ bool Cannon::isAllRocketsExploaded() {
 
 void Cannon::reloadRockets() {
 	_rocketsAvailable = _rockets;
+}
+
+void Cannon::setMissileSpeed(float speed) {
+	_missileSpeed = speed;
 }
