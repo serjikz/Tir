@@ -1,4 +1,4 @@
-CountTarget=51
+CountTarget=25
 Speed=450
 Time=55
 Missiles=250

@@ -11,6 +11,7 @@ class GameFieldWidget : public GUI::Widget
 {
 private:
 	const int MIN_Y_SHOT = 50;
+	const int MAX_ENEMIES_COUNT = 50;
 	Interface::HardPtr _gui;
 	Tank::HardPrt _tank;
 	std::vector<Cloud::HardPtr> _clouds;
