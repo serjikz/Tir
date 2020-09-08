@@ -175,7 +175,7 @@ void GameFieldWidget::createNewEnemies() {
 	{
 		while (getline(in, params)) {
 			if (params.substr(0, std::string(paramToFound).length()) == paramToFound) {
-				enemies = stoi(params.substr(paramToFound.length(), params.length() - 1));
+				enemies = math::clamp(1, 50, stoi(params.substr(paramToFound.length(), params.length() - 1)));
 			}
 		}
 	}
