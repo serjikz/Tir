@@ -22,8 +22,8 @@ Enemy::Enemy(rapidxml::xml_node<>* settings)
 };
 
 void Enemy::update(float dt) {
-	_x += _vecMove.x * dt;
-	_y += _vecMove.y * dt;
+	//_x += _vecMove.x * dt;
+	//_y += _vecMove.y * dt;
 	if (fabs(_vecMove.x) > MAX_SPEED) {
 		_vecMove.x *= FRICTION;
 	}
