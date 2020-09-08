@@ -5,6 +5,7 @@
 class Cannon
 {
 private:	
+	const float EPS = 0.001f;
 	Render::Texture* _tex;
 	short int _x, _y;
 	short int _dx, _dy;

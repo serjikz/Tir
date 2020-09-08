@@ -91,10 +91,6 @@ FPoint Missile::getMoveVec() const {
 	return _moveVec;
 }
 
-float Missile::getMass() const {
-	return M;
-}
-
 void Missile::bounceWith(Enemy::HardPtr enemy) {
 	FPoint interactionVec = enemy->getCenterPos() - getCenterPos();
 	float alpha = math::atan(interactionVec.y, interactionVec.x);
@@ -108,11 +104,10 @@ void Missile::bounceWith(Enemy::HardPtr enemy) {
 	float p1Y = _moveVec.y * cosA - _moveVec.x * sinA;
 	float p2Y = enemyV.y * cosA - enemyV.x * sinA;
 	// новые скорости тел
-	float m1 = M;
 	float m2 = enemy->getMass();
-	float p = m1 * p1X + m2 * p2X;
+	float p = M * p1X + m2 * p2X;
 	float v = p1X - p2X;
-	float v2f = (p + v * m1) / (m1 + m2);
+	float v2f = (p + v * M) / (M + m2);
 	p2X = v2f;
 	// обратное проецирование
 	enemy->setMoveVec(p2X * cosA - p2Y * sinA, p2Y * cosA + p2X * sinA);

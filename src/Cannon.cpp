@@ -54,7 +54,7 @@ void Cannon::update(float dt, float tankPosx, std::vector<Enemy::HardPtr> &enemi
 	IPoint mousePos = Core::mainInput.GetMousePos();
 	IPoint v1 = IPoint(mousePos.x - tankPosx, mousePos.y - _tex->getBitmapRect().Height());
 	float len = sqrt(pow(v1.x, 2) + pow(v1.y, 2));
-	if (len < 0.001f) {
+	if (len < EPS) {
 		return;
 	}
 	_directionVec = FPoint(v1.x / len, v1.y / len);

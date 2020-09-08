@@ -30,6 +30,5 @@ public:
 	void tryHit(std::vector<Enemy::HardPtr> &enemies);
 	FPoint getCenterPos() const;
 	FPoint getMoveVec() const;
-	float getMass() const;	
 	void bounceWith(Enemy::HardPtr enemy);
 };
