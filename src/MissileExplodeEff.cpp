@@ -18,10 +18,10 @@ void MissileExplodeEff::update(float dt) {
 
 void MissileExplodeEff::reset(int x, int y, bool enemyDestroyed) {
 	if (enemyDestroyed) {
-
+		_eff = _effCont.AddEffect("EnemyExploded");
 	}
 	else {
-		_eff = _effCont.AddEffect("EnemyShot");
+		_eff = _effCont.AddEffect("MissileExploded");
 	}
 	_eff->posX = x;
 	_eff->posY = y;

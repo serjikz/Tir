@@ -72,7 +72,8 @@ void Missile::tryHit(std::vector<Enemy::HardPtr> &enemies) {
 			bounceWith(*it);
 			(*it)->reduceHealth();
 			if ((*it)->getHealth() <= 0) {
-				it = enemies.erase(it);
+				_missileExplEff->reset((*it)->getCenterPos().x, (*it)->getCenterPos().y, true);
+				it = enemies.erase(it);				
 				return;
 			}
 			else {
