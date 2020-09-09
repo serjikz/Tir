@@ -14,7 +14,6 @@ private:
 	float MAX_ANGLE;
 	float FRICTION_FORCE;
 	float GRAVITY_FORCE;
-	float SWING_FORCE;
 	float ANGLE_COEF;	
 	float _x;
 	float _speed;

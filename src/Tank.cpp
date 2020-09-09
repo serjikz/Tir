@@ -13,7 +13,6 @@ Tank::Tank(rapidxml::xml_node<>* settings)
 	ANGLE_COEF = Xml::GetFloatAttributeOrDef(tankSpeed, "angleCoef", 0.f);
 	FRICTION_FORCE = Xml::GetFloatAttributeOrDef(tankSpeed, "frictionForce", 0.f);
 	GRAVITY_FORCE = Xml::GetFloatAttributeOrDef(tankSpeed, "gravityForce", 0.f);
-	SWING_FORCE = Xml::GetFloatAttributeOrDef(tankSpeed, "swingForce", 0.f);
 	_tex = Core::resourceManager.Get<Render::Texture>("Tank");
 	rapidxml::xml_node<>* wheels = settings->first_node("Wheels");
 	rapidxml::xml_node<>* wheel = wheels->first_node("Wheel");
