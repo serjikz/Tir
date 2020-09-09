@@ -50,19 +50,10 @@ void GameFieldWidget::Draw()
 		_clouds[i]->draw();
 	}
 	_effCont.Draw();
-	
-	switch (_gui->getState()) {
-	case Interface::State::TAP_TO_PLAY:
-
-		break;
-	case Interface::State::PLAY:
+	if (_gui->getState() == Interface::State::PLAY) {
 		for (int i = 0; i < (int)_enemies.size(); i++) {
 			_enemies[i]->draw();
 		}
-		break;
-	case Interface::State::IS_OVER:
-
-		break;
 	}
 	_tank->draw();
 	_gui->draw();
@@ -76,10 +67,7 @@ void GameFieldWidget::Update(float dt)
 	}
 	_gui->update(dt);
 	_tank->update(dt, _enemies);
-	switch (_gui->getState()) {
-	case Interface::State::TAP_TO_PLAY:
-		break;
-	case Interface::State::PLAY:
+	if (_gui->getState() == Interface::State::PLAY) {
 		for (int i = 0; i < (int)_enemies.size(); i++) {
 			_enemies[i]->update(dt);
 		}
@@ -98,9 +86,6 @@ void GameFieldWidget::Update(float dt)
 			Message msg = Message(Message("Interface", "RocketsIsOver"));
 			AcceptMessage(msg);
 		}
-		break;
-	case Interface::State::IS_OVER:
-		break;
 	}
 }
 
