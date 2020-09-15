@@ -8,6 +8,8 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 	, _angle(0)
 	, _scale(0.f)
 	, _enemiesToHit(0)
+	, _targetX(0)
+	, _targetY(0)
 {
 	Init();
 }
@@ -41,22 +43,59 @@ void GameFieldWidget::Init()
 		}		
 	}
 	in.close();
+	_targetX = Render::device.CreateRenderTarget(1024, 1024);
+	_targetY = Render::device.CreateRenderTarget(1024, 1024);
+	_blurShaderX = Core::resourceManager.Get<Render::ShaderProgram>("blurX");
+	_blurShaderY = Core::resourceManager.Get<Render::ShaderProgram>("blurY");
+	_blurShaderX->SetUniform("step", 3);
+	_blurShaderY->SetUniform("step", 3);
 } 
 
 void GameFieldWidget::Draw()
 {
-	_bkg->Draw();
-	for (int i = 0; i < (int)_clouds.size(); i++) {
-		_clouds[i]->draw();
-	}
-	_effCont.Draw();
-	if (_gui->getState() == Interface::State::PLAY) {
-		for (int i = 0; i < (int)_enemies.size(); i++) {
-			_enemies[i]->draw();
+	if (_gui->getState() == Interface::State::TAP_TO_PLAY) {
+		Render::device.BeginRenderTo(_targetX);
+		_bkg->Draw();
+		for (int i = 0; i < (int)_clouds.size(); i++) {
+			_clouds[i]->draw();
 		}
+		_tank->draw();
+		//_gui->draw();
+		Render::device.EndRenderTo();
+		Render::device.BeginRenderTo(_targetY);
+		_blurShaderX->Bind();
+		_targetX->Draw(FPoint(0.0, 0.0));
+		_blurShaderX->Unbind();
+		Render::device.EndRenderTo();
+		_blurShaderY->Bind();
+		_targetY->Draw(FPoint(0.0, 0.0));
+		_blurShaderY->Unbind();
+		_gui->draw();
+		
+		/*for (int i = 0; i < (int)_clouds.size(); i++) {
+			_clouds[i]->draw();
+		}*/
+		//_tank->draw();
+		//_gui->draw();
+
+		//
+		//
 	}
-	_tank->draw();
-	_gui->draw();
+	else {
+
+		_bkg->Draw();
+		for (int i = 0; i < (int)_clouds.size(); i++) {
+			_clouds[i]->draw();
+		}
+		_effCont.Draw();
+		if (_gui->getState() == Interface::State::PLAY) {
+			for (int i = 0; i < (int)_enemies.size(); i++) {
+				_enemies[i]->draw();
+			}
+		}
+		_tank->draw();
+		_gui->draw();
+	}
 }
 
 void GameFieldWidget::Update(float dt)

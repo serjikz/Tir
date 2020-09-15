@@ -23,6 +23,10 @@ private:
 	EffectsContainer _effCont;
 	std::vector <Enemy::HardPtr> _enemies;
 	int _enemiesToHit;
+	Render::Target* _targetX;
+	Render::Target* _targetY;
+	Render::ShaderProgramPtr _blurShaderX;
+	Render::ShaderProgramPtr _blurShaderY;
 	void Init();
 	void createNewEnemies();
 public:

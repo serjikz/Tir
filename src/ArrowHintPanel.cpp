@@ -4,7 +4,7 @@
 ArrowHintPanel::ArrowHintPanel(rapidxml::xml_node<>* settings)
 	:Panel(settings),
 	_isMirrored(false),
-	_alpha(1.f), 
+	_alpha(0.5f), 
 	_dx(0.f)
 {
 	_isMirrored = Xml::GetBoolAttributeOrDef(settings, "mirror", false);
@@ -27,7 +27,7 @@ void ArrowHintPanel::draw() {
 
 void ArrowHintPanel::update(float dt) {
 	if (_state != State::HIDEN) {
-		_alpha = math::clamp(0.f, 1.f, _alpha + _direction * dt);
+		_alpha = math::clamp(0.f, MAX_ALPHA, _alpha + _direction * dt);
 		if (_state == State::DISSAPEARENCE) {
 			if (_isMirrored) {
 				_dx = math::clamp(-MAX_DX, 0.f, _dx - DISSAPEARENCE_SPEED * dt);

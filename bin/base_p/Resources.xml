@@ -29,4 +29,8 @@
     <texture id="RestartButton" path="textures/RestartButton" />
     <texture id="PanelHint" path="textures/PanelHint" />
   </Textures>
+  <Shaders group="shaders">
+    <Shader id="blurX" vs="shaders/blurX" ps="shaders/blurX"/>
+    <Shader id="blurY" vs="shaders/blurY" ps="shaders/blurY"/>
+  </Shaders> 
 </Resources>

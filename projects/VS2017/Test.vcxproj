@@ -173,6 +173,8 @@
     <Xml Include="..\..\bin\base_p\Settings.xml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\bin\base_p\shaders\blurX.fsh" />
+    <None Include="..\..\bin\base_p\shaders\blurY.fsh" />
     <None Include="..\..\bin\base_p\start.lua" />
   </ItemGroup>
   <ItemGroup>
@@ -180,6 +182,16 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\bin\input.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\bin\base_p\shaders\blurX.vsh">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\bin\base_p\shaders\blurY.vsh">
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

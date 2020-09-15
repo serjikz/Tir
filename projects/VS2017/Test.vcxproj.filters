@@ -28,6 +28,9 @@
     <Filter Include="Source Files\Interface">
       <UniqueIdentifier>{645cd684-3ae4-48eb-b5d8-f34068ec6992}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{32323f12-2c84-4282-a5ef-b3eb735be82c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Main.cpp">
@@ -170,6 +173,18 @@
   <ItemGroup>
     <None Include="..\..\bin\base_p\start.lua">
       <Filter>Scripts</Filter>
+    </None>
+    <None Include="..\..\bin\base_p\shaders\blurX.fsh">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\..\bin\base_p\shaders\blurX.vsh">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\..\bin\base_p\shaders\blurY.fsh">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\..\bin\base_p\shaders\blurY.vsh">
+      <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
