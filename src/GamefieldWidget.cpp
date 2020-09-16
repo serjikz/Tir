@@ -47,20 +47,23 @@ void GameFieldWidget::Init()
 	_targetY = Render::device.CreateRenderTarget(1024, 1024);
 	_blurShaderX = Core::resourceManager.Get<Render::ShaderProgram>("blurX");
 	_blurShaderY = Core::resourceManager.Get<Render::ShaderProgram>("blurY");
-	_blurShaderX->SetUniform("step", 3);
-	_blurShaderY->SetUniform("step", 3);
 } 
 
 void GameFieldWidget::Draw()
 {
-	if (_gui->getState() == Interface::State::TAP_TO_PLAY) {
+	if (_gui->getState() != Interface::State::PLAY) {
 		Render::device.BeginRenderTo(_targetX);
 		_bkg->Draw();
 		for (int i = 0; i < (int)_clouds.size(); i++) {
 			_clouds[i]->draw();
 		}
+		_effCont.Draw();
+		if (_gui->getState() == Interface::State::IS_OVER) {
+			for (int i = 0; i < (int)_enemies.size(); i++) {
+				_enemies[i]->draw();
+			}
+		}
 		_tank->draw();
-		//_gui->draw();
 		Render::device.EndRenderTo();
 		Render::device.BeginRenderTo(_targetY);
 		_blurShaderX->Bind();
@@ -71,15 +74,6 @@ void GameFieldWidget::Draw()
 		_targetY->Draw(FPoint(0.0, 0.0));
 		_blurShaderY->Unbind();
 		_gui->draw();
-		
-		/*for (int i = 0; i < (int)_clouds.size(); i++) {
-			_clouds[i]->draw();
-		}*/
-		//_tank->draw();
-		//_gui->draw();
-
-		//
-		//
 	}
 	else {
 
@@ -106,7 +100,7 @@ void GameFieldWidget::Update(float dt)
 	}
 	_gui->update(dt);
 	_tank->update(dt, _enemies);
-	if (_gui->getState() == Interface::State::PLAY) {
+	//if (_gui->getState() == Interface::State::PLAY) {
 		for (int i = 0; i < (int)_enemies.size(); i++) {
 			_enemies[i]->update(dt);
 		}
@@ -125,7 +119,7 @@ void GameFieldWidget::Update(float dt)
 			Message msg = Message(Message("Interface", "RocketsIsOver"));
 			AcceptMessage(msg);
 		}
-	}
+	//}
 }
 
 bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)
@@ -181,12 +175,6 @@ void GameFieldWidget::KeyPressed(int keyCode)
 	}
 	else if (keyCode == VK_RIGHT || keyCode == VK_D) {
 		_tank->moveRight();
-	}
-	else if (keyCode == VK_ESCAPE) {
-		_gui->setState(Interface::State::IS_OVER);
-	}
-	else if (keyCode == VK_1) {
-		_gui->setState(Interface::State::TAP_TO_PLAY);
 	}
 }
 
