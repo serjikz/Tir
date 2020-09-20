@@ -11,8 +11,8 @@ void main(void)
 
 	for(int i = 0; i < 7; i++) { 
 		// due to target size.y = 1024
-		if (ty.y > 0.75) {
-			ty.y = 0.75;
+		if (ty.y > 0.748) {
+			ty.y = 0.748;
 		}
 		sum += texture2D(sampler, ty).rgb;		
 		ty += dy;
