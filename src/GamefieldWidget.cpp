@@ -52,28 +52,7 @@ void GameFieldWidget::Init()
 void GameFieldWidget::Draw()
 {
 	if (_gui->getState() != Interface::State::PLAY) {
-		Render::device.BeginRenderTo(_targetX);
-		_bkg->Draw();
-		for (int i = 0; i < (int)_clouds.size(); i++) {
-			_clouds[i]->draw();
-		}
-		_effCont.Draw();
-		if (_gui->getState() == Interface::State::IS_OVER) {
-			for (int i = 0; i < (int)_enemies.size(); i++) {
-				_enemies[i]->draw();
-			}
-		}
-		_tank->draw();
-		Render::device.EndRenderTo();
-		Render::device.BeginRenderTo(_targetY);
-		_blurShaderX->Bind();
-		_targetX->Draw(FPoint(0.0, 0.0));
-		_blurShaderX->Unbind();
-		Render::device.EndRenderTo();
-		_blurShaderY->Bind();
-		_targetY->Draw(FPoint(0.0, 0.0));
-		_blurShaderY->Unbind();
-		_gui->draw();
+		drawWithBlur();
 	}
 	else {
 
@@ -90,6 +69,30 @@ void GameFieldWidget::Draw()
 		_tank->draw();
 		_gui->draw();
 	}
+}
+void GameFieldWidget::drawWithBlur() {
+	Render::device.BeginRenderTo(_targetX);
+	_bkg->Draw();
+	for (int i = 0; i < (int)_clouds.size(); i++) {
+		_clouds[i]->draw();
+	}
+	_effCont.Draw();
+	if (_gui->getState() == Interface::State::IS_OVER) {
+		for (int i = 0; i < (int)_enemies.size(); i++) {
+			_enemies[i]->draw();
+		}
+	}
+	_tank->draw();
+	Render::device.EndRenderTo();
+	Render::device.BeginRenderTo(_targetY);
+	_blurShaderX->Bind();
+	_targetX->Draw(FPoint(0.0, 0.0));
+	_blurShaderX->Unbind();
+	Render::device.EndRenderTo();
+	_blurShaderY->Bind();
+	_targetY->Draw(FPoint(0.0, 0.0));
+	_blurShaderY->Unbind();
+	_gui->draw();
 }
 
 void GameFieldWidget::Update(float dt)
