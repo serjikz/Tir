@@ -4,7 +4,7 @@ attribute vec2 a_texcoord;
 uniform mat4 u_modelview;
 varying vec4 v_color;
 varying vec2 v_texcoord;
-
+uniform float t;
 void main(void)
 {
 	v_color = a_color;

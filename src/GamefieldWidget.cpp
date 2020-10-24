@@ -47,6 +47,7 @@ void GameFieldWidget::Init()
 	_targetY = Render::device.CreateRenderTarget(1024, 1024);
 	_blurShaderX = Core::resourceManager.Get<Render::ShaderProgram>("blurX");
 	_blurShaderY = Core::resourceManager.Get<Render::ShaderProgram>("blurY");
+	
 } 
 
 void GameFieldWidget::Draw()
@@ -71,7 +72,21 @@ void GameFieldWidget::Draw()
 	}
 }
 void GameFieldWidget::drawWithBlur() {
-	Render::device.BeginRenderTo(_targetX);
+	
+	_blurShaderX->Bind();
+	_blurShaderX->SetUniform("t", _timer);
+	_blurShaderX->SetUniform("u_resolution", (float) 1024, (float) 768);
+	_bkg->Draw();
+	//if (_gui->getState() == Interface::State::IS_OVER) {
+
+		for (int i = 0; i < (int)_enemies.size(); i++) {
+			
+			//_enemies[i]->draw();
+		}
+	//}
+	_blurShaderX->Unbind();
+
+	/*Render::device.BeginRenderTo(_targetX);
 	_bkg->Draw();
 	for (int i = 0; i < (int)_clouds.size(); i++) {
 		_clouds[i]->draw();
@@ -92,7 +107,7 @@ void GameFieldWidget::drawWithBlur() {
 	_blurShaderY->Bind();
 	_targetY->Draw(FPoint(0.0, 0.0));
 	_blurShaderY->Unbind();
-	_gui->draw();
+	_gui->draw();*/
 }
 
 void GameFieldWidget::Update(float dt)
@@ -122,7 +137,12 @@ void GameFieldWidget::Update(float dt)
 			Message msg = Message(Message("Interface", "RocketsIsOver"));
 			AcceptMessage(msg);
 		}
-	//}
+
+		_timer += dt;
+		if (_timer > 2.f * math::PI) {
+			//_timer = 0.f;
+		}
+		//}
 }
 
 bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)
