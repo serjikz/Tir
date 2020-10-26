@@ -19,9 +19,6 @@
     <Filter Include="XML">
       <UniqueIdentifier>{582ad4ec-2022-4b82-bb37-74eeac449897}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Panels">
-      <UniqueIdentifier>{84e64bff-e05c-4676-9cbb-242148cff089}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Tank">
       <UniqueIdentifier>{6d7dc987-88b1-4987-9c28-e0f295bb415a}</UniqueIdentifier>
     </Filter>
@@ -30,6 +27,27 @@
     </Filter>
     <Filter Include="Shaders">
       <UniqueIdentifier>{32323f12-2c84-4282-a5ef-b3eb735be82c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interface\Interface objects">
+      <UniqueIdentifier>{32dd9e12-1622-4237-ba87-a52beecd1cd2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interface\Interface objects\Button">
+      <UniqueIdentifier>{4424caef-bbab-493b-a64f-d7b54597af1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Background">
+      <UniqueIdentifier>{5b3f251f-7b35-4034-8f42-2cc8451c90cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Background\Clouds">
+      <UniqueIdentifier>{f4f1ed47-7b10-494b-86ef-b0d6f894645a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Background\Picture">
+      <UniqueIdentifier>{1c3715a1-f968-4bd2-a506-ac80638f699b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interface\Interface objects\Panels">
+      <UniqueIdentifier>{84e64bff-e05c-4676-9cbb-242148cff089}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interface\Interface objects\Text">
+      <UniqueIdentifier>{f04cc0a6-827a-4a39-aab6-0942b2b5b065}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,16 +67,16 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\ArrowHintPanel.cpp">
-      <Filter>Source Files\Panels</Filter>
+      <Filter>Source Files\Interface\Interface objects\Panels</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Panel.cpp">
-      <Filter>Source Files\Panels</Filter>
+      <Filter>Source Files\Interface\Interface objects\Panels</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\ScorePanel.cpp">
-      <Filter>Source Files\Panels</Filter>
+      <Filter>Source Files\Interface\Interface objects\Panels</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\TimePanel.cpp">
-      <Filter>Source Files\Panels</Filter>
+      <Filter>Source Files\Interface\Interface objects\Panels</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Missile.cpp">
       <Filter>Source Files\Tank</Filter>
@@ -72,17 +90,8 @@
     <ClCompile Include="..\..\src\Dirt.cpp">
       <Filter>Source Files\Tank</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Button.cpp">
-      <Filter>Source Files\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Cloud.cpp">
-      <Filter>Source Files\Interface</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\Cannon.cpp">
       <Filter>Source Files\Tank</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\TextAnimated.cpp">
-      <Filter>Source Files\Interface</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\Interface.cpp">
       <Filter>Source Files\Interface</Filter>
@@ -94,7 +103,25 @@
       <Filter>Source Files\Tank</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\MissilesPanel.cpp">
-      <Filter>Source Files\Panels</Filter>
+      <Filter>Source Files\Interface\Interface objects\Panels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Button.cpp">
+      <Filter>Source Files\Interface\Interface objects\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Cloud.cpp">
+      <Filter>Source Files\Background\Clouds</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TextAnimated.cpp">
+      <Filter>Source Files\Interface\Interface objects\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\BackgroundPicture.cpp">
+      <Filter>Source Files\Background\Picture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\BkgObjectCreator.cpp">
+      <Filter>Source Files\Background</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\BkgConcreteCreators.cpp">
+      <Filter>Source Files\Background</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -111,16 +138,16 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\ArrowHintPanel.h">
-      <Filter>Source Files\Panels</Filter>
+      <Filter>Source Files\Interface\Interface objects\Panels</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\Panel.h">
-      <Filter>Source Files\Panels</Filter>
+      <Filter>Source Files\Interface\Interface objects\Panels</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\ScorePanel.h">
-      <Filter>Source Files\Panels</Filter>
+      <Filter>Source Files\Interface\Interface objects\Panels</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\TimePanel.h">
-      <Filter>Source Files\Panels</Filter>
+      <Filter>Source Files\Interface\Interface objects\Panels</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\Missile.h">
       <Filter>Source Files\Tank</Filter>
@@ -134,17 +161,8 @@
     <ClInclude Include="..\..\src\Dirt.h">
       <Filter>Source Files\Tank</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\Button.h">
-      <Filter>Source Files\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\Cloud.h">
-      <Filter>Source Files\Interface</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\Cannon.h">
       <Filter>Source Files\Tank</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\TextAnimated.h">
-      <Filter>Source Files\Interface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\Interface.h">
       <Filter>Source Files\Interface</Filter>
@@ -156,7 +174,31 @@
       <Filter>Source Files\Tank</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\MissilesPanel.h">
-      <Filter>Source Files\Panels</Filter>
+      <Filter>Source Files\Interface\Interface objects\Panels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Button.h">
+      <Filter>Source Files\Interface\Interface objects\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Cloud.h">
+      <Filter>Source Files\Background\Clouds</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TextAnimated.h">
+      <Filter>Source Files\Interface\Interface objects\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\InterfaceObject.h">
+      <Filter>Source Files\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\BkgObject.h">
+      <Filter>Source Files\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\BackgroundPicture.h">
+      <Filter>Source Files\Background\Picture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\BkgObjectCreator.h">
+      <Filter>Source Files\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\BkgConcreteCreators.h">
+      <Filter>Source Files\Background</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

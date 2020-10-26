@@ -2,9 +2,7 @@
 #include "TextAnimated.h"
 
 TextAnimated::TextAnimated(const std::string& text, int x, int y)
-	:_x(x),
-	_y(y),
-	_text(text),
+	:_text(text),
 	_scale(1.f),
 	_t(0.f),
 	_alpha(1.f),

@@ -1,11 +1,11 @@
 #pragma once
+#include "InterfaceObject.h"
 
-class Button
+class Button : public InterfaceObject
 {
 protected:	
 	const float DELTA_SCALE = 0.05f;
 	Render::Texture* _tex;
-	short int _x, _y;
 	float _scale;
 	float _t;
 	float _speed;

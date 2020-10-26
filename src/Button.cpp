@@ -2,9 +2,7 @@
 #include "Button.h"
 
 Button::Button(rapidxml::xml_node<>* settings)
-	: _x(0),
-	  _y(0),
-	_t(0.f),
+	: _t(0.f),
 	_state(State::NORMAL),
 	_scale(1.f)
 {

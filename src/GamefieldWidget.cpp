@@ -11,25 +11,37 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 	, _targetX(0)
 	, _targetY(0)
 {
-	Init();
-}
 
-void GameFieldWidget::Init()
-{
+
 	_bkg = Core::resourceManager.Get<Render::Texture>("Background");
 	_curTex = 0;
 	_angle = 0;
 	Xml::RapidXmlDocument settingsXml("Settings.xml");
 	rapidxml::xml_node<>* root = settingsXml.first_node();
 	_tank = Tank::HardPrt(new Tank(root));
-	rapidxml::xml_node<>* cloud = root->first_node("Clouds")->first_node("Cloud");
-	while (cloud) {
-		_clouds.push_back(Cloud::HardPtr(new Cloud(cloud)));
-		cloud = cloud->next_sibling();
-	}
 	createNewEnemies();
 	_gui = Interface::HardPtr(new Interface(root->first_node("GUI")));
 	_gui->setState(Interface::State::TAP_TO_PLAY);
+	
+
+	BkgObjectCreator::HardPtr _bkgCreator = BackgroundPictureCreator::HardPtr(new BackgroundPictureCreator());
+	_backGround.push_back(_bkgCreator->getObject());
+	
+	rapidxml::xml_node<>* cloud = root->first_node("Clouds")->first_node("Cloud");
+	while (cloud) {
+		//_clouds.push_back(Cloud::HardPtr(new Cloud(cloud)));
+		_bkgCreator = CloudCreator::HardPtr(new CloudCreator(cloud));
+		_backGround.push_back(_bkgCreator->getObject());
+		cloud = cloud->next_sibling();
+	}
+	
+	Init();
+}
+
+void GameFieldWidget::Init()
+{
+	
+	
 	std::string params;
 	std::ifstream in("input.txt");
 	std::string paramToFound = "Speed=";
@@ -56,10 +68,18 @@ void GameFieldWidget::Draw()
 	}
 	else {
 
-		_bkg->Draw();
+		/*for (size_t i = 0; i < _backGround.size(); i++) {
+			_backGround[i]->draw();
+		}*/
+
+		for (const auto& bkgObj : _backGround) {
+			bkgObj->draw();
+		}
+
+		/*_bkg->Draw();
 		for (int i = 0; i < (int)_clouds.size(); i++) {
 			_clouds[i]->draw();
-		}
+		}*/
 		_effCont.Draw();
 		if (_gui->getState() == Interface::State::PLAY) {
 			for (int i = 0; i < (int)_enemies.size(); i++) {
@@ -98,8 +118,8 @@ void GameFieldWidget::drawWithBlur() {
 void GameFieldWidget::Update(float dt)
 {
 	_effCont.Update(dt);
-	for (int i = 0; i < (int)_clouds.size(); i++) {
-		_clouds[i]->update(dt);
+	for (const auto& bkgObj : _backGround) {
+		bkgObj->update(dt);
 	}
 	_gui->update(dt);
 	_tank->update(dt, _enemies);

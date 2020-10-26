@@ -3,6 +3,7 @@
 #include "Cloud.h"
 #include "Enemy.h"
 #include "Interface.h"
+#include "BkgObjectCreator.h"
 ///
 /// Виджет - основной визуальный элемент на экране.
 /// Он отрисовывает себя, а также может содержать другие виджеты.
@@ -30,6 +31,7 @@ private:
 	void Init();
 	void createNewEnemies();
 	void drawWithBlur();
+	std::vector<BkgObject::HardPtr> _backGround;
 public:
 	GameFieldWidget(const std::string& name, rapidxml::xml_node<>* elem);
 	void Draw() override;

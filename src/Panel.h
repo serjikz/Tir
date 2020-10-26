@@ -1,12 +1,12 @@
 #pragma once
+#include "InterfaceObject.h"
 
-class Panel
+class Panel : public InterfaceObject
 {
 protected:	
 	const float EPS = 0.01f;
 	Render::Texture* _tex;
 	FPoint _textureCenter;
-	short int _x, _y;
 	float _splineVal;
 	float _t;
 	float _speed;

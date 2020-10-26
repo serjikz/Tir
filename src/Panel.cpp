@@ -2,9 +2,7 @@
 #include "Panel.h"
 
 Panel::Panel(rapidxml::xml_node<>* settings)
-	: _x(0),
-	  _y(0),
-	_t(0.f),
+	: _t(0.f),
 	_direction(1.f),
 	_state(State::HIDEN)
 {
