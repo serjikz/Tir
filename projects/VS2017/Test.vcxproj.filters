@@ -49,6 +49,12 @@
     <Filter Include="Source Files\Interface\Interface objects\Text">
       <UniqueIdentifier>{f04cc0a6-827a-4a39-aab6-0942b2b5b065}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Background\Factory method">
+      <UniqueIdentifier>{b77f2cf1-c595-44f5-925d-5a455886ea1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interface\Factory method">
+      <UniqueIdentifier>{875d1014-e34b-4ef5-903e-fde40ef95d55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Main.cpp">
@@ -179,20 +185,26 @@
     <ClInclude Include="..\..\src\TextAnimated.h">
       <Filter>Source Files\Interface\Interface objects\Text</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\InterfaceObject.h">
-      <Filter>Source Files\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\BkgObject.h">
-      <Filter>Source Files\Background</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\BackgroundPicture.h">
       <Filter>Source Files\Background\Picture</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\BkgObjectCreator.h">
-      <Filter>Source Files\Background</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\BkgConcreteCreators.h">
-      <Filter>Source Files\Background</Filter>
+      <Filter>Source Files\Background\Factory method</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\BkgObject.h">
+      <Filter>Source Files\Background\Factory method</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\BkgObjectCreator.h">
+      <Filter>Source Files\Background\Factory method</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\InterfaceObject.h">
+      <Filter>Source Files\Interface\Factory method</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\InterfaceObjectCreator.h">
+      <Filter>Source Files\Interface\Factory method</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\InterfaceConcreteCreators.h">
+      <Filter>Source Files\Interface\Factory method</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

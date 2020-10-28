@@ -1,20 +1,19 @@
 #pragma once
-#include "BkgObjectCreator.h"
-#include "BackgroundPicture.h"
-#include "Cloud.h"
+#include "InterfaceObjectCreator.h"
+#include "Panel.h"
 
-class PanelCreator : public ObjectCreator
+class PanelCreator : public InterfaceObjectCreator
 {
 private:
 	rapidxml::xml_node<>* _settings;
 	
 protected:
-	virtual BkgObject::HardPtr createObject() {
-		return BkgObject::HardPtr(new Cloud(_settings));
+	virtual InterfaceObject::HardPtr createObject() {
+		return InterfaceObject::HardPtr(new Panel(_settings));
 	}
 public:
-	CloudCreator(rapidxml::xml_node<>* settings) 
+	PanelCreator(rapidxml::xml_node<>* settings)
 		: _settings(settings)
 	{};
-	typedef boost::shared_ptr<CloudCreator> HardPtr;
+	typedef boost::shared_ptr<PanelCreator> HardPtr;
 };

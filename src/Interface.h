@@ -5,7 +5,7 @@
 #include "TextAnimated.h"
 #include "ArrowHintPanel.h"
 #include "MissilesPanel.h"
-#include "BkgConcreteCreators.h"
+#include "InterfaceConcreteCreators.h"
 
 class Interface
 {

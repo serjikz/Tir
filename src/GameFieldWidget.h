@@ -3,7 +3,7 @@
 #include "Cloud.h"
 #include "Enemy.h"
 #include "Interface.h"
-#include "BkgObjectCreator.h"
+#include "BkgConcreteCreators.h"
 ///
 /// Виджет - основной визуальный элемент на экране.
 /// Он отрисовывает себя, а также может содержать другие виджеты.
