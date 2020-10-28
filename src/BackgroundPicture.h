@@ -12,8 +12,4 @@ public:
 	virtual void draw() {
 		_tex->Draw();
 	}
-
-	virtual void update(float dt) {
-		
-	}
 };

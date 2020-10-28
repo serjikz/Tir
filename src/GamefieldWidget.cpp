@@ -3,19 +3,12 @@
 
 GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* elem)
 	: Widget(name)
-	, _curTex(0)
 	, _timer(0)
-	, _angle(0)
 	, _scale(0.f)
 	, _enemiesToHit(0)
 	, _targetX(0)
 	, _targetY(0)
 {
-
-
-	_bkg = Core::resourceManager.Get<Render::Texture>("Background");
-	_curTex = 0;
-	_angle = 0;
 	Xml::RapidXmlDocument settingsXml("Settings.xml");
 	rapidxml::xml_node<>* root = settingsXml.first_node();
 	_tank = Tank::HardPrt(new Tank(root));
@@ -24,24 +17,24 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 	_gui->setState(Interface::State::TAP_TO_PLAY);
 	
 
-	BkgObjectCreator::HardPtr _bkgCreator = BackgroundPictureCreator::HardPtr(new BackgroundPictureCreator());
-	_backGround.push_back(_bkgCreator->getObject());
+	BkgObjectCreator::HardPtr bkgCreator = BackgroundPictureCreator::HardPtr(new BackgroundPictureCreator());
+	_backGround.push_back(bkgCreator->getObject());
 	
 	rapidxml::xml_node<>* cloud = root->first_node("Clouds")->first_node("Cloud");
 	while (cloud) {
-		//_clouds.push_back(Cloud::HardPtr(new Cloud(cloud)));
-		_bkgCreator = CloudCreator::HardPtr(new CloudCreator(cloud));
-		_backGround.push_back(_bkgCreator->getObject());
+		bkgCreator = CloudCreator::HardPtr(new CloudCreator(cloud));
+		_backGround.push_back(bkgCreator->getObject());
 		cloud = cloud->next_sibling();
 	}
-	
+	_targetX = Render::device.CreateRenderTarget(1024, 1024);
+	_targetY = Render::device.CreateRenderTarget(1024, 1024);
+	_blurShaderX = Core::resourceManager.Get<Render::ShaderProgram>("blurX");
+	_blurShaderY = Core::resourceManager.Get<Render::ShaderProgram>("blurY");
 	Init();
 }
 
 void GameFieldWidget::Init()
 {
-	
-	
 	std::string params;
 	std::ifstream in("input.txt");
 	std::string paramToFound = "Speed=";
@@ -55,10 +48,6 @@ void GameFieldWidget::Init()
 		}		
 	}
 	in.close();
-	_targetX = Render::device.CreateRenderTarget(1024, 1024);
-	_targetY = Render::device.CreateRenderTarget(1024, 1024);
-	_blurShaderX = Core::resourceManager.Get<Render::ShaderProgram>("blurX");
-	_blurShaderY = Core::resourceManager.Get<Render::ShaderProgram>("blurY");
 } 
 
 void GameFieldWidget::Draw()
@@ -67,20 +56,9 @@ void GameFieldWidget::Draw()
 		drawWithBlur();
 	}
 	else {
-
-		/*for (size_t i = 0; i < _backGround.size(); i++) {
-			_backGround[i]->draw();
-		}*/
-
 		for (const auto& bkgObj : _backGround) {
 			bkgObj->draw();
 		}
-
-		/*_bkg->Draw();
-		for (int i = 0; i < (int)_clouds.size(); i++) {
-			_clouds[i]->draw();
-		}*/
-		_effCont.Draw();
 		if (_gui->getState() == Interface::State::PLAY) {
 			for (int i = 0; i < (int)_enemies.size(); i++) {
 				_enemies[i]->draw();
@@ -92,11 +70,9 @@ void GameFieldWidget::Draw()
 }
 void GameFieldWidget::drawWithBlur() {
 	Render::device.BeginRenderTo(_targetX);
-	_bkg->Draw();
-	for (int i = 0; i < (int)_clouds.size(); i++) {
-		_clouds[i]->draw();
+	for (const auto& bkgObj : _backGround) {
+		bkgObj->draw();
 	}
-	_effCont.Draw();
 	if (_gui->getState() == Interface::State::IS_OVER) {
 		for (int i = 0; i < (int)_enemies.size(); i++) {
 			_enemies[i]->draw();
@@ -117,32 +93,31 @@ void GameFieldWidget::drawWithBlur() {
 
 void GameFieldWidget::Update(float dt)
 {
-	_effCont.Update(dt);
 	for (const auto& bkgObj : _backGround) {
 		bkgObj->update(dt);
 	}
 	_gui->update(dt);
 	_tank->update(dt, _enemies);
-	//if (_gui->getState() == Interface::State::PLAY) {
-		for (int i = 0; i < (int)_enemies.size(); i++) {
-			_enemies[i]->update(dt);
-		}
-		if ((int)_enemies.size() == 0 && _gui->getTime() > 0) {
-			Message msg = Message("Interface", "Victory");
-			AcceptMessage(msg);
-			return;
-		}
-		for (int i = 0; i < (int)_enemies.size(); i++) {
-			for (int j = i + 1; j < (int)_enemies.size(); j++) {
-				if (_enemies[i]->isIntersect(_enemies[j])) {
-					_enemies[i]->bounceWith(_enemies[j]);
-				}
+
+	for (int i = 0; i < (int)_enemies.size(); i++) {
+		_enemies[i]->update(dt);
+	}
+	if ((int)_enemies.size() == 0 && _gui->getTime() > 0) {
+		Message msg = Message("Interface", "Victory");
+		AcceptMessage(msg);
+		return;
+	}
+	for (int i = 0; i < (int)_enemies.size(); i++) {
+		for (int j = i + 1; j < (int)_enemies.size(); j++) {
+			if (_enemies[i]->isIntersect(_enemies[j])) {
+				_enemies[i]->bounceWith(_enemies[j]);
 			}
-		} if (_tank->isAllRocketsExploaded()) {
-			Message msg = Message(Message("Interface", "RocketsIsOver"));
-			AcceptMessage(msg);
 		}
-	//}
+	} 
+	if (_tank->isAllRocketsExploaded()) {
+		Message msg = Message(Message("Interface", "RocketsIsOver"));
+		AcceptMessage(msg);
+	}
 }
 
 bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)

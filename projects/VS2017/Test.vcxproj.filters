@@ -117,12 +117,6 @@
     <ClCompile Include="..\..\src\BackgroundPicture.cpp">
       <Filter>Source Files\Background\Picture</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\BkgObjectCreator.cpp">
-      <Filter>Source Files\Background</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\BkgConcreteCreators.cpp">
-      <Filter>Source Files\Background</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\stdafx.h">

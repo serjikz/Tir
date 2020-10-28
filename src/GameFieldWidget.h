@@ -15,13 +15,8 @@ private:
 	const int MAX_ENEMIES_COUNT = 50;
 	Interface::HardPtr _gui;
 	Tank::HardPrt _tank;
-	std::vector<Cloud::HardPtr> _clouds;
 	float _timer;
 	float _scale;
-	float _angle;
-	int _curTex;
-	Render::Texture* _bkg;
-	EffectsContainer _effCont;
 	std::vector <Enemy::HardPtr> _enemies;
 	int _enemiesToHit;
 	Render::Target* _targetX;
