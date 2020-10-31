@@ -14,7 +14,7 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 	_tank = Tank::HardPrt(new Tank(root));
 	createNewEnemies();
 	_gui = Interface::HardPtr(new Interface(root->first_node("GUI")));
-	_gui->setState(Interface::State::TAP_TO_PLAY);
+	_gui->setState(InterfaceState::TAP_TO_PLAY);
 	
 
 	BkgObjectCreator::HardPtr bkgCreator = BackgroundPictureCreator::HardPtr(new BackgroundPictureCreator());
@@ -52,14 +52,14 @@ void GameFieldWidget::Init()
 
 void GameFieldWidget::Draw()
 {
-	if (_gui->getState() != Interface::State::PLAY) {
+	if (_gui->getState() != InterfaceState::PLAY) {
 		drawWithBlur();
 	}
 	else {
 		for (const auto& bkgObj : _backGround) {
 			bkgObj->draw();
 		}
-		if (_gui->getState() == Interface::State::PLAY) {
+		if (_gui->getState() == InterfaceState::PLAY) {
 			for (int i = 0; i < (int)_enemies.size(); i++) {
 				_enemies[i]->draw();
 			}
@@ -73,7 +73,7 @@ void GameFieldWidget::drawWithBlur() {
 	for (const auto& bkgObj : _backGround) {
 		bkgObj->draw();
 	}
-	if (_gui->getState() == Interface::State::IS_OVER) {
+	if (_gui->getState() == InterfaceState::IS_OVER) {
 		for (int i = 0; i < (int)_enemies.size(); i++) {
 			_enemies[i]->draw();
 		}
@@ -123,16 +123,16 @@ void GameFieldWidget::Update(float dt)
 bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)
 {
 	switch (_gui->getState()) {
-	case Interface::State::TAP_TO_PLAY:
-		_gui->setState(Interface::State::PLAY);
+	case InterfaceState::TAP_TO_PLAY:
+		_gui->setState(InterfaceState::PLAY);
 		break;
-	case Interface::State::PLAY:
+	case InterfaceState::PLAY:
 		if (mouse_pos.y > MIN_Y_SHOT) {
 			_tank->shot();
 			_gui->decreaseRockets();
 		}
 		break;
-	case Interface::State::IS_OVER:
+	case InterfaceState::IS_OVER:
 		_gui->mouseDown(mouse_pos);
 		break;
 	}
@@ -140,7 +140,7 @@ bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)
 }
 
 void GameFieldWidget::MouseMove(const IPoint &mouse_pos) {
-	if (_gui->getState() == Interface::State::IS_OVER) {
+	if (_gui->getState() == InterfaceState::IS_OVER) {
 		_gui->mouseMove(mouse_pos);
 	}
 }
@@ -148,20 +148,20 @@ void GameFieldWidget::MouseMove(const IPoint &mouse_pos) {
 void GameFieldWidget::AcceptMessage(const Message& message)
 {
 	if (message.is("Interface", "TimeIsOver")) {
-		_gui->setState(Interface::State::IS_OVER);
+		_gui->setState(InterfaceState::IS_OVER);
 		_gui->setStatisticsMsg("TIME IS OVER!\n\n\nTargets left to hit:\n" +
 			std::to_string((int) _enemies.size()) + "/" + std::to_string(_enemiesToHit));
 	} if (message.is("Interface", "RocketsIsOver")) {
-		_gui->setState(Interface::State::IS_OVER);
+		_gui->setState(InterfaceState::IS_OVER);
 		_gui->setStatisticsMsg("Rockets is over!\n\n\nTargets left to hit:\n" +
 			std::to_string((int)_enemies.size()) + "/" + std::to_string(_enemiesToHit));
 	}
 	else if (message.is("Interface", "SetStateTapToPlay")) {
-		_gui->setState(Interface::State::TAP_TO_PLAY);
+		_gui->setState(InterfaceState::TAP_TO_PLAY);
 		createNewEnemies();
 	}
 	else if (message.is("Interface", "Victory")) {
-		_gui->setState(Interface::State::IS_OVER);
+		_gui->setState(InterfaceState::IS_OVER);
 		_gui->setStatisticsMsg("CONGRATULATIONS!\n\nYou win!\n\nAll targets defeated");
 	}
 }

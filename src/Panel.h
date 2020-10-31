@@ -10,18 +10,13 @@ protected:
 	float _splineVal;
 	float _t;
 	float _speed;
-	float _direction;
+	
 	TimedSpline<float> _spline;
 public:
-	enum class State {
-		HIDEN,
-		NORMAL,
-		APEARENCE,
-		DISSAPEARENCE
-	} _state;
 	Panel(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Panel> HardPtr;
 	virtual void draw();
 	virtual void update(float dt);
-	virtual void setState(Panel::State newState);
+	virtual void setState(InterfaceState newState) {};
+	virtual void setState(InterfaceObject::State newState);
 };

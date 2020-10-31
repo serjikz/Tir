@@ -52,9 +52,11 @@ void ArrowHintPanel::update(float dt) {
 	}
 }
 
-void ArrowHintPanel::setState(Panel::State newState) {
-	Panel::setState(newState);
-	if (newState == State::APEARENCE) {
+void ArrowHintPanel::setState(InterfaceState newState) {
+	if (newState == InterfaceState::PLAY) {
+		Panel::setState(State::APEARENCE);
+	} else if (newState == InterfaceState::TAP_TO_PLAY) {
+		Panel::setState(State::DISSAPEARENCE);
 		_t = 0.f;
 	}
 }

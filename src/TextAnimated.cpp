@@ -5,9 +5,8 @@ TextAnimated::TextAnimated(const std::string& text, int x, int y)
 	:_text(text),
 	_scale(1.f),
 	_t(0.f),
-	_alpha(1.f),
-	_state(State::APEARENCE)
-{
+	_alpha(1.f)
+	{
 }
 
 void TextAnimated::draw() {
@@ -30,16 +29,16 @@ void TextAnimated::update(float dt) {
 		_t = 0.f;
 	}
 	_scale = 1.f + DELTA_SCALE * sinf(_t);
-	_alpha = math::clamp(0.f, 1.f, _alpha + _multiplier * dt);
+	_alpha = math::clamp(0.f, 1.f, _alpha + _direction * dt);
 }
 
-void TextAnimated::setState(TextAnimated::State newState) {
-	_state = newState;
-	if (_state == State::DISSAPEARENCE) {
-		_multiplier = -1.f;
-	}
-	else if (_state == State::APEARENCE) {
-		_multiplier = 1.f;
+void TextAnimated::setState(InterfaceState newState){
+	if (newState == InterfaceState::PLAY) {
+		_state = State::DISSAPEARENCE;
+		_direction = -1.f;
+	}else if (newState == InterfaceState::TAP_TO_PLAY) {
+		_state = State::APEARENCE;
+		_direction = 1.f;
 		_t = 0.f;
 	}
 }

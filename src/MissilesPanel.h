@@ -16,7 +16,7 @@ public:
 	typedef boost::shared_ptr<MissilesPanel> HardPtr;
 	virtual void draw();
 	virtual void update(float dt);
-	virtual void setState(Panel::State newState);
+	virtual void setState(InterfaceState newState);
 	void decreaseRockets();
 	int getRocketsCount();
 };

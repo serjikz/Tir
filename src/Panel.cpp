@@ -2,9 +2,7 @@
 #include "Panel.h"
 
 Panel::Panel(rapidxml::xml_node<>* settings)
-	: _t(0.f),
-	_direction(1.f),
-	_state(State::HIDEN)
+	: _t(0.f)
 {
 	std::string textureID = Xml::GetStringAttributeOrDef(settings, "textureID", "");
 	_tex = Core::resourceManager.Get<Render::Texture>(textureID);
@@ -43,12 +41,12 @@ void Panel::update(float dt) {
 	}
 }
 
-void Panel::setState(Panel::State newState) {
+void Panel::setState(InterfaceObject::State newState) {
 	_state = newState;
-	if (newState == State::APEARENCE) {
+	if (newState == InterfaceObject::State::APEARENCE) {
 		_direction = 1.f;
 	}
-	else if (newState == State::DISSAPEARENCE) {
+	else if (newState == InterfaceObject::State::DISSAPEARENCE) {
 		_direction = -1.f;
 	}
 }

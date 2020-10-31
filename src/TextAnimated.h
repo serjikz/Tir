@@ -10,16 +10,11 @@ private:
 	float _scale;
 	float _t;
 	float _alpha;
-	float _multiplier;
 	std::string _text;	
 public:
-	enum class State {		
-		APEARENCE,
-		DISSAPEARENCE
-	} _state;
 	TextAnimated(const std::string& text, int x, int y);
 	typedef boost::shared_ptr<TextAnimated> HardPtr;
 	void draw();
 	void update(float dt);
-	void setState(TextAnimated::State newState);
+	virtual void setState(InterfaceState newState);
 };

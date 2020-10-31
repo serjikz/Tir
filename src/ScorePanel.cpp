@@ -15,7 +15,7 @@ ScorePanel::ScorePanel(rapidxml::xml_node<>* settings)
 	_backSideRect = IRect(x, y, scale * _textureCenter.x, scale * _textureCenter.y);
 	_textX = Xml::GetIntAttributeOrDef(settings, "textX", 0);
 	_textY = Xml::GetIntAttributeOrDef(settings, "textY", 0);
-	_restartButton = Button::HardPtr(new Button(settings->first_node("button")));
+	//_restartButton = Button::HardPtr(new Button(settings->first_node("button")));
 }
 
 
@@ -60,4 +60,13 @@ void ScorePanel::mouseMove(const IPoint& mouse_pos) {
 void ScorePanel::mouseDown(const IPoint& mouse_pos) {
 	IPoint shift = IPoint(_x - _textureCenter.x, _y - _textureCenter.y);
 	_restartButton->mouseDown(mouse_pos - shift);
+}
+
+void ScorePanel::setState(InterfaceState newState) {
+	if (newState == InterfaceState::IS_OVER) {
+		Panel::setState(Panel::State::APEARENCE);
+	}
+	else if (newState == InterfaceState::TAP_TO_PLAY) {
+		Panel::setState(Panel::State::DISSAPEARENCE);	
+	}
 }

@@ -58,13 +58,16 @@ void TimePanel::update(float dt) {
 	}
 }
 
-void TimePanel::setState(Panel::State newState) {
-	Panel::setState(newState);
-	if (newState == State::APEARENCE) {
-		_t0 = clock();
-	}
-}
-
 int TimePanel::getTime() {
 	return _timeAvailable;
+}
+
+void TimePanel::setState(InterfaceState newState) {
+	if (newState == InterfaceState::PLAY) {
+		Panel::setState(State::APEARENCE);
+		_t0 = clock();
+	}
+	else if (newState == InterfaceState::IS_OVER) {
+		Panel::setState(State::DISSAPEARENCE);
+	}
 }
