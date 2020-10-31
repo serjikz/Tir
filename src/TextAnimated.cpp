@@ -6,7 +6,9 @@ TextAnimated::TextAnimated(const std::string& text, int x, int y)
 	_scale(1.f),
 	_t(0.f),
 	_alpha(1.f)
-	{
+{
+	_x = x;
+	_y = y;
 }
 
 void TextAnimated::draw() {

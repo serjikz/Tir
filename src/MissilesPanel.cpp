@@ -51,8 +51,11 @@ void MissilesPanel::decreaseRockets() {
 }
 
 void MissilesPanel::setState(InterfaceState newState) {
-	Panel::setState(newState);
 	if (newState == InterfaceState::PLAY) {
 		_missiles = _missilesAvailable;
-	} 
+		Panel::setState(State::APEARENCE);
+	}
+	else if (newState == InterfaceState::IS_OVER) {
+		Panel::setState(State::DISSAPEARENCE);
+	}
 }
