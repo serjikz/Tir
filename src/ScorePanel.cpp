@@ -15,7 +15,7 @@ ScorePanel::ScorePanel(rapidxml::xml_node<>* settings)
 	_backSideRect = IRect(x, y, scale * _textureCenter.x, scale * _textureCenter.y);
 	_textX = Xml::GetIntAttributeOrDef(settings, "textX", 0);
 	_textY = Xml::GetIntAttributeOrDef(settings, "textY", 0);
-	//_restartButton = Button::HardPtr(new Button(settings->first_node("button")));
+	_restartButton = Button::HardPtr(new Button(settings->first_node("button")));
 }
 
 

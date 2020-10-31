@@ -10,6 +10,7 @@ protected:
 	float _t;
 	float _speed;
 	FPoint _textureCenter;
+
 public:
 	enum class State {
 		NORMAL,
@@ -22,4 +23,5 @@ public:
 	void mouseDown(const IPoint& mouse_pos);
 	void mouseMove(const IPoint& mouse_pos);
 	void setState(State newState);
+	virtual void setState(InterfaceState newState){};
 };

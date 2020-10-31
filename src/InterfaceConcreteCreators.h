@@ -1,6 +1,7 @@
 #pragma once
 #include "InterfaceObjectCreator.h"
 #include "Panel.h"
+#include "InterfaceObject.h"
 
 class PanelCreator : public InterfaceObjectCreator
 {

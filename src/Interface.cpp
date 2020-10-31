@@ -9,46 +9,29 @@
 
 Interface::Interface(rapidxml::xml_node<>* settings)
 {
-	InterfaceObjectCreator::HardPtr creator;
-	
 	rapidxml::xml_node<>* panel = settings->first_node("Panel");
-	//
 	_interfaceObjects.push_back(InterfaceObject::HardPtr(new MissilesPanel(panel)));
-	//_rocketsPanel = MissilesPanel::HardPtr(new MissilesPanel(panel));
 	panel = panel->next_sibling();
-	//_timePanel = TimePanel::HardPtr(new TimePanel(panel));
-	//
 	_interfaceObjects.push_back(InterfaceObject::HardPtr(new TimePanel(panel)));
 	panel = panel->next_sibling();
-	//_scorePanel = ScorePanel::HardPtr(new ScorePanel(panel));
-	//
 	_interfaceObjects.push_back(InterfaceObject::HardPtr(new ScorePanel(panel)));
 	panel = panel->next_sibling();
-	//_leftArrowHintPanel = ArrowHintPanel::HardPtr(new ArrowHintPanel(panel));
-	//
 	_interfaceObjects.push_back(InterfaceObject::HardPtr(new ArrowHintPanel(panel)));
 	panel = panel->next_sibling();
-//	_rightArrowHintPanel = ArrowHintPanel::HardPtr(new ArrowHintPanel(panel));
-	//
 	_interfaceObjects.push_back(InterfaceObject::HardPtr(new ArrowHintPanel(panel)));
-	//_tapToPlayText = TextAnimated::HardPtr(new TextAnimated("TAP TO PLAY", Render::device.Width() / 2, Render::device.Height() / 2));
-
-
-
-
+	_interfaceObjects.push_back(InterfaceObject::HardPtr(new TextAnimated("TAP TO PLAY", 
+								Render::device.Width() / 2, Render::device.Height() / 2)));
 
 	_state = InterfaceState::TAP_TO_PLAY;
 }
 
 void Interface::draw() {
-	//_tapToPlayText->draw();
 	for (const auto& intObj : _interfaceObjects) {
 		intObj->draw();
 	}
 }
 
 void Interface::update(float dt) {
-	//_tapToPlayText->update(dt);
 	for (const auto& intObj : _interfaceObjects) {
 		intObj->update(dt); 
 	}
