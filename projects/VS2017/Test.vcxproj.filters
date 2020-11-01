@@ -46,14 +46,14 @@
     <Filter Include="Source Files\Interface\Interface objects\Panels">
       <UniqueIdentifier>{84e64bff-e05c-4676-9cbb-242148cff089}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Interface\Interface objects\Text">
-      <UniqueIdentifier>{f04cc0a6-827a-4a39-aab6-0942b2b5b065}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Background\Factory method">
       <UniqueIdentifier>{b77f2cf1-c595-44f5-925d-5a455886ea1a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Interface\Factory method">
       <UniqueIdentifier>{875d1014-e34b-4ef5-903e-fde40ef95d55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Interface\Interface objects\TextAnimated">
+      <UniqueIdentifier>{39d04b71-d245-4455-90ee-b81146542e78}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,11 +117,11 @@
     <ClCompile Include="..\..\src\Cloud.cpp">
       <Filter>Source Files\Background\Clouds</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\TextAnimated.cpp">
-      <Filter>Source Files\Interface\Interface objects\Text</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\BackgroundPicture.cpp">
       <Filter>Source Files\Background\Picture</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\TextAnimated.cpp">
+      <Filter>Source Files\Interface\Interface objects\TextAnimated</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -182,9 +182,6 @@
     <ClInclude Include="..\..\src\Cloud.h">
       <Filter>Source Files\Background\Clouds</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\TextAnimated.h">
-      <Filter>Source Files\Interface\Interface objects\Text</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\BackgroundPicture.h">
       <Filter>Source Files\Background\Picture</Filter>
     </ClInclude>
@@ -205,6 +202,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\InterfaceConcreteCreators.h">
       <Filter>Source Files\Interface\Factory method</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\TextAnimated.h">
+      <Filter>Source Files\Interface\Interface objects\TextAnimated</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

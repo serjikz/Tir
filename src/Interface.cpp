@@ -9,19 +9,12 @@
 
 Interface::Interface(rapidxml::xml_node<>* settings)
 {
-	rapidxml::xml_node<>* panel = settings->first_node("Panel");
-	_interfaceObjects.push_back(InterfaceObject::HardPtr(new MissilesPanel(panel)));
-	panel = panel->next_sibling();
-	_interfaceObjects.push_back(InterfaceObject::HardPtr(new TimePanel(panel)));
-	panel = panel->next_sibling();
-	_interfaceObjects.push_back(InterfaceObject::HardPtr(new ScorePanel(panel)));
-	panel = panel->next_sibling();
-	_interfaceObjects.push_back(InterfaceObject::HardPtr(new ArrowHintPanel(panel)));
-	panel = panel->next_sibling();
-	_interfaceObjects.push_back(InterfaceObject::HardPtr(new ArrowHintPanel(panel)));
-	_interfaceObjects.push_back(InterfaceObject::HardPtr(new TextAnimated("TAP TO PLAY", 
-								Render::device.Width() / 2, Render::device.Height() / 2)));
-
+	rapidxml::xml_node<>* objSettings = settings->first_node("InterfaceObject");
+	InterfaceObjectCreator::HardPtr objCreator = InterfaceObjectCreator::HardPtr(new InterfaceObjectCreator());
+	while (objSettings) {
+		_interfaceObjects.push_back(objCreator->createObject(objSettings));
+		objSettings = objSettings->next_sibling();
+	}
 	_state = InterfaceState::TAP_TO_PLAY;
 }
 

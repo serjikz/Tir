@@ -3,17 +3,27 @@
 
 class InterfaceObjectCreator
 {
-private:
-	InterfaceObject::HardPtr _obj;
-protected:
-	virtual InterfaceObject::HardPtr createObject() = 0;
 public:
-	InterfaceObjectCreator() {};
-	InterfaceObject::HardPtr getObject() {
-		if (!_obj) {
-			_obj = createObject();
+	InterfaceObject::HardPtr createObject(rapidxml::xml_node<>* settings) {
+		std::string name = Xml::GetStringAttribute(settings, "name");
+		if (name == "missilesPanel") {
+			return InterfaceObject::HardPtr(new MissilesPanel(settings));
 		}
-		return _obj;
-	};
+		else if (name == "timePanel") {
+			return InterfaceObject::HardPtr(new TimePanel(settings));
+		}
+		else if (name == "scorePanel") {
+			return InterfaceObject::HardPtr(new ScorePanel(settings));
+		}
+		else if (name == "arrowHintPanel") {
+			return InterfaceObject::HardPtr(new ArrowHintPanel(settings));
+		}
+		else if (name == "textAnimated") {
+			return InterfaceObject::HardPtr(new TextAnimated(settings));
+		}
+		else {
+			assert(false);
+		}
+	}
 	typedef boost::shared_ptr<InterfaceObjectCreator> HardPtr;
 };

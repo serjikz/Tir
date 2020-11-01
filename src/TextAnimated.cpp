@@ -1,14 +1,16 @@
 #include "stdafx.h"
 #include "TextAnimated.h"
 
-TextAnimated::TextAnimated(const std::string& text, int x, int y)
-	:_text(text),
-	_scale(1.f),
-	_t(0.f),
+TextAnimated::TextAnimated(rapidxml::xml_node<>* settings)
+	:_scale(1.f),
 	_alpha(1.f)
 {
-	_x = x;
-	_y = y;
+	_t = 0.f;
+	_x = Xml::GetIntAttributeOrDef(settings, "x", 0);
+	_y = Xml::GetIntAttributeOrDef(settings, "y", 0);
+	_speed = Xml::GetFloatAttributeOrDef(settings, "speed", 0);
+	_deltaScale = Xml::GetFloatAttributeOrDef(settings, "deltaScale", 0);
+	_text = Xml::GetStringAttributeOrDef(settings, "text", "");
 }
 
 void TextAnimated::draw() {
@@ -26,11 +28,11 @@ void TextAnimated::draw() {
 }
 
 void TextAnimated::update(float dt) {
-	_t += SPEED * dt;
+	_t += _speed * dt;
 	if (_t > 2 * math::PI) {
 		_t = 0.f;
 	}
-	_scale = 1.f + DELTA_SCALE * sinf(_t);
+	_scale = 1.f + _deltaScale * sinf(_t);
 	_alpha = math::clamp(0.f, 1.f, _alpha + _direction * dt);
 }
 
