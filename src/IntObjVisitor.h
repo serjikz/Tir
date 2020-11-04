@@ -1,9 +1,11 @@
 #pragma once
+class ScorePanel;
+
 class InterfaceObjVisitor
 {
 
 public:
-	//virtual void visitScorePanel(ScorePanel::HardPtr panel) = 0;
+	virtual void visitScorePanel(ScorePanel* panel) = 0;
 	typedef boost::shared_ptr<InterfaceObjVisitor> HardPtr;
 };
 
@@ -15,7 +17,5 @@ public:
 		: _msg(msg)
 	{}
 
-	//virtual void visitScorePanel(ScorePanel::HardPtr panel) {
-	//	panel->setStatisticsMsg(_msg);
-	//}
+	virtual void visitScorePanel(ScorePanel* panel);
 };

@@ -72,5 +72,5 @@ void ScorePanel::setState(InterfaceState newState) {
 }
 
 void ScorePanel::acceptVisitor(InterfaceObjVisitor::HardPtr visitor) {
-//	visitor->visitScorePanel(this);
+	visitor->visitScorePanel(this);
 }

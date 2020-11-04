@@ -1,6 +1,5 @@
 #pragma once
-
-
+#include "IntObjVisitor.h"
 
 enum class InterfaceState {
 	TAP_TO_PLAY,

@@ -36,10 +36,10 @@ InterfaceState Interface::getState() {
 }
 
 void Interface::setStatisticsMsg(const std::string& msg) {
-	/*ScorePanelVisitor::HardPtr visitor = ScorePanelVisitor::HardPtr(new ScorePanelVisitor(msg));
+	ScorePanelVisitor::HardPtr visitor = ScorePanelVisitor::HardPtr(new ScorePanelVisitor(msg));
 	for (const auto& intObj : _interfaceObjects) {
 		intObj->acceptVisitor(visitor);
-	}*/
+	}
 }
 
 void Interface::mouseMove(const IPoint& mouse_pos) {

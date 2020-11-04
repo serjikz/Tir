@@ -126,6 +126,9 @@
     <ClCompile Include="..\..\src\TextAnimated.cpp">
       <Filter>Source Files\Interface\Interface objects\TextAnimated</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\IntObjVisitor.cpp">
+      <Filter>Source Files\Interface\Interface object visitor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\stdafx.h">
