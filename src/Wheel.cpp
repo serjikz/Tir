@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Wheel.h"
+
 
 Wheel::Wheel(rapidxml::xml_node<>* settings)
 	: _x(0),

@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "AppDelegate.h"
-#include "GameFieldWidget.h"
+
 
 enum {
 	WINDOW_WIDTH = 1024,

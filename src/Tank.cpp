@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Tank.h"
+
 
 Tank::Tank(rapidxml::xml_node<>* settings)
 	: _x(START_X),

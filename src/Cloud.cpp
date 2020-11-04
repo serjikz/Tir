@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Cloud.h"
+
 
 Cloud::Cloud(rapidxml::xml_node<>* settings)
 	: _scale(1.f),

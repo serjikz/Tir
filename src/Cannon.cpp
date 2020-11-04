@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Cannon.h"
+
 
 Cannon::Cannon(rapidxml::xml_node<>* settings)
 	: _x(0),

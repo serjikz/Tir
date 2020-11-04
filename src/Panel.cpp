@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Panel.h"
+
 
 Panel::Panel(rapidxml::xml_node<>* settings)
 	: _t(0.f)

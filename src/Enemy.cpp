@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Enemy.h"
+
 
 Enemy::Enemy(rapidxml::xml_node<>* settings)
 {	

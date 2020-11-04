@@ -1,5 +1,5 @@
 #pragma once
-#include "BkgObject.h"
+
 
 class BkgObjectCreator
 {

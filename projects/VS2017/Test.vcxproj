@@ -161,6 +161,7 @@
     <ClInclude Include="..\..\src\InterfaceConcreteCreators.h" />
     <ClInclude Include="..\..\src\InterfaceObject.h" />
     <ClInclude Include="..\..\src\InterfaceObjectCreator.h" />
+    <ClInclude Include="..\..\src\IntObjVisitor.h" />
     <ClInclude Include="..\..\src\Missile.h" />
     <ClInclude Include="..\..\src\MissileExplodeEff.h" />
     <ClInclude Include="..\..\src\Panel.h" />

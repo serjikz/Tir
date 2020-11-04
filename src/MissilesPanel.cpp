@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "MissilesPanel.h"
+
 
 MissilesPanel::MissilesPanel(rapidxml::xml_node<>* settings)
 	:Panel(settings),

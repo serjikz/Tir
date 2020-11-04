@@ -1,11 +1,5 @@
 #include "stdafx.h"
-#include "Interface.h"
-#include "ScorePanel.h"
-#include "TimePanel.h"
-#include "TextAnimated.h"
-#include "ArrowHintPanel.h"
-#include "MissilesPanel.h"
-#include "InterfaceObjectCreator.h"
+
 
 Interface::Interface(rapidxml::xml_node<>* settings)
 {
@@ -42,7 +36,10 @@ InterfaceState Interface::getState() {
 }
 
 void Interface::setStatisticsMsg(const std::string& msg) {
-	//_scorePanel->setStatisticsMsg(msg);
+	/*ScorePanelVisitor::HardPtr visitor = ScorePanelVisitor::HardPtr(new ScorePanelVisitor(msg));
+	for (const auto& intObj : _interfaceObjects) {
+		intObj->acceptVisitor(visitor);
+	}*/
 }
 
 void Interface::mouseMove(const IPoint& mouse_pos) {

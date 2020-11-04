@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "ScorePanel.h"
+
 
 ScorePanel::ScorePanel(rapidxml::xml_node<>* settings)
 	:Panel(settings),
@@ -69,4 +69,8 @@ void ScorePanel::setState(InterfaceState newState) {
 	else if (newState == InterfaceState::TAP_TO_PLAY) {
 		Panel::setState(Panel::State::DISSAPEARENCE);	
 	}
+}
+
+void ScorePanel::acceptVisitor(InterfaceObjVisitor::HardPtr visitor) {
+//	visitor->visitScorePanel(this);
 }

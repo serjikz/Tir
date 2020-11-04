@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Button.h"
+
 
 Button::Button(rapidxml::xml_node<>* settings)
 	: _t(0.f),

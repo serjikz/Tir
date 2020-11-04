@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "TextAnimated.h"
+
 
 TextAnimated::TextAnimated(rapidxml::xml_node<>* settings)
 	:_scale(1.f),

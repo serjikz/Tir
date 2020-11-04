@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "GameFieldWidget.h"
+
 
 GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* elem)
 	: Widget(name)

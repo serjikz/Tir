@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "ArrowHintPanel.h"
+
 
 ArrowHintPanel::ArrowHintPanel(rapidxml::xml_node<>* settings)
 	:Panel(settings),

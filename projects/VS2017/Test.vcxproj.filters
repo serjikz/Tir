@@ -55,6 +55,9 @@
     <Filter Include="Source Files\Interface\Interface objects\TextAnimated">
       <UniqueIdentifier>{39d04b71-d245-4455-90ee-b81146542e78}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Interface\Interface object visitor">
+      <UniqueIdentifier>{cf9b3780-7a11-4815-914a-c4349b53a637}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\Main.cpp">
@@ -205,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\TextAnimated.h">
       <Filter>Source Files\Interface\Interface objects\TextAnimated</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\IntObjVisitor.h">
+      <Filter>Source Files\Interface\Interface object visitor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #pragma once
 
 
+
 enum class InterfaceState {
 	TAP_TO_PLAY,
 	PLAY,
@@ -27,8 +28,8 @@ public:
 	{};
 	virtual void draw() = 0;
 	virtual void setState(InterfaceState newState) = 0;
+	virtual void acceptVisitor(InterfaceObjVisitor::HardPtr visitor) {};
 	virtual void update(float dt) {};
 	typedef boost::shared_ptr<InterfaceObject> HardPtr;
 };
 
-                 
