@@ -17,7 +17,7 @@ public:
 	void setStatisticsMsg(const std::string& msg);
 	void mouseMove(const IPoint& mouse_pos);
 	void mouseDown(const IPoint& mouse_pos);
-	void decreaseRockets();
+	void decreaseMissiles();
 	int getTime();
 	InterfaceState getState();
 };

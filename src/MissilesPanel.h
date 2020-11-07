@@ -17,6 +17,7 @@ public:
 	virtual void draw();
 	virtual void update(float dt);
 	virtual void setState(InterfaceState newState);
-	void decreaseRockets();
+	virtual void acceptVisitor(InterfaceObjVisitor::HardPtr visitor);
+	void decreaseMissiles();
 	int getRocketsCount();
 };

@@ -71,3 +71,7 @@ void TimePanel::setState(InterfaceState newState) {
 		Panel::setState(State::DISSAPEARENCE);
 	}
 }
+
+void TimePanel::acceptVisitor(InterfaceObjVisitor::HardPtr visitor) {
+	visitor->visitTimePanel(this);
+}

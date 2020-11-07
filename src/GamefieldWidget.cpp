@@ -102,10 +102,13 @@ void GameFieldWidget::Update(float dt)
 	for (int i = 0; i < (int)_enemies.size(); i++) {
 		_enemies[i]->update(dt);
 	}
-	if ((int)_enemies.size() == 0 && _gui->getTime() > 0) {
-		Message msg = Message("Interface", "Victory");
-		AcceptMessage(msg);
-		return;
+	// TODO:
+	if (_gui->getState() == InterfaceState::PLAY) {
+		if ((int)_enemies.size() == 0 && _gui->getTime() > 0) {
+			Message msg = Message("Interface", "Victory");
+			AcceptMessage(msg);
+			return;
+		}
 	}
 	for (int i = 0; i < (int)_enemies.size(); i++) {
 		for (int j = i + 1; j < (int)_enemies.size(); j++) {
@@ -129,7 +132,7 @@ bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)
 	case InterfaceState::PLAY:
 		if (mouse_pos.y > MIN_Y_SHOT) {
 			_tank->shot();
-			_gui->decreaseRockets();
+			_gui->decreaseMissiles();
 		}
 		break;
 	case InterfaceState::IS_OVER:
@@ -147,6 +150,7 @@ void GameFieldWidget::MouseMove(const IPoint &mouse_pos) {
 
 void GameFieldWidget::AcceptMessage(const Message& message)
 {
+	//TODO:
 	if (message.is("Interface", "TimeIsOver")) {
 		_gui->setState(InterfaceState::IS_OVER);
 		_gui->setStatisticsMsg("TIME IS OVER!\n\n\nTargets left to hit:\n" +

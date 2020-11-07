@@ -46,7 +46,7 @@ int MissilesPanel::getRocketsCount() {
 	return _missiles;
 }
 
-void MissilesPanel::decreaseRockets() {
+void MissilesPanel::decreaseMissiles() {
 	_missiles--;
 }
 
@@ -58,4 +58,8 @@ void MissilesPanel::setState(InterfaceState newState) {
 	else if (newState == InterfaceState::IS_OVER) {
 		Panel::setState(State::DISSAPEARENCE);
 	}
+}
+
+void MissilesPanel::acceptVisitor(InterfaceObjVisitor::HardPtr visitor) {
+	visitor->visitMissilesPanel(this);
 }

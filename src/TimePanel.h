@@ -16,5 +16,6 @@ public:
 	virtual void draw();
 	virtual void update(float dt);
 	virtual void setState(InterfaceState newState);
+	virtual void acceptVisitor(InterfaceObjVisitor::HardPtr visitor);
 	int getTime();
 };
