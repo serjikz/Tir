@@ -25,6 +25,7 @@ private:
 	Render::ShaderProgramPtr _blurShaderY;
 	void Init();
 	void createNewEnemies();
+	void createBackground(rapidxml::xml_node<>* root);
 	void drawWithBlur();
 	std::vector<BkgObject::HardPtr> _backGround;
 public:

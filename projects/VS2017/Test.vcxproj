@@ -159,7 +159,6 @@
     <ClInclude Include="..\..\src\Enemy.h" />
     <ClInclude Include="..\..\src\GameFieldWidget.h" />
     <ClInclude Include="..\..\src\Interface.h" />
-    <ClInclude Include="..\..\src\InterfaceConcreteCreators.h" />
     <ClInclude Include="..\..\src\InterfaceObject.h" />
     <ClInclude Include="..\..\src\InterfaceObjectCreator.h" />
     <ClInclude Include="..\..\src\IntObjVisitor.h" />

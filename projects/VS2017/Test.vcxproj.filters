@@ -206,9 +206,6 @@
     <ClInclude Include="..\..\src\InterfaceObjectCreator.h">
       <Filter>Source Files\Interface\Factory method</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\InterfaceConcreteCreators.h">
-      <Filter>Source Files\Interface\Factory method</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\src\TextAnimated.h">
       <Filter>Source Files\Interface\Interface objects\TextAnimated</Filter>
     </ClInclude>

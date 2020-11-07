@@ -9,7 +9,7 @@ Interface::Interface(rapidxml::xml_node<>* settings)
 		_interfaceObjects.push_back(objCreator->createObject(objSettings));
 		objSettings = objSettings->next_sibling();
 	}
-	_state = InterfaceState::TAP_TO_PLAY;
+	setState(InterfaceState::TAP_TO_PLAY);
 }
 
 void Interface::draw() {

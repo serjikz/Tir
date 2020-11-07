@@ -14,23 +14,23 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 	_tank = Tank::HardPrt(new Tank(root));
 	createNewEnemies();
 	_gui = Interface::HardPtr(new Interface(root->first_node("GUI")));
-	_gui->setState(InterfaceState::TAP_TO_PLAY);
-	
+	createBackground(root);
+	_targetX = Render::device.CreateRenderTarget(1024, 1024);
+	_targetY = Render::device.CreateRenderTarget(1024, 1024);
+	_blurShaderX = Core::resourceManager.Get<Render::ShaderProgram>("blurX");
+	_blurShaderY = Core::resourceManager.Get<Render::ShaderProgram>("blurY");
+	Init();
+}
 
+void GameFieldWidget::createBackground(rapidxml::xml_node<>* root) {
 	BkgObjectCreator::HardPtr bkgCreator = BackgroundPictureCreator::HardPtr(new BackgroundPictureCreator());
 	_backGround.push_back(bkgCreator->getObject());
-	
 	rapidxml::xml_node<>* cloud = root->first_node("Clouds")->first_node("Cloud");
 	while (cloud) {
 		bkgCreator = CloudCreator::HardPtr(new CloudCreator(cloud));
 		_backGround.push_back(bkgCreator->getObject());
 		cloud = cloud->next_sibling();
 	}
-	_targetX = Render::device.CreateRenderTarget(1024, 1024);
-	_targetY = Render::device.CreateRenderTarget(1024, 1024);
-	_blurShaderX = Core::resourceManager.Get<Render::ShaderProgram>("blurX");
-	_blurShaderY = Core::resourceManager.Get<Render::ShaderProgram>("blurY");
-	Init();
 }
 
 void GameFieldWidget::Init()
