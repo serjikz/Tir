@@ -130,6 +130,7 @@
     <ClCompile Include="..\..\src\Main.cpp" />
     <ClCompile Include="..\..\src\AppDelegate.cpp" />
     <ClCompile Include="..\..\src\GamefieldWidget.cpp" />
+    <ClCompile Include="..\..\src\Messenger.cpp" />
     <ClCompile Include="..\..\src\Missile.cpp" />
     <ClCompile Include="..\..\src\MissileExplodeEff.cpp" />
     <ClCompile Include="..\..\src\Panel.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="..\..\src\InterfaceObject.h" />
     <ClInclude Include="..\..\src\InterfaceObjectCreator.h" />
     <ClInclude Include="..\..\src\IntObjVisitor.h" />
+    <ClInclude Include="..\..\src\Messenger.h" />
     <ClInclude Include="..\..\src\Missile.h" />
     <ClInclude Include="..\..\src\MissileExplodeEff.h" />
     <ClInclude Include="..\..\src\Panel.h" />
@@ -178,6 +180,7 @@
     <Xml Include="..\..\bin\base_p\Layers.xml">
       <SubType>Designer</SubType>
     </Xml>
+    <Xml Include="..\..\bin\base_p\Messages.xml" />
     <Xml Include="..\..\bin\base_p\Resources.xml" />
     <Xml Include="..\..\bin\base_p\Settings.xml" />
   </ItemGroup>

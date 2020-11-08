@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "Interface.h"
 #include "BkgConcreteCreators.h"
+#include "Messenger.h"
 ///
 /// Виджет - основной визуальный элемент на экране.
 /// Он отрисовывает себя, а также может содержать другие виджеты.
@@ -12,7 +13,8 @@ class GameFieldWidget : public GUI::Widget
 {
 private:
 	const std::string INPUT_FILE_NAME = "input.txt";
-	const std::string VARIABLE_PARAM = "Speed=";
+	const std::string INPUT_PARAM_SPEED = "Speed=";
+	const std::string INPUT_PARAM_COUNT_ENEMIES = "CountTarget=";
 	constexpr static int MIN_Y_SHOT = 50;
 	constexpr static int MAX_ENEMIES_COUNT = 50;
 	Interface::HardPtr _gui;
@@ -31,6 +33,7 @@ private:
 	void createBackground(rapidxml::xml_node<>* root);
 	void drawWithBlur();
 	std::vector<BkgObject::HardPtr> _backGround;
+	Messenger::HardPtr _messenger;
 public:
 	GameFieldWidget(const std::string& name, rapidxml::xml_node<>* elem);
 	void Draw() override;

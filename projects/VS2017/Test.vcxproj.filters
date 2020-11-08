@@ -129,6 +129,9 @@
     <ClCompile Include="..\..\src\IntObjVisitor.cpp">
       <Filter>Source Files\Interface\Interface object visitor</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\Messenger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\stdafx.h">
@@ -212,6 +215,9 @@
     <ClInclude Include="..\..\src\IntObjVisitor.h">
       <Filter>Source Files\Interface\Interface object visitor</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\src\Messenger.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\..\bin\base_p\Layers.xml">
@@ -221,6 +227,9 @@
       <Filter>XML</Filter>
     </Xml>
     <Xml Include="..\..\bin\base_p\Settings.xml">
+      <Filter>XML</Filter>
+    </Xml>
+    <Xml Include="..\..\bin\base_p\Messages.xml">
       <Filter>XML</Filter>
     </Xml>
   </ItemGroup>

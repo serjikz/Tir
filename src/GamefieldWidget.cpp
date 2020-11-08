@@ -1,6 +1,5 @@
 #include "stdafx.h"
 
-
 GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* elem)
 	: Widget(name)
 	, _timer(0)
@@ -16,6 +15,7 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 	createBackground(root);
 	_gui = Interface::HardPtr(new Interface(root->first_node("GUI")));
 	readInputFileParam();
+	_messenger = Messenger::HardPtr(new Messenger());
 	initShaders();
 }
 
@@ -37,8 +37,8 @@ void GameFieldWidget::readInputFileParam()
 	{
 		std::string params;
 		while (getline(in, params)) {
-			if (params.substr(0, std::string(VARIABLE_PARAM).length()) == VARIABLE_PARAM) {
-				int speed = stoi(params.substr(VARIABLE_PARAM.length(), params.length() - 1));
+			if (params.substr(0, std::string(INPUT_PARAM_SPEED).length()) == INPUT_PARAM_SPEED) {
+				int speed = stoi(params.substr(INPUT_PARAM_SPEED.length(), params.length() - 1));
 				_tank->setMissileSpeed(speed);
 			}
 		}		
@@ -60,12 +60,12 @@ void GameFieldWidget::Draw()
 		drawWithBlur();
 	}
 	else {
-		for (const auto& bkgObj : _backGround) {
+		for (const auto &bkgObj : _backGround) {
 			bkgObj->draw();
 		}
 		if (_gui->getState() == InterfaceState::PLAY) {
-			for (int i = 0; i < (int)_enemies.size(); i++) {
-				_enemies[i]->draw();
+			for (const auto &enemy: _enemies ) {
+				enemy->draw();
 			}
 		}
 		_tank->draw();
@@ -78,8 +78,8 @@ void GameFieldWidget::drawWithBlur() {
 		bkgObj->draw();
 	}
 	if (_gui->getState() == InterfaceState::IS_OVER) {
-		for (int i = 0; i < (int)_enemies.size(); i++) {
-			_enemies[i]->draw();
+		for (const auto& enemy : _enemies) {
+			enemy->draw();
 		}
 	}
 	_tank->draw();
@@ -103,24 +103,25 @@ void GameFieldWidget::Update(float dt)
 	_gui->update(dt);
 	_tank->update(dt, _enemies);
 
-	for (int i = 0; i < (int)_enemies.size(); i++) {
-		_enemies[i]->update(dt);
+	for (const auto& enemy : _enemies) {
+		enemy->update(dt);
 	}
 	// TODO:
 	if (_gui->getState() == InterfaceState::PLAY) {
-		if ((int)_enemies.size() == 0 && _gui->getTime() > 0) {
+		if (_enemies.empty() && _gui->getTime() > 0) {
 			Message msg = Message("Interface", "Victory");
 			AcceptMessage(msg);
 			return;
 		}
 	}
-	for (int i = 0; i < (int)_enemies.size(); i++) {
-		for (int j = i + 1; j < (int)_enemies.size(); j++) {
+	for (size_t i = 0; i < _enemies.size(); i++) {
+		for (size_t j = i + 1; j < _enemies.size(); j++) {
 			if (_enemies[i]->isIntersect(_enemies[j])) {
 				_enemies[i]->bounceWith(_enemies[j]);
 			}
 		}
 	} 
+	// TODO:
 	if (_tank->isAllRocketsExploaded()) {
 		Message msg = Message(Message("Interface", "RocketsIsOver"));
 		AcceptMessage(msg);
@@ -157,12 +158,12 @@ void GameFieldWidget::AcceptMessage(const Message& message)
 	//TODO:
 	if (message.is("Interface", "TimeIsOver")) {
 		_gui->setState(InterfaceState::IS_OVER);
-		_gui->setStatisticsMsg("TIME IS OVER!\n\n\nTargets left to hit:\n" +
-			std::to_string((int) _enemies.size()) + "/" + std::to_string(_enemiesToHit));
+		_gui->setStatisticsMsg(_messenger->getText("TIME_IS_OVER") +
+			std::to_string((size_t) _enemies.size()) + "/" + std::to_string(_enemiesToHit));
 	} if (message.is("Interface", "RocketsIsOver")) {
 		_gui->setState(InterfaceState::IS_OVER);
-		_gui->setStatisticsMsg("Rockets is over!\n\n\nTargets left to hit:\n" +
-			std::to_string((int)_enemies.size()) + "/" + std::to_string(_enemiesToHit));
+		_gui->setStatisticsMsg(_messenger->getText("MISSILES_ARE_OVER") +
+			std::to_string((size_t)_enemies.size()) + "/" + std::to_string(_enemiesToHit));
 	}
 	else if (message.is("Interface", "SetStateTapToPlay")) {
 		_gui->setState(InterfaceState::TAP_TO_PLAY);
@@ -170,7 +171,7 @@ void GameFieldWidget::AcceptMessage(const Message& message)
 	}
 	else if (message.is("Interface", "Victory")) {
 		_gui->setState(InterfaceState::IS_OVER);
-		_gui->setStatisticsMsg("CONGRATULATIONS!\n\nYou win!\n\nAll targets defeated");
+		_gui->setStatisticsMsg(_messenger->getText("CONGRATULATIONS"));
 	}
 }
 
@@ -185,15 +186,14 @@ void GameFieldWidget::KeyPressed(int keyCode)
 }
 
 void GameFieldWidget::createNewEnemies() {
-	std::string params;
-	std::ifstream in("input.txt"); 
-	int enemies = 0;
-	std::string paramToFound = "CountTarget=";
+	std::ifstream in(INPUT_FILE_NAME);
+	size_t enemies = 0;
 	if (in.is_open())
 	{
+		std::string params;
 		while (getline(in, params)) {
-			if (params.substr(0, std::string(paramToFound).length()) == paramToFound) {
-				enemies = math::clamp(0, MAX_ENEMIES_COUNT, stoi(params.substr(paramToFound.length(), params.length() - 1)));
+			if (params.substr(0, std::string(INPUT_PARAM_COUNT_ENEMIES).length()) == INPUT_PARAM_COUNT_ENEMIES) {
+				enemies = math::clamp(0, MAX_ENEMIES_COUNT, stoi(params.substr(INPUT_PARAM_COUNT_ENEMIES.length(), params.length() - 1)));
 			}
 		}
 	}

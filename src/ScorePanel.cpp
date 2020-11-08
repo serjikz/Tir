@@ -38,7 +38,7 @@ void ScorePanel::draw() {
 		Render::EndColor();
 		Render::EndAlphaMul();
 		Render::BindFont("FloralessTime");
-		Render::PrintString(_textX, _textY, _text, 1.f, CenterAlign, CenterAlign);
+		Render::PrintString(_textX, _textY, _backSideRect.Width(), _text, 1.f, CenterAlign, CenterAlign);
 		Render::device.SetTexturing(true);
 		_tex->Draw();
 		_restartButton->draw();
