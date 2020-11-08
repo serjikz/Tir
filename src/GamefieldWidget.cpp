@@ -13,13 +13,10 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 	rapidxml::xml_node<>* root = settingsXml.first_node();
 	_tank = Tank::HardPrt(new Tank(root));
 	createNewEnemies();
-	_gui = Interface::HardPtr(new Interface(root->first_node("GUI")));
 	createBackground(root);
-	_targetX = Render::device.CreateRenderTarget(1024, 1024);
-	_targetY = Render::device.CreateRenderTarget(1024, 1024);
-	_blurShaderX = Core::resourceManager.Get<Render::ShaderProgram>("blurX");
-	_blurShaderY = Core::resourceManager.Get<Render::ShaderProgram>("blurY");
-	Init();
+	_gui = Interface::HardPtr(new Interface(root->first_node("GUI")));
+	readInputFileParam();
+	initShaders();
 }
 
 void GameFieldWidget::createBackground(rapidxml::xml_node<>* root) {
@@ -33,22 +30,29 @@ void GameFieldWidget::createBackground(rapidxml::xml_node<>* root) {
 	}
 }
 
-void GameFieldWidget::Init()
+void GameFieldWidget::readInputFileParam()
 {
-	std::string params;
-	std::ifstream in("input.txt");
-	std::string paramToFound = "Speed=";
+	std::ifstream in(INPUT_FILE_NAME);
 	if (in.is_open())
 	{
+		std::string params;
 		while (getline(in, params)) {
-			if (params.substr(0, std::string(paramToFound).length()) == paramToFound) {
-				int speed = stoi(params.substr(paramToFound.length(), params.length() - 1));
+			if (params.substr(0, std::string(VARIABLE_PARAM).length()) == VARIABLE_PARAM) {
+				int speed = stoi(params.substr(VARIABLE_PARAM.length(), params.length() - 1));
 				_tank->setMissileSpeed(speed);
 			}
 		}		
 	}
 	in.close();
 } 
+
+void GameFieldWidget::initShaders() {
+	_targetX = Render::device.CreateRenderTarget(1024, 1024);
+	_targetY = Render::device.CreateRenderTarget(1024, 1024);
+	_blurShaderX = Core::resourceManager.Get<Render::ShaderProgram>("blurX");
+	_blurShaderY = Core::resourceManager.Get<Render::ShaderProgram>("blurY");
+}
+
 
 void GameFieldWidget::Draw()
 {

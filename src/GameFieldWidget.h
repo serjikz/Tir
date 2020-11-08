@@ -11,19 +11,22 @@
 class GameFieldWidget : public GUI::Widget
 {
 private:
-	const int MIN_Y_SHOT = 50;
-	const int MAX_ENEMIES_COUNT = 50;
+	const std::string INPUT_FILE_NAME = "input.txt";
+	const std::string VARIABLE_PARAM = "Speed=";
+	constexpr static int MIN_Y_SHOT = 50;
+	constexpr static int MAX_ENEMIES_COUNT = 50;
 	Interface::HardPtr _gui;
 	Tank::HardPrt _tank;
 	float _timer;
 	float _scale;
 	std::vector <Enemy::HardPtr> _enemies;
-	int _enemiesToHit;
+	size_t _enemiesToHit;
 	Render::Target* _targetX;
 	Render::Target* _targetY;
 	Render::ShaderProgramPtr _blurShaderX;
 	Render::ShaderProgramPtr _blurShaderY;
-	void Init();
+	void readInputFileParam();
+	void initShaders();
 	void createNewEnemies();
 	void createBackground(rapidxml::xml_node<>* root);
 	void drawWithBlur();
