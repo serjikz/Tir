@@ -109,7 +109,7 @@ void GameFieldWidget::Update(float dt)
 	// TODO:
 	if (_gui->getState() == InterfaceState::PLAY) {
 		if (_enemies.empty() && _gui->getTime() > 0) {
-			Message msg = Message("Interface", "Victory");
+			Message msg = Message("ShowStats", "Victory");
 			AcceptMessage(msg);
 			return;
 		}
@@ -121,11 +121,6 @@ void GameFieldWidget::Update(float dt)
 			}
 		}
 	} 
-	// TODO:
-	if (_tank->isAllRocketsExploaded()) {
-		Message msg = Message(Message("Interface", "RocketsIsOver"));
-		AcceptMessage(msg);
-	}
 }
 
 bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)
@@ -155,23 +150,22 @@ void GameFieldWidget::MouseMove(const IPoint &mouse_pos) {
 
 void GameFieldWidget::AcceptMessage(const Message& message)
 {
-	//TODO:
-	if (message.is("Interface", "TimeIsOver")) {
-		_gui->setState(InterfaceState::IS_OVER);
-		_gui->setStatisticsMsg(_messenger->getText("TIME_IS_OVER") +
-			std::to_string((size_t) _enemies.size()) + "/" + std::to_string(_enemiesToHit));
-	} if (message.is("Interface", "RocketsIsOver")) {
-		_gui->setState(InterfaceState::IS_OVER);
-		_gui->setStatisticsMsg(_messenger->getText("MISSILES_ARE_OVER") +
-			std::to_string((size_t)_enemies.size()) + "/" + std::to_string(_enemiesToHit));
-	}
-	else if (message.is("Interface", "SetStateTapToPlay")) {
+	if (message.getPublisher() == "ShowStats") {
+		_gui->setState(InterfaceState::IS_OVER); 
+		std::string event = message.getData();
+		std::string text;
+		if (event == "TimeIsOver") {
+			text = _messenger->getText("TIME_IS_OVER") + getTargetsLeft();
+		} else if (event == "MissilesAreOver") {
+			text = _messenger->getText("MISSILES_ARE_OVER") + getTargetsLeft();
+		}
+		else {
+			text = _messenger->getText("CONGRATULATIONS");
+		}
+		_gui->setStatisticsMsg(text);
+	} else if (message.is("Interface", "SetStateTapToPlay")) {
 		_gui->setState(InterfaceState::TAP_TO_PLAY);
 		createNewEnemies();
-	}
-	else if (message.is("Interface", "Victory")) {
-		_gui->setState(InterfaceState::IS_OVER);
-		_gui->setStatisticsMsg(_messenger->getText("CONGRATULATIONS"));
 	}
 }
 
@@ -186,6 +180,7 @@ void GameFieldWidget::KeyPressed(int keyCode)
 }
 
 void GameFieldWidget::createNewEnemies() {
+	// todo class
 	std::ifstream in(INPUT_FILE_NAME);
 	size_t enemies = 0;
 	if (in.is_open())
@@ -196,8 +191,8 @@ void GameFieldWidget::createNewEnemies() {
 				enemies = math::clamp(0, MAX_ENEMIES_COUNT, stoi(params.substr(INPUT_PARAM_COUNT_ENEMIES.length(), params.length() - 1)));
 			}
 		}
+		in.close();
 	}
-	in.close(); 
 	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
 	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
 	rapidxml::xml_node<>* enemy = root->first_node("Enemies")->first_node("Enemy");
@@ -209,4 +204,8 @@ void GameFieldWidget::createNewEnemies() {
 		_enemiesToHit++;
 	}
 	_tank->reloadRockets();
+}
+
+std::string GameFieldWidget:: getTargetsLeft() const {
+	return std::to_string((size_t)_enemies.size()) + "/" + std::to_string(_enemiesToHit);
 }

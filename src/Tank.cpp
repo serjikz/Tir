@@ -43,6 +43,10 @@ void Tank::update(float dt, std::vector<Enemy::HardPtr>& enemies) {
 	_cannon->update(dt, _x + _tex->getBitmapRect().Width() / 2.f, enemies);
 	_effCont.Update(dt);
 	_dirtEff->update(dt);
+	if (_cannon->isAllRocketsExploaded()) {
+		Message msg = Message(Message("ShowStats", "MissilesAreOver"));
+		Core::guiManager.getLayer("TestLayer")->getWidget("GameFieldWidget")->AcceptMessage(msg);
+	}
 }
 
 void Tank::draw() {

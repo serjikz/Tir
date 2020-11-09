@@ -32,6 +32,7 @@ private:
 	void createNewEnemies();
 	void createBackground(rapidxml::xml_node<>* root);
 	void drawWithBlur();
+	std::string getTargetsLeft() const;
 	std::vector<BkgObject::HardPtr> _backGround;
 	Messenger::HardPtr _messenger;
 public:
