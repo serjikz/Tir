@@ -125,6 +125,7 @@
     <ClCompile Include="..\..\src\Cloud.cpp" />
     <ClCompile Include="..\..\src\Dirt.cpp" />
     <ClCompile Include="..\..\src\Enemy.cpp" />
+    <ClCompile Include="..\..\src\InputFileReader.cpp" />
     <ClCompile Include="..\..\src\Interface.cpp" />
     <ClCompile Include="..\..\src\IntObjVisitor.cpp" />
     <ClCompile Include="..\..\src\Main.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="..\..\src\Dirt.h" />
     <ClInclude Include="..\..\src\Enemy.h" />
     <ClInclude Include="..\..\src\GameFieldWidget.h" />
+    <ClInclude Include="..\..\src\InputFileReader.h" />
     <ClInclude Include="..\..\src\Interface.h" />
     <ClInclude Include="..\..\src\InterfaceObject.h" />
     <ClInclude Include="..\..\src\InterfaceObjectCreator.h" />

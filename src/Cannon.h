@@ -20,8 +20,8 @@ private:
 	float CANNON_Y0;
 	FPoint _directionVec;
 	std::deque<Missile::HardPtr> _missiles;
-	int _rocketsAvailable;
-	int _rockets;
+	size_t _missilesAvailable;
+	size_t _missilesCount;
 	FPoint _textureCenter;
 	EffectsContainer _effCont;
 	ParticleEffectPtr _eff;

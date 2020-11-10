@@ -132,6 +132,9 @@
     <ClCompile Include="..\..\src\Messenger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\InputFileReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\stdafx.h">
@@ -216,6 +219,9 @@
       <Filter>Source Files\Interface\Interface object visitor</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\Messenger.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\InputFileReader.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

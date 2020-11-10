@@ -6,9 +6,9 @@ class MissilesPanel : public Panel
 {
 private:	
 	std::string _text;
-	int _missilesAvailable;
-	int _missiles;
-	int _t0;
+	size_t _missilesAvailable;
+	size_t _missiles;
+	size_t _t0;
 	int _textX;
 	int _textY;
 public:

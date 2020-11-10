@@ -4,24 +4,12 @@
 MissilesPanel::MissilesPanel(rapidxml::xml_node<>* settings)
 	:Panel(settings),
 	_text(""),
-	_missilesAvailable(0.f)
+	_missilesAvailable(0)
 {
 	rapidxml::xml_node<>* timeText = settings->first_node("text");
 	_textX = Xml::GetIntAttributeOrDef(timeText, "x", 0);
 	_textY = Xml::GetIntAttributeOrDef(timeText, "y", 0);
-	std::string params;
-	std::ifstream in("input.txt");
-	std::string paramToFound = "Missiles=";
-	if (in.is_open())
-	{
-		while (getline(in, params)) {
-			if (params.substr(0, std::string(paramToFound).length()) == paramToFound) {
-				_missilesAvailable = stoi(params.substr(paramToFound.length(), params.length() - 1));
-			}
-		}
-	}
-	in.close();
-
+	_missilesAvailable = InputFileReader::getInstance()->getMissilesAvailable();
 }
 
 void MissilesPanel::draw() {
@@ -38,7 +26,7 @@ void MissilesPanel::draw() {
 void MissilesPanel::update(float dt) {
 	Panel::update(dt);
 	if (_state != State::HIDEN) {
-		_text = std::to_string(math::clamp(0, _missilesAvailable, _missiles));
+		_text = std::to_string(math::clamp((size_t) 0, _missilesAvailable, _missiles));
 	}
 }
 

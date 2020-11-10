@@ -14,7 +14,6 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 	createNewEnemies();
 	createBackground(root);
 	_gui = Interface::HardPtr(new Interface(root->first_node("GUI")));
-	readInputFileParam();
 	_messenger = Messenger::HardPtr(new Messenger());
 	initShaders();
 }
@@ -29,22 +28,6 @@ void GameFieldWidget::createBackground(rapidxml::xml_node<>* root) {
 		cloud = cloud->next_sibling();
 	}
 }
-
-void GameFieldWidget::readInputFileParam()
-{
-	std::ifstream in(INPUT_FILE_NAME);
-	if (in.is_open())
-	{
-		std::string params;
-		while (getline(in, params)) {
-			if (params.substr(0, std::string(INPUT_PARAM_SPEED).length()) == INPUT_PARAM_SPEED) {
-				int speed = stoi(params.substr(INPUT_PARAM_SPEED.length(), params.length() - 1));
-				_tank->setMissileSpeed(speed);
-			}
-		}		
-	}
-	in.close();
-} 
 
 void GameFieldWidget::initShaders() {
 	_targetX = Render::device.CreateRenderTarget(1024, 1024);
@@ -102,17 +85,8 @@ void GameFieldWidget::Update(float dt)
 	}
 	_gui->update(dt);
 	_tank->update(dt, _enemies);
-
 	for (const auto& enemy : _enemies) {
 		enemy->update(dt);
-	}
-	// TODO:
-	if (_gui->getState() == InterfaceState::PLAY) {
-		if (_enemies.empty() && _gui->getTime() > 0) {
-			Message msg = Message("ShowStats", "Victory");
-			AcceptMessage(msg);
-			return;
-		}
 	}
 	for (size_t i = 0; i < _enemies.size(); i++) {
 		for (size_t j = i + 1; j < _enemies.size(); j++) {
@@ -121,6 +95,14 @@ void GameFieldWidget::Update(float dt)
 			}
 		}
 	} 
+	// TODO:
+	if (_gui->getState() == InterfaceState::PLAY) {
+		if (_enemies.empty() && _gui->getTime() > 0) {
+			Message msg = Message("ShowStats", "Victory");
+			AcceptMessage(msg);
+			return;
+		}
+	}
 }
 
 bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)
@@ -181,24 +163,13 @@ void GameFieldWidget::KeyPressed(int keyCode)
 
 void GameFieldWidget::createNewEnemies() {
 	// todo class
-	std::ifstream in(INPUT_FILE_NAME);
-	size_t enemies = 0;
-	if (in.is_open())
-	{
-		std::string params;
-		while (getline(in, params)) {
-			if (params.substr(0, std::string(INPUT_PARAM_COUNT_ENEMIES).length()) == INPUT_PARAM_COUNT_ENEMIES) {
-				enemies = math::clamp(0, MAX_ENEMIES_COUNT, stoi(params.substr(INPUT_PARAM_COUNT_ENEMIES.length(), params.length() - 1)));
-			}
-		}
-		in.close();
-	}
 	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
 	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
 	rapidxml::xml_node<>* enemy = root->first_node("Enemies")->first_node("Enemy");
 	_enemies.clear();
 	_enemiesToHit = 0;
-	while (enemy && _enemiesToHit < enemies) {
+	size_t enemiesCount = InputFileReader::getInstance()->getEnemiesCount();
+	while (enemy && _enemiesToHit < enemiesCount) {
 		_enemies.push_back(Enemy::HardPtr(new Enemy(enemy)));
 		enemy = enemy->next_sibling();
 		_enemiesToHit++;

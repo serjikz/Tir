@@ -21,19 +21,8 @@ Cannon::Cannon(rapidxml::xml_node<>* settings)
 	CANNON_X0 = Xml::GetIntAttributeOrDef(settings, "cannonX0", 0);
 	CANNON_Y0 = Xml::GetIntAttributeOrDef(settings, "cannonY0", 0);
 	_textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
-	std::string params;
-	std::ifstream in("input.txt");
-	std::string paramToFound = "Missiles=";
-	if (in.is_open())
-	{
-		while (getline(in, params)) {
-			if (params.substr(0, std::string(paramToFound).length()) == paramToFound) {
-				_rocketsAvailable = stoi(params.substr(paramToFound.length(), params.length() - 1));
-			}
-		}
-	}
-	in.close();
-	_rockets = _rocketsAvailable;
+	_missilesAvailable = InputFileReader::getInstance()->getMissilesAvailable();
+	_missilesCount = _missilesAvailable;
 }
 
 void Cannon::draw() {
@@ -43,8 +32,8 @@ void Cannon::draw() {
 	Render::device.MatrixRotate(math::Vector3(0, 0, 1), _angle);
 	Render::device.MatrixTranslate(-_textureCenter.x, 0, 0);
 	_tex->Draw();
-	for (int i = 0; i < (int)_missiles.size(); i++) {
-		_missiles[i]->draw();
+	for (const auto &missile: _missiles) {
+		missile->draw();
 	}
 	_effCont.Draw();
 	Render::device.PopMatrix();
@@ -63,7 +52,7 @@ void Cannon::update(float dt, float tankPosx, std::vector<Enemy::HardPtr> &enemi
 		_angle *= -1;
 	}
 	_t = math::clamp(0.f, 1.f, _t + INTERTIA_SPEED * dt);
-	if (_rocketsAvailable >= 0) {
+	if (_missilesAvailable >= 0) {
 		_dx = math::lerp(int(INTERTIA_MOVE * _directionVec.x), 0, _t);
 		_dy = math::lerp(int(INTERTIA_MOVE * _directionVec.y), 0, _t);
 	} 
@@ -86,8 +75,8 @@ void Cannon::shot(IPoint atTankPos) {
 	float r = _tex->getBitmapRect().Height();
 	float x0 = CANNON_X0 + atTankPos.x + r * cos(alpha);
 	float y0 = CANNON_Y0 +  atTankPos.y + r * sin(alpha);
-	_rocketsAvailable--;
-	if (_rocketsAvailable >= 0) {
+	_missilesAvailable--;
+	if (_missilesAvailable >= 0) {
 		_missiles.push_back(Missile::HardPtr(new Missile(_directionVec, _missileSpeed, x0, y0)));
 		_eff = _effCont.AddEffect("MissileShot");
 		_eff->posX = _tex->getBitmapRect().Width() / 2.f;
@@ -97,11 +86,11 @@ void Cannon::shot(IPoint atTankPos) {
 }
 
 bool Cannon::isAllRocketsExploaded() {
-	return _rocketsAvailable <= 0 && _missiles.empty();
+	return _missilesAvailable <= 0 && _missiles.empty();
 }
 
 void Cannon::reloadRockets() {
-	_rocketsAvailable = _rockets;
+	_missilesAvailable = _missilesCount;
 }
 
 void Cannon::setMissileSpeed(float speed) {

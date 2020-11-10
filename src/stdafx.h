@@ -32,4 +32,5 @@
 #include "Wheel.h"
 #include "GameFieldWidget.h"
 #include "Enemy.h"
+#include "InputFileReader.h"
 #endif
