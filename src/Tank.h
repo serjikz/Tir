@@ -36,6 +36,5 @@ public:
 	void shot();
 	bool isAllRocketsExploaded();
 	void reloadRockets();
-	void setMissileSpeed(int speed);
 };
 

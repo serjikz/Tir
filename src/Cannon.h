@@ -25,7 +25,7 @@ private:
 	FPoint _textureCenter;
 	EffectsContainer _effCont;
 	ParticleEffectPtr _eff;
-	float _missileSpeed;
+	size_t _missileSpeed;
 public:
 	Cannon(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Cannon> HardPtr;
@@ -34,5 +34,4 @@ public:
 	void shot(IPoint atTankPos);
 	bool isAllRocketsExploaded();
 	void reloadRockets();
-	void setMissileSpeed(float speed);
 };

@@ -23,6 +23,7 @@ Cannon::Cannon(rapidxml::xml_node<>* settings)
 	_textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
 	_missilesAvailable = InputFileReader::getInstance()->getMissilesAvailable();
 	_missilesCount = _missilesAvailable;
+	_missileSpeed = InputFileReader::getInstance()->getMissileSpeed();
 }
 
 void Cannon::draw() {
@@ -93,6 +94,3 @@ void Cannon::reloadRockets() {
 	_missilesAvailable = _missilesCount;
 }
 
-void Cannon::setMissileSpeed(float speed) {
-	_missileSpeed = speed;
-}

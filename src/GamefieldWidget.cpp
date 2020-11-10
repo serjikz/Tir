@@ -133,6 +133,9 @@ void GameFieldWidget::MouseMove(const IPoint &mouse_pos) {
 void GameFieldWidget::AcceptMessage(const Message& message)
 {
 	if (message.getPublisher() == "ShowStats") {
+		if (_gui->getState() == InterfaceState::IS_OVER) {
+			return;
+		}
 		_gui->setState(InterfaceState::IS_OVER); 
 		std::string event = message.getData();
 		std::string text;

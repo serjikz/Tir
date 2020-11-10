@@ -89,6 +89,3 @@ void Tank::reloadRockets() {
 	_cannon->reloadRockets();
 }
 
-void Tank::setMissileSpeed(int speed) {
-	_cannon->setMissileSpeed(speed);
-}
