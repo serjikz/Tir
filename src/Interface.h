@@ -9,7 +9,7 @@ private:
 	std::vector<InterfaceObject::HardPtr> _interfaceObjects;
 public:
 	
-	Interface(rapidxml::xml_node<>* settings);
+	Interface();
 	typedef boost::shared_ptr<Interface> HardPtr;
 	void draw();
 	void update(float dt);

@@ -2,16 +2,14 @@
 
 GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* elem)
 	: Widget(name)
+	, _gui(new Interface())
+	, _tank(new Tank())
 	, _blurEff(new BlurWidgetEffect())
 	, _enemiesToHit(0)
 	, _messenger(new Messenger())
 	, _bkg(new Background())
 {
-	Xml::RapidXmlDocument settingsXml("Settings.xml");
-	rapidxml::xml_node<>* root = settingsXml.first_node();
-	_tank = Tank::HardPtr(new Tank(root));
 	createNewEnemies();
-	_gui = Interface::HardPtr(new Interface(root->first_node("GUI")));
 }
 
 void GameFieldWidget::Draw()

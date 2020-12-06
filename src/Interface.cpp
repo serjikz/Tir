@@ -1,8 +1,10 @@
 #include "stdafx.h"
 
 
-Interface::Interface(rapidxml::xml_node<>* settings)
+Interface::Interface()
 {
+	
+	rapidxml::xml_node<>* settings = XmlSettings::getInstance()->getGUINode();
 	rapidxml::xml_node<>* objSettings = settings->first_node("InterfaceObject");
 	InterfaceObjectCreator::HardPtr objCreator = InterfaceObjectCreator::HardPtr(new InterfaceObjectCreator());
 	while (objSettings) {

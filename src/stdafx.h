@@ -34,4 +34,5 @@
 #include "Enemy.h"
 #include "InputFileReader.h"
 #include "BlurWidgetEffect.h"
+#include "XmlSettings.h"
 #endif

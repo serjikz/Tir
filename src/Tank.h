@@ -27,7 +27,7 @@ private:
 	Cannon::HardPtr _cannon;
 	Dirt::HardPrt _dirtEff;
 public:
-	Tank(rapidxml::xml_node<>* settings);
+	Tank();
 	typedef boost::shared_ptr<Tank> HardPtr;
 	void draw();
 	void update(float dt, std::vector<Enemy::HardPtr> &enemies);

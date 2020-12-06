@@ -1,11 +1,12 @@
 #include "stdafx.h"
 
 
-Tank::Tank(rapidxml::xml_node<>* settings)
+Tank::Tank()
 	: _x(START_X),
 	_speed(0),
 	_angle(0)
 {	
+	rapidxml::xml_node<>* settings = XmlSettings::getInstance()->getTankNode();
 	rapidxml::xml_node<>* tankSpeed = settings->first_node("TankSpeed");
 	MAX_SPEED = Xml::GetFloatAttributeOrDef(tankSpeed, "maxSpeed", 0.f);
 	MOVE_DX = Xml::GetFloatAttributeOrDef(tankSpeed, "moveDX", 0.f);

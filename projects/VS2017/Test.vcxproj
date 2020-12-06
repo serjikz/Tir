@@ -148,6 +148,7 @@
     <ClCompile Include="..\..\src\TextAnimated.cpp" />
     <ClCompile Include="..\..\src\TimePanel.cpp" />
     <ClCompile Include="..\..\src\Wheel.cpp" />
+    <ClCompile Include="..\..\src\XmlSettings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\AppDelegate.h" />
@@ -181,6 +182,7 @@
     <ClInclude Include="..\..\src\TextAnimated.h" />
     <ClInclude Include="..\..\src\TimePanel.h" />
     <ClInclude Include="..\..\src\Wheel.h" />
+    <ClInclude Include="..\..\src\XmlSettings.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\..\bin\base_p\Layers.xml">

@@ -144,6 +144,9 @@
     <ClCompile Include="..\..\src\Background.cpp">
       <Filter>Source Files\Background</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\XmlSettings.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\stdafx.h">
@@ -238,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\Background.h">
       <Filter>Source Files\Background</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\XmlSettings.h">
+      <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
