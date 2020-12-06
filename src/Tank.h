@@ -34,7 +34,7 @@ public:
 	void moveLeft();
 	void moveRight();
 	void shot();
-	bool isAllRocketsExploaded();
-	void reloadRockets();
+	bool isAllMissilesExploaded();
+	void reloadMissiles();
 };
 

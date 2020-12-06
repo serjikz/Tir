@@ -128,7 +128,7 @@ void GameFieldWidget::createNewEnemies() {
 		enemy = enemy->next_sibling();
 		_enemiesToHit++;
 	}
-	_tank->reloadRockets();
+	_tank->reloadMissiles();
 }
 
 std::string GameFieldWidget:: getTargetsLeft() const {

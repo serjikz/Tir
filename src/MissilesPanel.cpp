@@ -26,7 +26,7 @@ void MissilesPanel::draw() {
 void MissilesPanel::update(float dt) {
 	Panel::update(dt);
 	if (_state != State::HIDEN) {
-		_text = std::to_string(math::clamp((size_t) 0, _missilesAvailable, _missiles));
+		_text = std::to_string(math::clamp((short int) 0, _missilesAvailable, _missiles));
 	}
 }
 

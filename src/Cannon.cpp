@@ -22,7 +22,7 @@ Cannon::Cannon(rapidxml::xml_node<>* settings)
 	CANNON_Y0 = Xml::GetIntAttributeOrDef(settings, "cannonY0", 0);
 	_textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
 	_missilesAvailable = InputFileReader::getInstance()->getMissilesAvailable();
-	_missilesCount = _missilesAvailable;
+	_missilesInitValue = _missilesAvailable;
 	_missileSpeed = InputFileReader::getInstance()->getMissileSpeed();
 }
 
@@ -86,11 +86,11 @@ void Cannon::shot(IPoint atTankPos) {
 	}
 }
 
-bool Cannon::isAllRocketsExploaded() {
-	return _missilesAvailable <= 0 && _missiles.empty();
+bool Cannon::isAllMissilesExploaded() {
+	return (_missilesAvailable <= 0) && _missiles.empty();
 }
 
-void Cannon::reloadRockets() {
-	_missilesAvailable = _missilesCount;
+void Cannon::reloadMissiles() {
+	_missilesAvailable = _missilesInitValue;
 }
 

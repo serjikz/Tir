@@ -6,11 +6,10 @@ class MissilesPanel : public Panel
 {
 private:	
 	std::string _text;
-	size_t _missilesAvailable;
-	size_t _missiles;
-	size_t _t0;
-	int _textX;
-	int _textY;
+	short int _missilesAvailable;
+	short int _missiles;
+	short int _textX;
+	short int _textY;
 public:
 	MissilesPanel(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<MissilesPanel> HardPtr;

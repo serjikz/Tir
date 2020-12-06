@@ -43,7 +43,7 @@ void Tank::update(float dt, std::vector<Enemy::HardPtr>& enemies) {
 	_cannon->update(dt, _x + _tex->getBitmapRect().Width() / 2.f, enemies);
 	_effCont.Update(dt);
 	_dirtEff->update(dt);
-	if (_cannon->isAllRocketsExploaded()) {
+	if (isAllMissilesExploaded()) {
 		Message msg = Message(Message("ShowStats", "MissilesAreOver"));
 		Core::guiManager.getLayer("TestLayer")->getWidget("GameFieldWidget")->AcceptMessage(msg);
 	}
@@ -81,11 +81,11 @@ void Tank::shot() {
 	_cannon->shot(IPoint(_x + _textureCenter.x, _textureCenter.y));
 }
 
-bool Tank::isAllRocketsExploaded() {
-	return _cannon->isAllRocketsExploaded();
+bool Tank::isAllMissilesExploaded() {
+	return _cannon->isAllMissilesExploaded();
 }
 
-void Tank::reloadRockets() {
-	_cannon->reloadRockets();
+void Tank::reloadMissiles() {
+	_cannon->reloadMissiles();
 }
 

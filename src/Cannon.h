@@ -20,8 +20,8 @@ private:
 	float CANNON_Y0;
 	FPoint _directionVec;
 	std::deque<Missile::HardPtr> _missiles;
-	size_t _missilesAvailable;
-	size_t _missilesCount;
+	short int _missilesAvailable;
+	size_t _missilesInitValue;
 	FPoint _textureCenter;
 	EffectsContainer _effCont;
 	ParticleEffectPtr _eff;
@@ -32,6 +32,6 @@ public:
 	void draw();
 	void update(float dt, float tankPosx, std::vector<Enemy::HardPtr>& enemies);
 	void shot(IPoint atTankPos);
-	bool isAllRocketsExploaded();
-	void reloadRockets();
+	bool isAllMissilesExploaded();
+	void reloadMissiles();
 };
