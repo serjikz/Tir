@@ -26,6 +26,11 @@ private:
 	std::vector<Wheel::HardPtr> _wheels;	
 	Cannon::HardPtr _cannon;
 	Dirt::HardPrt _dirtEff;
+	enum class State {
+		NORMAL,
+		MISSILES_OVER,
+		NEED_RELOAD
+	} _state;
 public:
 	Tank();
 	typedef boost::shared_ptr<Tank> HardPtr;

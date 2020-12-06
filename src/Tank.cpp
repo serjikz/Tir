@@ -4,7 +4,8 @@
 Tank::Tank()
 	: _x(START_X),
 	_speed(0),
-	_angle(0)
+	_angle(0),
+	_state(State::NORMAL)
 {	
 	rapidxml::xml_node<>* settings = XmlSettings::getInstance()->getTankNode();
 	rapidxml::xml_node<>* tankSpeed = settings->first_node("TankSpeed");
@@ -38,15 +39,24 @@ void Tank::update(float dt, std::vector<Enemy::HardPtr>& enemies) {
 	if (fabs(_speed) < 0.1f) {
 		_speed = 0.f;
 	}
-	for (int i = 0; i < (int)_wheels.size(); i++) {
-		_wheels[i]->update(-_speed * dt);
+	for (const auto& wheel : _wheels) {
+		wheel->update(-_speed * dt);
 	}
 	_cannon->update(dt, _x + _tex->getBitmapRect().Width() / 2.f, enemies);
 	_effCont.Update(dt);
 	_dirtEff->update(dt);
-	if (isAllMissilesExploaded()) {
+
+	switch (_state) {
+	case State::NORMAL:
+		if (isAllMissilesExploaded()) {
+			_state = State::MISSILES_OVER;
+		}
+		break;
+	case State::MISSILES_OVER:
 		Message msg = Message(Message("ShowStats", "MissilesAreOver"));
 		Core::guiManager.getLayer("TestLayer")->getWidget("GameFieldWidget")->AcceptMessage(msg);
+		_state = State::NEED_RELOAD;
+		break;
 	}
 }
 
@@ -88,5 +98,6 @@ bool Tank::isAllMissilesExploaded() {
 
 void Tank::reloadMissiles() {
 	_cannon->reloadMissiles();
+	_state = State::NORMAL;
 }
 

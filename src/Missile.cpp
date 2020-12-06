@@ -13,7 +13,6 @@ Missile::Missile(FPoint directionVec, float speed, float x0, float y0)
 	float alpha = atan2(directionVec.y, directionVec.x);
 	_moveVec = FPoint(_speed * cos(alpha), _speed * sin(alpha));
 	_tex = Core::resourceManager.Get<Render::Texture>("Missile");
-	_t = 0.f;
 	_missileTailEff = MissileTailEff::HardPtr(new MissileTailEff());
 	_missileTailEff->reset();
 	_missileExplEff = MissileExplodeEff::HardPtr(new MissileExplodeEff());

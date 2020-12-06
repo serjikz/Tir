@@ -80,23 +80,11 @@ void GameFieldWidget::MouseMove(const IPoint &mouse_pos) {
 }
 
 void GameFieldWidget::AcceptMessage(const Message& message)
-{
+{	
 	if (message.getPublisher() == "ShowStats") {
-		if (_gui->getState() == InterfaceState::IS_OVER) {
-			return;
-		}
 		_gui->setState(InterfaceState::IS_OVER); 
 		std::string event = message.getData();
-		std::string text;
-		if (event == "TimeIsOver") {
-			text = _messenger->getText("TIME_IS_OVER") + getTargetsLeft();
-		} else if (event == "MissilesAreOver") {
-			text = _messenger->getText("MISSILES_ARE_OVER") + getTargetsLeft();
-		}
-		else {
-			text = _messenger->getText("CONGRATULATIONS");
-		}
-		_gui->setStatisticsMsg(text);
+		showStatistics(event);			
 	} else if (message.is("Interface", "SetStateTapToPlay")) {
 		_gui->setState(InterfaceState::TAP_TO_PLAY);
 		createNewEnemies();
@@ -127,6 +115,20 @@ void GameFieldWidget::createNewEnemies() {
 	_tank->reloadMissiles();
 }
 
-std::string GameFieldWidget:: getTargetsLeft() const {
+std::string GameFieldWidget::getTargetsLeft() const {
 	return std::to_string((size_t)_enemies.size()) + "/" + std::to_string(_enemiesToHit);
+}
+
+void GameFieldWidget::showStatistics(const std::string& event) {
+	std::string text;
+	if (event == "TimeIsOver") {
+		text = _messenger->getText("TIME_IS_OVER") + getTargetsLeft();
+	}
+	else if (event == "MissilesAreOver") {
+		text = _messenger->getText("MISSILES_ARE_OVER") + getTargetsLeft();
+	}
+	else {
+		text = _messenger->getText("CONGRATULATIONS");
+	}
+	_gui->setStatisticsMsg(text);
 }
