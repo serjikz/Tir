@@ -19,12 +19,11 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 }
 
 void GameFieldWidget::createBackground(rapidxml::xml_node<>* root) {
-	BkgObjectCreator::HardPtr bkgCreator = BackgroundPictureCreator::HardPtr(new BackgroundPictureCreator());
-	_backGround.push_back(bkgCreator->getObject());
+	// todo bkg->xml
+	_backGround.push_back((new BackgroundPictureCreator())->getObject());
 	rapidxml::xml_node<>* cloud = root->first_node("Clouds")->first_node("Cloud");
 	while (cloud) {
-		bkgCreator = CloudCreator::HardPtr(new CloudCreator(cloud));
-		_backGround.push_back(bkgCreator->getObject());
+		_backGround.push_back((new CloudCreator(cloud))->getObject());
 		cloud = cloud->next_sibling();
 	}
 }
@@ -165,7 +164,7 @@ void GameFieldWidget::KeyPressed(int keyCode)
 }
 
 void GameFieldWidget::createNewEnemies() {
-	// todo class
+	// todo class factory?
 	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
 	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
 	rapidxml::xml_node<>* enemy = root->first_node("Enemies")->first_node("Enemy");
