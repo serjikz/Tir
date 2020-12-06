@@ -2,8 +2,6 @@
 
 GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* elem)
 	: Widget(name)
-	, _timer(0)
-	, _scale(0.f)
 	, _enemiesToHit(0)
 	, _targetX(0)
 	, _targetY(0)

@@ -15,8 +15,6 @@ private:
 	constexpr static int MIN_Y_SHOT = 50;
 	Interface::HardPtr _gui;
 	Tank::HardPrt _tank;
-	float _timer;
-	float _scale;
 	std::vector <Enemy::HardPtr> _enemies;
 	size_t _enemiesToHit;
 	Render::Target* _targetX;
