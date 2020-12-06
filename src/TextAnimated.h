@@ -5,6 +5,7 @@ class TextAnimated : public InterfaceObject
 {
 private:
 	const float EPS = 0.01f;
+	const std::string FONT_NAME = "FloralessTap";
 	float _deltaScale;
 	float _scale;
 	float _speed;

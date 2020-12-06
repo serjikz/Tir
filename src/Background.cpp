@@ -2,10 +2,8 @@
 
 Background::Background()
 {
-	Xml::RapidXmlDocument settingsXml("Settings.xml");
-	rapidxml::xml_node<>* root = settingsXml.first_node();
 	_bkgObjects.push_back((new BackgroundPictureCreator())->getObject());
-	rapidxml::xml_node<>* cloud = root->first_node("Clouds")->first_node("Cloud");
+	rapidxml::xml_node<>* cloud = XmlSettings::getInstance()->getCloudsNode();
 	while (cloud) {
 		_bkgObjects.push_back((new CloudCreator(cloud))->getObject());
 		cloud = cloud->next_sibling();

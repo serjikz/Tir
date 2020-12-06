@@ -115,11 +115,9 @@ void GameFieldWidget::KeyPressed(int keyCode)
 
 void GameFieldWidget::createNewEnemies() {
 	// todo class factory?
-	Xml::RapidXmlDocument tankSettingsXml("Settings.xml");
-	rapidxml::xml_node<>* root = tankSettingsXml.first_node();
-	rapidxml::xml_node<>* enemy = root->first_node("Enemies")->first_node("Enemy");
 	_enemies.clear();
 	_enemiesToHit = 0;
+	rapidxml::xml_node<>* enemy = XmlSettings::getInstance()->getEnemiesNode();
 	size_t enemiesCount = InputFileReader::getInstance()->getEnemiesCount();
 	while (enemy && _enemiesToHit < enemiesCount) {
 		_enemies.push_back(Enemy::HardPtr(new Enemy(enemy)));

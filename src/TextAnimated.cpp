@@ -15,7 +15,7 @@ TextAnimated::TextAnimated(rapidxml::xml_node<>* settings)
 
 void TextAnimated::draw() {
 	if (_alpha > EPS) {
-		Render::BindFont("FloralessTap");
+		Render::BindFont(FONT_NAME);
 		Render::BeginAlphaMul(_alpha);
 		Render::device.PushMatrix();
 		Render::device.MatrixTranslate(_x, _y, 0);

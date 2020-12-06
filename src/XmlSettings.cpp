@@ -6,9 +6,10 @@ XmlSettings::HardPtr XmlSettings::xmlSettings_ = nullptr;
 XmlSettings::XmlSettings()
 	:_doc(INPUT_FILE_NAME),
 	_root(_doc.first_node()),
-	_enemyNode(_root->first_node(ENEMIES_NODE)->first_node(CONCRETE_ENEMY_NODE)),
-	_guiNode(_root->first_node(GUI_NODE)),
-	_tankNode(_root)
+	_enemyNode(_root->first_node(ENEMIES_NODE)->first_node()),
+	_guiNode(_root->first_node(GUI_NODE)->first_node()),
+	_tankNode(_root),
+	_cloudsNode(_root->first_node(CLOUDS_NODE)->first_node())
 {
 	
 }
@@ -34,4 +35,8 @@ rapidxml::xml_node<>* XmlSettings::getGUINode() {
 
 rapidxml::xml_node<>* XmlSettings::getTankNode() {
 	return _tankNode;
+}
+
+rapidxml::xml_node<>* XmlSettings::getCloudsNode() {
+	return _cloudsNode;
 }

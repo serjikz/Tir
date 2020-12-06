@@ -4,12 +4,11 @@
 Interface::Interface()
 {
 	
-	rapidxml::xml_node<>* settings = XmlSettings::getInstance()->getGUINode();
-	rapidxml::xml_node<>* objSettings = settings->first_node("InterfaceObject");
+	rapidxml::xml_node<>* objectSettings = XmlSettings::getInstance()->getGUINode();
 	InterfaceObjectCreator::HardPtr objCreator = InterfaceObjectCreator::HardPtr(new InterfaceObjectCreator());
-	while (objSettings) {
-		_interfaceObjects.push_back(objCreator->createObject(objSettings));
-		objSettings = objSettings->next_sibling();
+	while (objectSettings) {
+		_interfaceObjects.push_back(objCreator->createObject(objectSettings));
+		objectSettings = objectSettings->next_sibling();
 	}
 	setState(InterfaceState::TAP_TO_PLAY);
 }

@@ -3,6 +3,8 @@
 class MissileExplodeEff
 {
 private:	
+	const std::string ENEMY_EXPL_EFF = "EnemyExploded";
+	const std::string MISSILE_EXPL_EFF = "MissileExploded";
 	EffectsContainer _effCont;
 	ParticleEffectPtr _eff;
 public:
