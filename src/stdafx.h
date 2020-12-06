@@ -33,4 +33,5 @@
 #include "GameFieldWidget.h"
 #include "Enemy.h"
 #include "InputFileReader.h"
+#include "BlurWidgetEffect.h"
 #endif

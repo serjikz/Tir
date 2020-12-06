@@ -58,22 +58,13 @@
     <Filter Include="Source Files\Interface\Interface object visitor">
       <UniqueIdentifier>{cf9b3780-7a11-4815-914a-c4349b53a637}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{b74acf3a-4c13-484c-8f10-b746d61c1428}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\Main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\stdafx.cpp">
       <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\GamefieldWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\AppDelegate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\src\Enemy.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\ArrowHintPanel.cpp">
       <Filter>Source Files\Interface\Interface objects\Panels</Filter>
@@ -129,11 +120,29 @@
     <ClCompile Include="..\..\src\IntObjVisitor.cpp">
       <Filter>Source Files\Interface\Interface object visitor</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\Messenger.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="..\..\src\AppDelegate.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Enemy.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\GamefieldWidget.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="..\..\src\InputFileReader.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Main.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Messenger.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\BlurWidgetEffect.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\Background.cpp">
+      <Filter>Source Files\Background</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,12 +151,6 @@
     </ClInclude>
     <ClInclude Include="..\..\src\AppDelegate.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\Enemy.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\GameFieldWidget.h">
-      <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\ArrowHintPanel.h">
       <Filter>Source Files\Interface\Interface objects\Panels</Filter>
@@ -218,11 +221,23 @@
     <ClInclude Include="..\..\src\IntObjVisitor.h">
       <Filter>Source Files\Interface\Interface object visitor</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\src\Messenger.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="..\..\src\Enemy.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\GameFieldWidget.h">
+      <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\InputFileReader.h">
-      <Filter>Source Files</Filter>
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Messenger.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\BlurWidgetEffect.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\Background.h">
+      <Filter>Source Files\Background</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

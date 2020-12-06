@@ -2,84 +2,38 @@
 
 GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* elem)
 	: Widget(name)
+	, _blurEff(new BlurWidgetEffect())
 	, _enemiesToHit(0)
-	, _targetX(0)
-	, _targetY(0)
+	, _messenger(new Messenger())
+	, _bkg(new Background())
 {
 	Xml::RapidXmlDocument settingsXml("Settings.xml");
 	rapidxml::xml_node<>* root = settingsXml.first_node();
-	_tank = Tank::HardPrt(new Tank(root));
+	_tank = Tank::HardPtr(new Tank(root));
 	createNewEnemies();
-	createBackground(root);
 	_gui = Interface::HardPtr(new Interface(root->first_node("GUI")));
-	_messenger = Messenger::HardPtr(new Messenger());
-	initShaders();
 }
-
-void GameFieldWidget::createBackground(rapidxml::xml_node<>* root) {
-	// todo bkg->xml
-	_backGround.push_back((new BackgroundPictureCreator())->getObject());
-	rapidxml::xml_node<>* cloud = root->first_node("Clouds")->first_node("Cloud");
-	while (cloud) {
-		_backGround.push_back((new CloudCreator(cloud))->getObject());
-		cloud = cloud->next_sibling();
-	}
-}
-
-void GameFieldWidget::initShaders() {
-	_targetX = Render::device.CreateRenderTarget(1024, 1024);
-	_targetY = Render::device.CreateRenderTarget(1024, 1024);
-	_blurShaderX = Core::resourceManager.Get<Render::ShaderProgram>("blurX");
-	_blurShaderY = Core::resourceManager.Get<Render::ShaderProgram>("blurY");
-}
-
 
 void GameFieldWidget::Draw()
 {
 	if (_gui->getState() != InterfaceState::PLAY) {
-		drawWithBlur();
+		_blurEff->draw(_bkg, _enemies, _tank);		
 	}
 	else {
-		for (const auto &bkgObj : _backGround) {
-			bkgObj->draw();
-		}
+		_bkg->draw();
 		if (_gui->getState() == InterfaceState::PLAY) {
 			for (const auto &enemy: _enemies ) {
 				enemy->draw();
 			}
 		}
 		_tank->draw();
-		_gui->draw();
 	}
-}
-void GameFieldWidget::drawWithBlur() {
-	Render::device.BeginRenderTo(_targetX);
-	for (const auto& bkgObj : _backGround) {
-		bkgObj->draw();
-	}
-	if (_gui->getState() == InterfaceState::IS_OVER) {
-		for (const auto& enemy : _enemies) {
-			enemy->draw();
-		}
-	}
-	_tank->draw();
-	Render::device.EndRenderTo();
-	Render::device.BeginRenderTo(_targetY);
-	_blurShaderX->Bind();
-	_targetX->Draw(FPoint(0.0, 0.0));
-	_blurShaderX->Unbind();
-	Render::device.EndRenderTo();
-	_blurShaderY->Bind();
-	_targetY->Draw(FPoint(0.0, 0.0));
-	_blurShaderY->Unbind();
 	_gui->draw();
 }
 
 void GameFieldWidget::Update(float dt)
 {
-	for (const auto& bkgObj : _backGround) {
-		bkgObj->update(dt);
-	}
+	_bkg->update(dt);
 	_gui->update(dt);
 	_tank->update(dt, _enemies);
 	for (const auto& enemy : _enemies) {

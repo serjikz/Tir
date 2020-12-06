@@ -119,7 +119,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\ArrowHintPanel.cpp" />
+    <ClCompile Include="..\..\src\Background.cpp" />
     <ClCompile Include="..\..\src\BackgroundPicture.cpp" />
+    <ClCompile Include="..\..\src\BlurWidgetEffect.cpp" />
     <ClCompile Include="..\..\src\Button.cpp" />
     <ClCompile Include="..\..\src\Cannon.cpp" />
     <ClCompile Include="..\..\src\Cloud.cpp" />
@@ -150,10 +152,12 @@
   <ItemGroup>
     <ClInclude Include="..\..\src\AppDelegate.h" />
     <ClInclude Include="..\..\src\ArrowHintPanel.h" />
+    <ClInclude Include="..\..\src\Background.h" />
     <ClInclude Include="..\..\src\BackgroundPicture.h" />
     <ClInclude Include="..\..\src\BkgConcreteCreators.h" />
     <ClInclude Include="..\..\src\BkgObject.h" />
     <ClInclude Include="..\..\src\BkgObjectCreator.h" />
+    <ClInclude Include="..\..\src\BlurWidgetEffect.h" />
     <ClInclude Include="..\..\src\Button.h" />
     <ClInclude Include="..\..\src\Cannon.h" />
     <ClInclude Include="..\..\src\Cloud.h" />
