@@ -2,7 +2,8 @@
 
 class MissileTailEff
 {
-private:	
+private:
+	const std::string ROCKET_TAIL_EFF = "RocketTail";
 	const int TAIL_X = 12;
 	EffectsContainer _effCont;
 	ParticleEffectPtr _eff;

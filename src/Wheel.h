@@ -4,6 +4,7 @@ class Wheel
 {
 private:	
 	Render::Texture* _wheel;
+	FPoint _textureCenter;
 	short int _x, _y;
 	float _angle;
 public:

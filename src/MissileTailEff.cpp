@@ -16,7 +16,7 @@ void MissileTailEff::update(float dt) {
 }
 
 void MissileTailEff::reset() {
-	_eff = _effCont.AddEffect("RocketTail");
+	_eff = _effCont.AddEffect(ROCKET_TAIL_EFF);
 	_eff->posX = _x;
 	_eff->posY = _y;
 	_eff->Reset();
