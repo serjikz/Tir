@@ -24,7 +24,7 @@ private:
 	std::string getTargetsLeft() const;
 	Messenger::HardPtr _messenger;
 	Background::HardPtr _bkg;
-	void showStatistics(const std::string& event);
+	void showStatistics(const std::string& eventName);
 public:
 	GameFieldWidget(const std::string& name, rapidxml::xml_node<>* elem);
 	void Draw() override;

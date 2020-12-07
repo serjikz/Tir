@@ -119,12 +119,12 @@ std::string GameFieldWidget::getTargetsLeft() const {
 	return std::to_string((size_t)_enemies.size()) + "/" + std::to_string(_enemiesToHit);
 }
 
-void GameFieldWidget::showStatistics(const std::string& event) {
+void GameFieldWidget::showStatistics(const std::string& eventName) {
 	std::string text;
-	if (event == "TimeIsOver") {
+	if (eventName == "TimeIsOver") {
 		text = _messenger->getText("TIME_IS_OVER") + getTargetsLeft();
 	}
-	else if (event == "MissilesAreOver") {
+	else if (eventName == "MissilesAreOver") {
 		text = _messenger->getText("MISSILES_ARE_OVER") + getTargetsLeft();
 	}
 	else {
