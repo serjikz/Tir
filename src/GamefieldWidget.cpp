@@ -19,10 +19,8 @@ void GameFieldWidget::Draw()
 	}
 	else {
 		_bkg->draw();
-		if (_gui->getState() == InterfaceState::PLAY) {
-			for (const auto &enemy: _enemies ) {
-				enemy->draw();
-			}
+		for (const auto &enemy: _enemies ) {
+			enemy->draw();
 		}
 		_tank->draw();
 	}
