@@ -35,13 +35,7 @@ void GameFieldWidget::Update(float dt)
 	for (const auto& enemy : _enemies) {
 		enemy->update(dt);
 	}
-	for (size_t i = 0; i < _enemies.size(); i++) {
-		for (size_t j = i + 1; j < _enemies.size(); j++) {
-			if (_enemies[i]->isIntersect(_enemies[j])) {
-				_enemies[i]->bounceWith(_enemies[j]);
-			}
-		}
-	} 
+	checkEnemiesCollision();
 	// TODO:
 	if (_gui->getState() == InterfaceState::PLAY) {
 		if (_enemies.empty() && _gui->getTime() > 0) {
@@ -129,4 +123,14 @@ void GameFieldWidget::showStatistics(const std::string& eventName) {
 		text = _messenger->getText("CONGRATULATIONS");
 	}
 	_gui->setStatisticsMsg(text);
+}
+
+void GameFieldWidget::checkEnemiesCollision() {
+	for (size_t i = 0; i < _enemies.size(); i++) {
+		for (size_t j = i + 1; j < _enemies.size(); j++) {
+			if (_enemies[i]->isIntersect(_enemies[j])) {
+				_enemies[i]->bounceWith(_enemies[j]);
+			}
+		}
+	}
 }
