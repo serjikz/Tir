@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+  <Messages>
+    <Msg id ="TIME_IS_OVER" text="TIME IS OVER!&#10;&#10;&#10;Targets left to hit:&#10;"/>
+    <Msg id ="MISSILES_ARE_OVER" text="Missiles are over!&#10;&#10;&#10;Targets left to hit:&#10;"/>
+    <Msg id ="CONGRATULATIONS" text="CONGRATULATIONS!&#10;&#10;You win!&#10;&#10;All targets defeated!"/>
+  </Messages>
+ 
