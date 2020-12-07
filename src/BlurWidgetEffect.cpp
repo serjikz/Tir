@@ -12,11 +12,9 @@ BlurWidgetEffect::BlurWidgetEffect()
 void BlurWidgetEffect::draw(const Background::HardPtr bkg, const std::vector <Enemy::HardPtr>& enemies, const Tank::HardPtr tank) {
 	Render::device.BeginRenderTo(_targetX);
 	bkg->draw();
-	//if (_gui->getState() == InterfaceState::IS_OVER) {
-		for (const auto& enemy : enemies) {
-			enemy->draw();
-		}
-//	}
+	for (const auto& enemy : enemies) {
+		enemy->draw();
+	}
 	tank->draw();
 	Render::device.EndRenderTo();
 	Render::device.BeginRenderTo(_targetY);
@@ -27,9 +25,4 @@ void BlurWidgetEffect::draw(const Background::HardPtr bkg, const std::vector <En
 	_blurShaderY->Bind();
 	_targetY->Draw(FPoint(0.0, 0.0));
 	_blurShaderY->Unbind();
-	//_gui->draw();*/
-}
-
-void BlurWidgetEffect::update(float dt) {
-
 }
