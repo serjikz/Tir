@@ -80,3 +80,7 @@ void EnemiesController::explode(const FPoint& pos) {
 	_eff->posY = pos.y;
 	_eff->Reset();
 }
+
+size_t EnemiesController::getEnemiesToHit() {
+	return _enemiesToHit;
+}

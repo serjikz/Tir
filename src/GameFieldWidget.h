@@ -18,11 +18,11 @@ private:
 	Interface::HardPtr _gui;
 	Tank::HardPtr _tank;
 	BlurWidgetEffect::HardPtr _blurEff;
-	size_t _enemiesToHit;
-	std::string getTargetsLeft() const;
+	
 	Messenger::HardPtr _messenger;
 	Background::HardPtr _bkg;
 	EnemiesController::HardPtr _enemiesController;
+	std::string getTargetsLeft() const;
 	void showStatistics(const std::string& eventName);
 	void checkVictoryState();
 	void checkMissilesHit();

@@ -85,7 +85,8 @@ void GameFieldWidget::KeyPressed(int keyCode)
 
 std::string GameFieldWidget::getTargetsLeft() const {
 	int enemiesCount = _enemiesController->getObjects().size();
-	return std::to_string(enemiesCount) + "/" + std::to_string(_enemiesToHit);
+	size_t enemiesToHit = _enemiesController->getEnemiesToHit();
+	return std::to_string(enemiesCount) + "/" + std::to_string(enemiesToHit);
 }
 
 void GameFieldWidget::showStatistics(const std::string& eventName) {

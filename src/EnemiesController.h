@@ -18,5 +18,6 @@ public:
 	void checkMissilesHit(std::vector<Missile::HardPtr> missiles);
 	void update(float dt);
 	void draw();
+	size_t getEnemiesToHit();
 	const std::vector <Enemy::HardPtr>& getObjects() const;
 };
