@@ -14,8 +14,8 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 
 void GameFieldWidget::Draw()
 {
-	if (_gui->getState() != InterfaceState::PLAY) {
-		_blurEff->draw(_bkg, _enemiesController->getObjects(), _tank);
+	if (_gui->getState() == InterfaceState::IS_OVER) {
+		_blurEff->draw(_bkg, _enemiesController, _tank);
 	}
 	else {
 		_bkg->draw();
@@ -64,8 +64,8 @@ void GameFieldWidget::AcceptMessage(const Message& message)
 {	
 	if (message.getPublisher() == "ShowStats") {
 		_gui->setState(InterfaceState::IS_OVER); 
-		std::string event = message.getData();
-		showStatistics(event);			
+		std::string eventName = message.getData();
+		showStatistics(eventName);
 	} else if (message.is("Interface", "SetStateTapToPlay")) {
 		_gui->setState(InterfaceState::TAP_TO_PLAY);
 		_enemiesController->createNewEnemies();

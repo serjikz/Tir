@@ -9,12 +9,10 @@ BlurWidgetEffect::BlurWidgetEffect()
 	_blurShaderY = Core::resourceManager.Get<Render::ShaderProgram>("blurY");
 }
 
-void BlurWidgetEffect::draw(const Background::HardPtr bkg, const std::vector <Enemy::HardPtr>& enemies, const Tank::HardPtr tank) {
+void BlurWidgetEffect::draw(const Background::HardPtr bkg, const EnemiesController::HardPtr enemiesController, const Tank::HardPtr tank) {
 	Render::device.BeginRenderTo(_targetX);
 	bkg->draw();
-	for (const auto& enemy : enemies) {
-		enemy->draw();
-	}
+	enemiesController->draw();
 	tank->draw();
 	Render::device.EndRenderTo();
 	Render::device.BeginRenderTo(_targetY);
