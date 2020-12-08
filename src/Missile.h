@@ -27,8 +27,8 @@ public:
 	void draw();
 	void update(float dt);
 	bool isNotVisible();
-	void tryHit(std::vector<Enemy::HardPtr> &enemies);
 	FPoint getCenterPos() const;
 	FPoint getMoveVec() const;
 	void bounceWith(Enemy::HardPtr enemy);
+	float getTextureHeight() const;
 };

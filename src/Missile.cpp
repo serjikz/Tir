@@ -59,29 +59,6 @@ bool Missile::isNotVisible() {
 	return (_exploded && _missileExplEff->isFinished()) || !textureRect.Intersects(screen);
 }
 
-void Missile::tryHit(std::vector<Enemy::HardPtr> &enemies) {
-	if (_exploded) {
-		return;
-	}
-	for (auto it = enemies.begin(); it != enemies.end();) {
-		FPoint interactionVec = (*it)->getCenterPos() - this->getCenterPos();
-		float sqrLen = pow(interactionVec.x, 2) + pow(interactionVec.y, 2);
-		float r = _tex->getBitmapRect().Height() / 2.f + (*it)->getTextureRect().Width() / 2.f;
-		if (sqrLen < r * r) {
-			bounceWith(*it);
-			(*it)->reduceHealth();
-			if ((*it)->getHealth() <= 0) {
-				_missileExplEff->reset((*it)->getCenterPos().x, (*it)->getCenterPos().y, true);
-				it = enemies.erase(it);				
-				return;
-			}
-			else {
-				_missileExplEff->reset(this->getCenterPos().x, this->getCenterPos().y);
-			}
-		}
-		it++;
-	}
-}
 
 FPoint Missile::getCenterPos() const{
 	return FPoint(_x0 + _dx, _y0 + _dy);
@@ -118,4 +95,8 @@ void Missile::explode() {
 	_moveVec.x = 0.f;
 	_moveVec.y = 0.f;
 	_exploded = true;
+}
+
+float Missile::getTextureHeight() const {
+	return _tex->getBitmapRect().Height() / 2.f;
 }

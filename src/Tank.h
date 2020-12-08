@@ -35,11 +35,12 @@ public:
 	Tank();
 	typedef boost::shared_ptr<Tank> HardPtr;
 	void draw();
-	void update(float dt, std::vector<Enemy::HardPtr> &enemies);
+	void update(float dt);
 	void moveLeft();
 	void moveRight();
 	void shot();
 	bool isAllMissilesExploaded();
 	void reloadMissiles();
+	std::vector<Missile::HardPtr> getMissiles();
 };
 

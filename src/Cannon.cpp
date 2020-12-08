@@ -40,9 +40,9 @@ void Cannon::draw() {
 	Render::device.PopMatrix();
 }
 
-void Cannon::update(float dt, float tankPosx, std::vector<Enemy::HardPtr> &enemies) {
+void Cannon::update(float dt, float tankPosX) {
 	IPoint mousePos = Core::mainInput.GetMousePos();
-	IPoint v1 = IPoint(mousePos.x - tankPosx, mousePos.y - _tex->getBitmapRect().Height());
+	IPoint v1 = IPoint(mousePos.x - tankPosX, mousePos.y - _tex->getBitmapRect().Height());
 	float len = sqrt(pow(v1.x, 2) + pow(v1.y, 2));
 	if (len < EPS) {
 		return;
@@ -57,13 +57,12 @@ void Cannon::update(float dt, float tankPosx, std::vector<Enemy::HardPtr> &enemi
 		_dx = math::lerp(int(INTERTIA_MOVE * _directionVec.x), 0, _t);
 		_dy = math::lerp(int(INTERTIA_MOVE * _directionVec.y), 0, _t);
 	} 
-	for (auto it =_missiles.begin(); it != _missiles.end();) {
+	for (auto it = _missiles.begin(); it != _missiles.end();) {
 		(*it)->update(dt);
 		if ((*it)->isNotVisible()) {
-			it = _missiles.erase(it);			
+			it = _missiles.erase(it);
 		}
 		else {
-			(*it)->tryHit(enemies);
 			it++;
 		}
 	}
@@ -92,5 +91,9 @@ bool Cannon::isAllMissilesExploaded() {
 
 void Cannon::reloadMissiles() {
 	_missilesAvailable = _missilesInitValue;
+}
+
+std::vector<Missile::HardPtr> Cannon::getMissiles() {
+	return _missiles;
 }
 

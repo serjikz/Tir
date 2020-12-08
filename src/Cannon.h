@@ -19,7 +19,7 @@ private:
 	float CANNON_X0;
 	float CANNON_Y0;
 	FPoint _directionVec;
-	std::deque<Missile::HardPtr> _missiles;
+	std::vector<Missile::HardPtr> _missiles;
 	short int _missilesAvailable;
 	size_t _missilesInitValue;
 	FPoint _textureCenter;
@@ -30,8 +30,9 @@ public:
 	Cannon(rapidxml::xml_node<>* settings);
 	typedef boost::shared_ptr<Cannon> HardPtr;
 	void draw();
-	void update(float dt, float tankPosx, std::vector<Enemy::HardPtr>& enemies);
+	void update(float dt, float tankPosX);
 	void shot(IPoint atTankPos);
 	bool isAllMissilesExploaded();
 	void reloadMissiles();
+	std::vector<Missile::HardPtr> getMissiles();
 };

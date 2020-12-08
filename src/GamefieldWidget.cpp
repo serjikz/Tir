@@ -5,23 +5,21 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 	, _gui(new Interface())
 	, _tank(new Tank())
 	, _blurEff(new BlurWidgetEffect())
-	, _enemiesToHit(0)
 	, _messenger(new Messenger())
 	, _bkg(new Background())
+	, _enemiesController(new EnemiesController())
 {
-	createNewEnemies();
+
 }
 
 void GameFieldWidget::Draw()
 {
 	if (_gui->getState() != InterfaceState::PLAY) {
-		_blurEff->draw(_bkg, _enemies, _tank);		
+		_blurEff->draw(_bkg, _enemiesController->getObjects(), _tank);
 	}
 	else {
 		_bkg->draw();
-		for (const auto &enemy: _enemies ) {
-			enemy->draw();
-		}
+		_enemiesController->draw();
 		_tank->draw();
 	}
 	_gui->draw();
@@ -31,19 +29,10 @@ void GameFieldWidget::Update(float dt)
 {
 	_bkg->update(dt);
 	_gui->update(dt);
-	_tank->update(dt, _enemies);
-	for (const auto& enemy : _enemies) {
-		enemy->update(dt);
-	}
-	checkEnemiesCollision();
-	// TODO:
-	if (_gui->getState() == InterfaceState::PLAY) {
-		if (_enemies.empty() && _gui->getTime() > 0) {
-			Message msg = Message("ShowStats", "Victory");
-			AcceptMessage(msg);
-			return;
-		}
-	}
+	_tank->update(dt);
+	_enemiesController->update(dt);
+	checkMissilesHit();
+	checkVictoryState();
 }
 
 bool GameFieldWidget::MouseDown(const IPoint &mouse_pos)
@@ -79,7 +68,8 @@ void GameFieldWidget::AcceptMessage(const Message& message)
 		showStatistics(event);			
 	} else if (message.is("Interface", "SetStateTapToPlay")) {
 		_gui->setState(InterfaceState::TAP_TO_PLAY);
-		createNewEnemies();
+		_enemiesController->createNewEnemies();
+		_tank->reloadMissiles();
 	}
 }
 
@@ -93,22 +83,9 @@ void GameFieldWidget::KeyPressed(int keyCode)
 	}
 }
 
-void GameFieldWidget::createNewEnemies() {
-	// todo class factory?
-	_enemies.clear();
-	_enemiesToHit = 0;
-	rapidxml::xml_node<>* enemy = XmlSettings::getInstance()->getEnemiesNode();
-	size_t enemiesCount = InputFileReader::getInstance()->getEnemiesCount();
-	while (enemy && _enemiesToHit < enemiesCount) {
-		_enemies.push_back(Enemy::HardPtr(new Enemy(enemy)));
-		enemy = enemy->next_sibling();
-		_enemiesToHit++;
-	}
-	_tank->reloadMissiles();
-}
-
 std::string GameFieldWidget::getTargetsLeft() const {
-	return std::to_string((size_t)_enemies.size()) + "/" + std::to_string(_enemiesToHit);
+	int enemiesCount = _enemiesController->getObjects().size();
+	return std::to_string(enemiesCount) + "/" + std::to_string(_enemiesToHit);
 }
 
 void GameFieldWidget::showStatistics(const std::string& eventName) {
@@ -125,12 +102,16 @@ void GameFieldWidget::showStatistics(const std::string& eventName) {
 	_gui->setStatisticsMsg(text);
 }
 
-void GameFieldWidget::checkEnemiesCollision() {
-	for (size_t i = 0; i < _enemies.size(); i++) {
-		for (size_t j = i + 1; j < _enemies.size(); j++) {
-			if (_enemies[i]->isIntersect(_enemies[j])) {
-				_enemies[i]->bounceWith(_enemies[j]);
-			}
+void GameFieldWidget::checkVictoryState() {
+	if (_gui->getState() == InterfaceState::PLAY) {
+		int enemiesCount = _enemiesController->getObjects().size();
+		if (enemiesCount == 0 && _gui->getTime() > 0) {
+			Message msg = Message("ShowStats", "Victory");
+			AcceptMessage(msg);
 		}
 	}
+}
+
+void GameFieldWidget::checkMissilesHit() {
+	_enemiesController->checkMissilesHit(_tank->getMissiles());
 }

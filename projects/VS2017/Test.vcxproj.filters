@@ -147,6 +147,9 @@
     <ClCompile Include="..\..\src\XmlSettings.cpp">
       <Filter>Source Files\Main</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\EnemiesController.cpp">
+      <Filter>Source Files\Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\stdafx.h">
@@ -243,6 +246,9 @@
       <Filter>Source Files\Background</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\XmlSettings.h">
+      <Filter>Source Files\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\EnemiesController.h">
       <Filter>Source Files\Main</Filter>
     </ClInclude>
   </ItemGroup>

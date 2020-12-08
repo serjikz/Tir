@@ -1,7 +1,7 @@
 #pragma once
 #include "Tank.h"
 #include "Cloud.h"
-#include "Enemy.h"
+#include "EnemiesController.h"
 #include "Interface.h"
 #include "BkgConcreteCreators.h"
 #include "Messenger.h"
@@ -17,15 +17,15 @@ private:
 	constexpr static int MIN_Y_SHOT = 50;
 	Interface::HardPtr _gui;
 	Tank::HardPtr _tank;
-	std::vector <Enemy::HardPtr> _enemies;
 	BlurWidgetEffect::HardPtr _blurEff;
 	size_t _enemiesToHit;
-	void createNewEnemies();
 	std::string getTargetsLeft() const;
 	Messenger::HardPtr _messenger;
 	Background::HardPtr _bkg;
+	EnemiesController::HardPtr _enemiesController;
 	void showStatistics(const std::string& eventName);
-	void checkEnemiesCollision();
+	void checkVictoryState();
+	void checkMissilesHit();
 public:
 	GameFieldWidget(const std::string& name, rapidxml::xml_node<>* elem);
 	void Draw() override;

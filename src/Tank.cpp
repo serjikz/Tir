@@ -32,7 +32,7 @@ Tank::Tank()
 	_textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);
 };
 
-void Tank::update(float dt, std::vector<Enemy::HardPtr>& enemies) {
+void Tank::update(float dt) {
 	_x = math::clamp(0.f, (float)Render::device.Width() - _tex->getBitmapRect().Width(), _x + _speed * dt);
 	_angle *= GRAVITY_FORCE;
 	_speed *= FRICTION_FORCE;
@@ -42,7 +42,7 @@ void Tank::update(float dt, std::vector<Enemy::HardPtr>& enemies) {
 	for (const auto& wheel : _wheels) {
 		wheel->update(-_speed * dt);
 	}
-	_cannon->update(dt, _x + _tex->getBitmapRect().Width() / 2.f, enemies);
+	_cannon->update(dt, _x + _tex->getBitmapRect().Width() / 2.f);
 	_effCont.Update(dt);
 	_dirtEff->update(dt);
 
@@ -101,3 +101,6 @@ void Tank::reloadMissiles() {
 	_state = State::NORMAL;
 }
 
+std::vector<Missile::HardPtr> Tank::getMissiles() {
+	return _cannon->getMissiles();
+}

@@ -12,6 +12,6 @@ public:
 	typedef boost::shared_ptr<MissileExplodeEff> HardPtr;
 	void draw();
 	void update(float dt);
-	void reset(int x, int y, bool enemyDestroyed = false);
+	void reset(int x, int y);
 	bool isFinished();
 };
