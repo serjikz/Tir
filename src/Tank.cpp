@@ -22,9 +22,9 @@ Tank::Tank()
 		_wheels.push_back(Wheel::HardPtr(new Wheel(wheel)));
 		wheel = wheel->next_sibling();
 	}
-	rapidxml::xml_node<>* cannon = settings->first_node("Cannon");
+	rapidxml::xml_node<>* cannonSettings = settings->first_node("Cannon");
 	rapidxml::xml_node<>* guiSettings = settings->first_node("GUI");
-	_cannon = Cannon::HardPtr(new Cannon(cannon));
+	_cannon = Cannon::HardPtr(new Cannon(cannonSettings));
 	_exhaustGasEff = _effCont.AddEffect("ExhaustGas");
 	_exhaustGasEff->posY = Xml::GetFloatAttributeOrDef(settings, "exhaustGasPosY", 0);
 	_exhaustGasEff->posX = Xml::GetFloatAttributeOrDef(settings, "exhaustGasPosX", 0);
@@ -68,8 +68,8 @@ void Tank::draw() {
 	Render::device.MatrixTranslate(-_textureCenter.x, -_textureCenter.y, 0);
 	_cannon->draw();
 	_tex->Draw();	
-	for (int i = 0; i < (int)_wheels.size(); i++) {
-		_wheels[i]->draw();
+	for (const auto& wheel: _wheels) {
+		wheel->draw();
 	}
 	_effCont.Draw();
 	_dirtEff->draw();
