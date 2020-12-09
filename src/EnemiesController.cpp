@@ -48,34 +48,44 @@ const std::vector <Enemy::HardPtr>& EnemiesController::getObjects() const {
 	return _enemies;
 }
 
-void EnemiesController::checkMissilesHit(std::vector<Missile::HardPtr> missiles) {
-	for (auto missilesIt = missiles.begin(); missilesIt != missiles.end(); missilesIt++) {
-		for (auto enemiesIt = _enemies.begin(); enemiesIt != _enemies.end();) {
-			FPoint interactionVec = (*missilesIt)->getCenterPos() - (*enemiesIt)->getCenterPos();
-			float sqrLen = pow(interactionVec.x, 2) + pow(interactionVec.y, 2);
-			float r = (*missilesIt)->getTextureHeight() / 2.f + (*enemiesIt)->getTextureRect().Width() / 2.f;
-			if (sqrLen < r * r) {
-				(*missilesIt)->bounceWith(*enemiesIt);
-				(*enemiesIt)->reduceHealth();
-				if ((*enemiesIt)->getHealth() <= 0) {
-					FPoint enemyPos = (*enemiesIt)->getCenterPos();
-					explode(enemyPos);
-					enemiesIt = _enemies.erase(enemiesIt);
-				}
-				else {
-					enemiesIt++;
-					//? in missile? _missileExplEff->reset(this->getCenterPos().x, this->getCenterPos().y);
-				}
+void EnemiesController::checkMissilesHit(std::vector<Missile::HardPtr>& missiles) {
+	for (auto missilesIt = missiles.begin(); missilesIt != missiles.end();) {
+		tryHitSomeEnemy((*missilesIt));
+		missilesIt++;
+	}		
+}
+
+void EnemiesController::tryHitSomeEnemy(Missile::HardPtr& missile) {
+	for (auto enemiesIt = _enemies.begin(); enemiesIt != _enemies.end();) {
+		FPoint interactionVec = missile->getCenterPos() - (*enemiesIt)->getCenterPos();
+		float sqrLen = pow(interactionVec.x, 2) + pow(interactionVec.y, 2);
+		float r = missile->getTextureHeight() / 2.f + (*enemiesIt)->getTextureRect().Width() / 2.f;
+		if (sqrLen < r * r) {
+			missile->bounceWith(*enemiesIt);
+			(*enemiesIt)->reduceHealth();
+			if ((*enemiesIt)->getHealth() <= 0) {
+				FPoint enemyPos = (*enemiesIt)->getCenterPos();
+				explodeEnemy(enemyPos);
+				enemiesIt = _enemies.erase(enemiesIt);
 			}
-			else {
-				enemiesIt++;
-			}
+			explodeMissile(missile->getCenterPos());
+			return;
+		}
+		else {
+			enemiesIt++;
 		}
 	}
 }
 
-void EnemiesController::explode(const FPoint& pos) {
+void EnemiesController::explodeEnemy(const FPoint& pos) {
 	_eff = _effCont.AddEffect(ENEMY_EXPL_EFF);
+	_eff->posX = pos.x;
+	_eff->posY = pos.y;
+	_eff->Reset();
+}
+
+void EnemiesController::explodeMissile(const FPoint& pos) {
+	_eff = _effCont.AddEffect(MISSILE_EXPL_EFF);
 	_eff->posX = pos.x;
 	_eff->posY = pos.y;
 	_eff->Reset();
@@ -84,3 +94,4 @@ void EnemiesController::explode(const FPoint& pos) {
 size_t EnemiesController::getEnemiesToHit() {
 	return _enemiesToHit;
 }
+

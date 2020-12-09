@@ -36,10 +36,7 @@ void Missile::draw() {
 }
 
 void Missile::update(float dt) {
-	if (_exploded) {
-		_missileExplEff->update(dt);
-	}
-	else {
+	if (!_exploded) {
 		_missileTailEff->update(dt);
 		_t = math::clamp(0.f, LIFE_TIME, _t + dt);
 		_dx += _moveVec.x * dt;
@@ -47,16 +44,18 @@ void Missile::update(float dt) {
 		_dy += _moveVec.y * dt;
 		_angle = -90.f + 180.f / math::PI * atan2(_moveVec.y, _moveVec.x);
 	}
+	else {
+		_missileExplEff->update(dt);
+	}
 	if (!_exploded && (_y0 + _dy < MIN_Y)) {
 		explode();
-		_missileExplEff->reset(_x0 + _dx, MIN_Y);
 	}
 }
 
 bool Missile::isNotVisible() {
 	IRect screen = IRect(0, 0, Render::device.Width(), 2 * Render::device.Height());
 	IRect textureRect = IRect(_x0 + _dx, _y0 + _dy, _tex->getBitmapRect().Width(), _tex->getBitmapRect().Height());
-	return (_exploded && _missileExplEff->isFinished()) || !textureRect.Intersects(screen);
+	return (_exploded || !textureRect.Intersects(screen));
 }
 
 
@@ -92,6 +91,7 @@ void Missile::bounceWith(Enemy::HardPtr enemy) {
 }
 
 void Missile::explode() {
+	_missileExplEff->reset(_x0 + _dx, MIN_Y);
 	_moveVec.x = 0.f;
 	_moveVec.y = 0.f;
 	_exploded = true;
