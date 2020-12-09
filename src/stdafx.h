@@ -12,9 +12,7 @@
 #ifdef __cplusplus
 #include <PlayrixEngine.h>
 #include "BkgObject.h"
-#include "Cloud.h"
 #include "IntObjVisitor.h"
-#include "Button.h"
 #include "TextAnimated.h"
 #include "ArrowHintPanel.h"
 #include "MissilesPanel.h"
@@ -24,11 +22,7 @@
 #include "Interface.h"
 #include "InterfaceObjectCreator.h"
 #include "Cannon.h"
-#include "Dirt.h"
-#include "Missile.h"
-#include "MissileTailEff.h"
 #include "Tank.h"
-#include "Wheel.h"
 #include "GameFieldWidget.h"
 #include "Enemy.h"
 #include "InputFileReader.h"
