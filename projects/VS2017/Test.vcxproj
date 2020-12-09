@@ -136,7 +136,6 @@
     <ClCompile Include="..\..\src\GamefieldWidget.cpp" />
     <ClCompile Include="..\..\src\Messenger.cpp" />
     <ClCompile Include="..\..\src\Missile.cpp" />
-    <ClCompile Include="..\..\src\MissileExplodeEff.cpp" />
     <ClCompile Include="..\..\src\Panel.cpp" />
     <ClCompile Include="..\..\src\MissilesPanel.cpp" />
     <ClCompile Include="..\..\src\MissileTailEff.cpp" />
@@ -174,7 +173,6 @@
     <ClInclude Include="..\..\src\IntObjVisitor.h" />
     <ClInclude Include="..\..\src\Messenger.h" />
     <ClInclude Include="..\..\src\Missile.h" />
-    <ClInclude Include="..\..\src\MissileExplodeEff.h" />
     <ClInclude Include="..\..\src\Panel.h" />
     <ClInclude Include="..\..\src\MissilesPanel.h" />
     <ClInclude Include="..\..\src\MissileTailEff.h" />

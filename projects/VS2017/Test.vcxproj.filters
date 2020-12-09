@@ -99,9 +99,6 @@
     <ClCompile Include="..\..\src\MissileTailEff.cpp">
       <Filter>Source Files\Tank</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\src\MissileExplodeEff.cpp">
-      <Filter>Source Files\Tank</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\src\MissilesPanel.cpp">
       <Filter>Source Files\Interface\Interface objects\Panels</Filter>
     </ClCompile>
@@ -189,9 +186,6 @@
       <Filter>Source Files\Interface</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\MissileTailEff.h">
-      <Filter>Source Files\Tank</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\src\MissileExplodeEff.h">
       <Filter>Source Files\Tank</Filter>
     </ClInclude>
     <ClInclude Include="..\..\src\MissilesPanel.h">

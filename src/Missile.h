@@ -1,7 +1,6 @@
 #pragma once
 #include "Enemy.h"
 #include "MissileTailEff.h"
-#include "MissileExplodeEff.h"
 
 class Missile
 {
@@ -19,7 +18,6 @@ private:
 	float _speed;
 	bool _exploded;
 	MissileTailEff::HardPtr _missileTailEff;
-	MissileExplodeEff::HardPtr _missileExplEff;
 	void explode();
 public:
 	Missile(FPoint directionVec, float speed, float x0, float y0);
