@@ -14,7 +14,7 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 
 void GameFieldWidget::Draw()
 {
-	if (_gui->getState() == InterfaceState::IS_OVER) {
+	if (_gui->getState() != InterfaceState::PLAY) {
 		_blurEff->draw(_bkg, _enemiesController, _tank);
 	}
 	else {
