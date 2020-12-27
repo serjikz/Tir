@@ -1,4 +1,4 @@
 CountTarget=10
 Speed=550
 Time=40
-Missiles=30
+Missiles=80
