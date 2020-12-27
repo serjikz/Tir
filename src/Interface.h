@@ -2,6 +2,7 @@
 
 #include "InterfaceObject.h"
 
+// Пользовательский интерфейс
 class Interface
 {
 private:	

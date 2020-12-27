@@ -1,5 +1,6 @@
 #pragma once
 
+// Движущееся колесо танка
 class Wheel
 {
 private:	

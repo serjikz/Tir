@@ -2,6 +2,7 @@
 #include "Panel.h"
 #include <ctime> 
 
+// Панель таймера 
 class TimePanel : public Panel
 {
 private:	

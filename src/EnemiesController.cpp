@@ -35,6 +35,7 @@ void EnemiesController::draw() {
 }
 
 void EnemiesController::checkEnemiesCollision() {
+	// Данный метод проверяет столкновение целей между собой
 	for (size_t i = 0; i < _enemies.size(); i++) {
 		for (size_t j = i + 1; j < _enemies.size(); j++) {
 			if (_enemies[i]->isIntersect(_enemies[j])) {
@@ -49,6 +50,7 @@ const std::vector <Enemy::HardPtr>& EnemiesController::getObjects() const {
 }
 
 void EnemiesController::checkMissilesHit(std::vector<Missile::HardPtr>& missiles) {
+	// Данный метод проверяет поражение снарядами целей
 	for (auto missilesIt = missiles.begin(); missilesIt != missiles.end();) {
 		tryHitSomeEnemy((*missilesIt));
 		missilesIt++;
@@ -56,6 +58,7 @@ void EnemiesController::checkMissilesHit(std::vector<Missile::HardPtr>& missiles
 }
 
 void EnemiesController::tryHitSomeEnemy(Missile::HardPtr& missile) {
+	// При проверке поражения цели проверяется квадрат расстояния между центрами снаряда и цели
 	for (auto enemiesIt = _enemies.begin(); enemiesIt != _enemies.end();) {
 		FPoint interactionVec = missile->getCenterPos() - (*enemiesIt)->getCenterPos();
 		float sqrLen = pow(interactionVec.x, 2) + pow(interactionVec.y, 2);
@@ -78,6 +81,7 @@ void EnemiesController::tryHitSomeEnemy(Missile::HardPtr& missile) {
 }
 
 void EnemiesController::explodeEnemy(const FPoint& pos) {
+	// При поражении цели создаем эффект взрыва 
 	_eff = _effCont.AddEffect(ENEMY_EXPL_EFF);
 	_eff->posX = pos.x;
 	_eff->posY = pos.y;
@@ -85,6 +89,7 @@ void EnemiesController::explodeEnemy(const FPoint& pos) {
 }
 
 void EnemiesController::explodeMissile(const FPoint& pos) {
+	// При столковении с целью создаём эффект взрыва снаряда
 	_eff = _effCont.AddEffect(MISSILE_EXPL_EFF);
 	_eff->posX = pos.x;
 	_eff->posY = pos.y;

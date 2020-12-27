@@ -1,6 +1,6 @@
 #pragma once
 
-
+// Базоый класс создателя элемента фона (Фабричный метод)
 class BkgObjectCreator
 {
 private:

@@ -1,6 +1,9 @@
 #pragma once
 #include "Enemy.h"
 
+/*
+ * Данный класс управляет целями на экране
+*/
 
 class EnemiesController
 {

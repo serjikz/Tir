@@ -1,6 +1,7 @@
 #pragma once
 
-// singleton
+// Данный класс обеспечивает работу с параметрами, заданных в файле Settings.xml 
+// Создается в единственном экземпляре
 class XmlSettings
 {
 	const std::string INPUT_FILE_NAME = "Settings.xml";

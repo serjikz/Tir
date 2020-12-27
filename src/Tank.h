@@ -4,6 +4,7 @@
 #include "Dirt.h"
 #include "Enemy.h"
 
+// Танк
 
 class Tank
 {

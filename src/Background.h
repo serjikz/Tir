@@ -1,6 +1,7 @@
 #pragma once
 #include "BkgObject.h"
 
+// ‘он
 class Background
 {
 private:	

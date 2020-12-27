@@ -1,6 +1,7 @@
 #pragma once
 #include "InterfaceObject.h"
 
+// Фабрика элементов интерфейса
 class InterfaceObjectCreator
 {
 public:

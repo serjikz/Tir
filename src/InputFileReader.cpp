@@ -25,6 +25,7 @@ InputFileReader::InputFileReader()
 }
 
 size_t InputFileReader::getParamValue(std::ifstream& file, const std::string& paramName){
+	// Поиск нужного параметра в файле
 	std::string params;
 	while (getline(file, params)) {
 		if (params.substr(0, paramName.length()) == paramName) {

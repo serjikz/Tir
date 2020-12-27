@@ -1,5 +1,7 @@
 #pragma once
 
+// Ёффект шлейфа из гр€зи позади движени€ танка
+
 class Dirt
 {
 private:	

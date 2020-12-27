@@ -7,6 +7,8 @@ enum class InterfaceState {
 	IS_OVER
 };
 
+// Базовый класс элемента интерфейса
+
 class InterfaceObject
 {
 protected:

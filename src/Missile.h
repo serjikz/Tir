@@ -2,6 +2,8 @@
 #include "Enemy.h"
 #include "MissileTailEff.h"
 
+// Класс снаряда
+
 class Missile
 {
 private:	

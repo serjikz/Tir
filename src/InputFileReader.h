@@ -1,6 +1,7 @@
 #pragma once
 
-// singleton
+// Данный класс обеспечивает считывание входных параметров из файла .txt
+// Создается в единственном экземпляре
 class InputFileReader
 {
 	const std::string INPUT_FILE_NAME = "input.txt";

@@ -1,6 +1,7 @@
 #pragma once
 #include "InterfaceObject.h"
 
+// Класс - кнопка в окне статистики 
 class Button : public InterfaceObject
 {
 protected:	

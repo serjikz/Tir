@@ -1,6 +1,8 @@
 #pragma once
 #include "stdafx.h"
 
+// Реализация методов постетителя, вызываются в методах класса Interface
+
 void ScorePanelMsgVisitor::visitScorePanel(ScorePanel* panel) {
 	panel->setStatisticsMsg(_msg);
 }

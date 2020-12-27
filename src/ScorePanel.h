@@ -2,6 +2,7 @@
 #include "Panel.h"
 #include "Button.h"
 
+// Окно статистики 
 class ScorePanel : public Panel
 {
 private:	

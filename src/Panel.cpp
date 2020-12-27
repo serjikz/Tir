@@ -4,6 +4,7 @@
 Panel::Panel(rapidxml::xml_node<>* settings)
 	: _t(0.f)
 {
+	// Инициализируем из файла
 	std::string textureID = Xml::GetStringAttributeOrDef(settings, "textureID", "");
 	_tex = Core::resourceManager.Get<Render::Texture>(textureID);
 	_textureCenter = FPoint(_tex->getBitmapRect().Width() / 2.f, _tex->getBitmapRect().Height() / 2.f);

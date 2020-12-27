@@ -2,6 +2,7 @@
 #include "stdafx.h"
 
 Messenger::Messenger() {
+	// Формируем библиотеку сообщений
 	Xml::RapidXmlDocument settingsXml(INPUT_FILE);
 	rapidxml::xml_node<>* root = settingsXml.first_node();
 	rapidxml::xml_node<>* msg = root->first_node("Msg");
@@ -14,6 +15,7 @@ Messenger::Messenger() {
 }
 
 const std::string& Messenger::getText(const std::string& id) const {
+	// Поиск нужного сообщения по id
 	auto search = _map.find(id);
 	if (search != _map.end()) {
 		return search->second;

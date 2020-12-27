@@ -18,7 +18,6 @@ private:
 	Interface::HardPtr _gui;
 	Tank::HardPtr _tank;
 	BlurWidgetEffect::HardPtr _blurEff;
-	
 	Messenger::HardPtr _messenger;
 	Background::HardPtr _bkg;
 	EnemiesController::HardPtr _enemiesController;

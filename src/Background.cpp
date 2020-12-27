@@ -2,6 +2,7 @@
 
 Background::Background()
 {
+	// Создаем фон
 	_bkgObjects.push_back((new BackgroundPictureCreator())->getObject());
 	rapidxml::xml_node<>* cloud = XmlSettings::getInstance()->getCloudsNode();
 	while (cloud) {

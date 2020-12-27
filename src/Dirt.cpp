@@ -23,6 +23,7 @@ void Dirt::reset(float speed) {
 	}
 	else {
 		_exhaustGasEff->posX = _x2;
+		// Отображаем эффект зеркально при движении в противоположную сторону
 		_exhaustGasEff->SetScale(-1.f, 1.f);
 	}
 	_exhaustGasEff->posY = _y;

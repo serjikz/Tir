@@ -10,6 +10,7 @@ Cannon::Cannon(rapidxml::xml_node<>* settings)
 	_scaleY(1.f),
 	_t(1.f)
 {
+	// Инициализируем из файла
 	std::string textureID = Xml::GetStringAttributeOrDef(settings, "textureID", "");
 	_tex = Core::resourceManager.Get<Render::Texture>(textureID);
 	_x = Xml::GetIntAttributeOrDef(settings, "x", 0);
@@ -41,6 +42,7 @@ void Cannon::draw() {
 }
 
 void Cannon::update(float dt, float tankPosX) {
+	// Вращаем пушку вслед за указателем мыши
 	IPoint mousePos = Core::mainInput.GetMousePos();
 	IPoint v1 = IPoint(mousePos.x - tankPosX, mousePos.y - _tex->getBitmapRect().Height());
 	float len = sqrt(pow(v1.x, 2) + pow(v1.y, 2));
@@ -52,11 +54,13 @@ void Cannon::update(float dt, float tankPosX) {
 	if (v1.x > 0) {
 		_angle *= -1;
 	}
+	// Обновление показателей инерции движения (отдачи) пушки при выстреле
 	_t = math::clamp(0.f, 1.f, _t + INTERTIA_SPEED * dt);
 	if (_missilesAvailable >= 0) {
 		_dx = math::lerp(int(INTERTIA_MOVE * _directionVec.x), 0, _t);
 		_dy = math::lerp(int(INTERTIA_MOVE * _directionVec.y), 0, _t);
 	} 
+	// Обновляем состоянии снарядов и проверяем необходимость хранения в памяти
 	for (auto it = _missiles.begin(); it != _missiles.end();) {
 		(*it)->update(dt);
 		if ((*it)->isNotVisible()) {
@@ -70,13 +74,17 @@ void Cannon::update(float dt, float tankPosX) {
 }
 
 void Cannon::shot(IPoint atTankPos) {
-	_t = 0;
-	float alpha = _angle * math::PI / 180.f + math::PI / 2.f;
-	float r = _tex->getBitmapRect().Height();
-	float x0 = CANNON_X0 + atTankPos.x + r * cos(alpha);
-	float y0 = CANNON_Y0 +  atTankPos.y + r * sin(alpha);
-	_missilesAvailable--;
+	// Если снаряды не закончились, то запускаем его
 	if (_missilesAvailable >= 0) {
+		_missilesAvailable--;
+		// Обновляем время инерционной отдачи
+		_t = 0;
+		// Вычисляем вектор движения цели
+		float alpha = _angle * math::PI / 180.f + math::PI / 2.f;
+		float r = _tex->getBitmapRect().Height();
+		float x0 = CANNON_X0 + atTankPos.x + r * cos(alpha);
+		float y0 = CANNON_Y0 + atTankPos.y + r * sin(alpha);
+		// Создаем снаряд и эффект
 		_missiles.push_back(Missile::HardPtr(new Missile(_directionVec, _missileSpeed, x0, y0)));
 		_eff = _effCont.AddEffect("MissileShot");
 		_eff->posX = _tex->getBitmapRect().Width() / 2.f;

@@ -6,6 +6,7 @@ Button::Button(rapidxml::xml_node<>* settings)
 	_state(State::NORMAL),
 	_scale(1.f)
 {
+	// Инициализируем из файла
 	std::string textureID = Xml::GetStringAttributeOrDef(settings, "textureID", "");
 	_tex = Core::resourceManager.Get<Render::Texture>(textureID);
 	_x = Xml::GetIntAttributeOrDef(settings, "x", 0);

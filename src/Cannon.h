@@ -2,6 +2,8 @@
 #include "Missile.h"
 #include "Enemy.h"
 
+// Пушка танка 
+
 class Cannon
 {
 private:	

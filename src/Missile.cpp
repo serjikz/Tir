@@ -30,18 +30,21 @@ void Missile::draw() {
 }
 
 void Missile::update(float dt) {
+	// ƒвижение снар€да по закону тела, брошенного под углом к горизонту
 	_missileTailEff->update(dt);
 	_t = math::clamp(0.f, LIFE_TIME, _t + dt);
 	_dx += _moveVec.x * dt;
 	_moveVec.y -= G * _t * _t / 2.f;
 	_dy += _moveVec.y * dt;
 	_angle = -90.f + 180.f / math::PI * atan2(_moveVec.y, _moveVec.x);
+	// ¬зрываем снар€д при падении на землю
 	if (!_exploded && (_y0 + _dy < MIN_Y)) {
 		explode();
 	}
 }
 
 bool Missile::isNotVisible() {
+	// —нар€д невидим, если взорван, либо находитс€ за пределами экрана
 	IRect screen = IRect(0, 0, Render::device.Width(), 2 * Render::device.Height());
 	IRect textureRect = IRect(_x0 + _dx, _y0 + _dy, _tex->getBitmapRect().Width(), _tex->getBitmapRect().Height());
 	return (_exploded || !textureRect.Intersects(screen));
@@ -57,6 +60,8 @@ FPoint Missile::getMoveVec() const {
 }
 
 void Missile::bounceWith(Enemy::HardPtr enemy) {
+	// ѕровер€ем столновение с целью
+	// ¬ычисл€ем вектор взаимодействи€
 	FPoint interactionVec = enemy->getCenterPos() - getCenterPos();
 	float alpha = math::atan(interactionVec.y, interactionVec.x);
 	float cosA = cos(alpha);

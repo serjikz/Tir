@@ -3,6 +3,7 @@ class ScorePanel;
 class TimePanel;
 class MissilesPanel;
 
+// Базовый класс - обработчик событий элементов интерфейса (Посетитель)
 class InterfaceObjVisitor
 {
 

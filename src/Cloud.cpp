@@ -5,6 +5,7 @@ Cloud::Cloud(rapidxml::xml_node<>* settings)
 	: _scale(1.f),
 	_speed(1.f)
 {
+	// Инициализируем из файла
 	std::string textureID = Xml::GetStringAttributeOrDef(settings, "textureID", "");
 	_tex = Core::resourceManager.Get<Render::Texture>(textureID);
 	_x = Xml::GetIntAttributeOrDef(settings, "dx", 0);
@@ -33,8 +34,10 @@ void Cloud::draw() {
 }
 
 void Cloud::update(float dt) {
+	// При перемщеннии проверяем границы экрана
 	_x -= math::clamp(1.f, MAX_SPEED, _speed * dt);
 	float leftBottomX = _x + _tex->getBitmapRect().Width();
+	// Модифицируем облако при выходе из экрана
 	if (leftBottomX < 0) {
 		_scale = math::random(MIN_SCALE, MAX_SCALE);
 		_speed = math::random(MIN_SPEED, MAX_SPEED);

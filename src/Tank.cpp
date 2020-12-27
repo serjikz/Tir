@@ -7,6 +7,7 @@ Tank::Tank()
 	_angle(0),
 	_state(State::NORMAL)
 {	
+	// Инициализируем из файла
 	rapidxml::xml_node<>* settings = XmlSettings::getInstance()->getTankNode();
 	rapidxml::xml_node<>* tankSpeed = settings->first_node("TankSpeed");
 	MAX_SPEED = Xml::GetFloatAttributeOrDef(tankSpeed, "maxSpeed", 0.f);
@@ -33,19 +34,24 @@ Tank::Tank()
 };
 
 void Tank::update(float dt) {
+	// При обновлении учитываем положение относительно границ экрана
 	_x = math::clamp(0.f, (float)Render::device.Width() - _tex->getBitmapRect().Width(), _x + _speed * dt);
+	// Опускаем корму танка силой тяжести
 	_angle *= GRAVITY_FORCE;
+	// Тормозим танк силой трения
 	_speed *= FRICTION_FORCE;
 	if (fabs(_speed) < 0.1f) {
 		_speed = 0.f;
 	}
+	// Вращаем колеса
 	for (const auto& wheel : _wheels) {
 		wheel->update(-_speed * dt);
 	}
+	// Обновляем пушку и эффекты
 	_cannon->update(dt, _x + _tex->getBitmapRect().Width() / 2.f);
 	_effCont.Update(dt);
 	_dirtEff->update(dt);
-
+	// Изменяем состояние танка
 	switch (_state) {
 	case State::NORMAL:
 		if (isAllMissilesExploaded()) {

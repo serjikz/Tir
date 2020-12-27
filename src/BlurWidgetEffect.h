@@ -3,6 +3,10 @@
 #include "Background.h"
 #include "Tank.h"
 
+/*
+ * Данный класс создает эффект по алгоритму однородного размытия Гаусса
+*/
+
 class BlurWidgetEffect
 {
 private:	

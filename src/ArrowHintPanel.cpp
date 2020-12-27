@@ -26,6 +26,7 @@ void ArrowHintPanel::draw() {
 }
 
 void ArrowHintPanel::update(float dt) {
+	// Обновляем эффект движения стрелок в различных состояниях
 	if (_state != State::HIDEN) {
 		_alpha = math::clamp(0.f, MAX_ALPHA, _alpha + _direction * dt);
 		if (_state == State::DISSAPEARENCE) {

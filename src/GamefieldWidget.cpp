@@ -14,6 +14,7 @@ GameFieldWidget::GameFieldWidget(const std::string& name, rapidxml::xml_node<>* 
 
 void GameFieldWidget::Draw()
 {
+	// Отрисовываем эффект в состоянии, отличного от PLAY
 	if (_gui->getState() != InterfaceState::PLAY) {
 		_blurEff->draw(_bkg, _enemiesController, _tank);
 	}
@@ -31,7 +32,9 @@ void GameFieldWidget::Update(float dt)
 	_gui->update(dt);
 	_tank->update(dt);
 	_enemiesController->update(dt);
+	// Проверяем попадание снарядов в цель
 	checkMissilesHit();
+	// Проверяем состояние выигрыша
 	checkVictoryState();
 }
 

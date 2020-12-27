@@ -1,6 +1,6 @@
 #pragma once
 
-
+// Базовый класс элемента фона
 class BkgObject
 {
 protected:

@@ -1,6 +1,8 @@
 #pragma once
 #include <map>
 
+// Данный класс обеспечивает создание текстовых сообщений в окне статистики
+
 class Messenger
 {
 	const std::string INPUT_FILE = "Messages.xml";

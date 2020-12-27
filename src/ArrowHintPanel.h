@@ -1,6 +1,7 @@
 #pragma once
 #include "Panel.h"
 
+// Стрелки - подсказки на начальном экране
 class ArrowHintPanel : public Panel
 {
 private:

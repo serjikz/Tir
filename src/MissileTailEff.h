@@ -1,5 +1,6 @@
 #pragma once
 
+// Ёффект - шлейф движени€ снар€да
 class MissileTailEff
 {
 private:

@@ -2,6 +2,7 @@
 #include "Panel.h"
 #include <ctime> 
 
+// Панель отображения остатка снарядов
 class MissilesPanel : public Panel
 {
 private:	

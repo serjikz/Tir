@@ -1,6 +1,7 @@
 #pragma once
 #include "InterfaceObject.h"
 
+// Базовый класс панели
 class Panel : public InterfaceObject
 {
 protected:	

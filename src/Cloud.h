@@ -1,5 +1,6 @@
 #pragma once
 
+// Элемент фона - движущееся облако
 
 class Cloud : public BkgObject
 {

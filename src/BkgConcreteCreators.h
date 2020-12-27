@@ -3,6 +3,7 @@
 #include "BackgroundPicture.h"
 #include "Cloud.h"
 
+// Конкретные классы элементов фона
 class CloudCreator : public BkgObjectCreator
 {
 private:

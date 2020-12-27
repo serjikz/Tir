@@ -24,12 +24,14 @@ Enemy::Enemy(rapidxml::xml_node<>* settings)
 void Enemy::update(float dt) {
 	_x += _vecMove.x * dt;
 	_y += _vecMove.y * dt;
+	// При обновлении учитыаем трение среды
 	if (fabs(_vecMove.x) > MAX_SPEED) {
 		_vecMove.x *= FRICTION;
 	}
 	if (fabs(_vecMove.y) > MAX_SPEED) {
 		_vecMove.y *= FRICTION;
 	}
+	// Даем время разлететься, чтобы тексутры не "слиплись"
 	if (_t < TIME_TO_BOUNCE * dt) {
 		_t += dt; 
 	}
@@ -54,6 +56,7 @@ void Enemy::draw() {
 }
 
 void Enemy::checkScreenBounce() {
+	// Проверяем столкновении с границами экрана
 	float halfWidth = getTextureRect().Width() / 2.f;
 	float halfHeight = getTextureRect().Height() / 2.f;
 	if (_x + halfWidth > Render::device.Width()) {
