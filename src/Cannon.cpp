@@ -75,7 +75,7 @@ void Cannon::update(float dt, float tankPosX) {
 
 void Cannon::shot(IPoint atTankPos) {
 	// Если снаряды не закончились, то запускаем его
-	if (_missilesAvailable >= 0) {
+	if (_missilesAvailable > 0) {
 		_missilesAvailable--;
 		// Обновляем время инерционной отдачи
 		_t = 0;
